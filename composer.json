@@ -1,0 +1,12 @@
+{
+    "name": "marqu3s/yii2-itam-module",
+    "description": "ITAM - IT Asset Manager module for Yii 2.",
+    "type": "module",
+    "authors": [
+        {
+            "name": "joao",
+            "email": "joao@jjmf.com"
+        }
+    ],
+    "require": {}
+}
