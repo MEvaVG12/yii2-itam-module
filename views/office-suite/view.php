@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\OfficeSuite */
+/* @var $model marqu3s\itam\models\OfficeSuite */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Office Suites'), 'url' => ['index']];

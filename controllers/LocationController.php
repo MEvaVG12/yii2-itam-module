@@ -3,9 +3,9 @@
 namespace marqu3s\itam\controllers;
 
 use Yii;
-use app\modules\itam\Module;
-use app\modules\itam\models\Location;
-use app\modules\itam\models\LocationSearch;
+use marqu3s\itam\Module;
+use marqu3s\itam\models\Location;
+use marqu3s\itam\models\LocationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -97,6 +97,7 @@ class LocationController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', Module::t('app', 'Location') . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }

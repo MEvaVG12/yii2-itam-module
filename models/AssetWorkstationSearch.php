@@ -7,9 +7,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * OfficeSuiteSearch represents the model behind the search form about `app\modules\itam\models\OfficeSuite`.
+ * AssetWorkstationSearch represents the model behind the search form about `marqu3s\itam\models\AssetWorkstation`.
  */
-class OfficeSuiteSearch extends OfficeSuite
+class AssetWorkstationSearch extends AssetWorkstation
 {
     /**
      * @inheritdoc
@@ -17,8 +17,8 @@ class OfficeSuiteSearch extends OfficeSuite
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'id_asset', 'id_os', 'id_office_suite'], 'integer'],
+            [['user'], 'safe'],
         ];
     }
 
@@ -40,9 +40,10 @@ class OfficeSuiteSearch extends OfficeSuite
      */
     public function search($params)
     {
-        $query = OfficeSuite::find();
+        $query = AssetWorkstation::find();
 
         // add conditions that should always apply here
+        $query->joinWith(['asset']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,9 +60,14 @@ class OfficeSuiteSearch extends OfficeSuite
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'id_asset' => $this->id_asset,
+            'id_office_suite' => $this->id_office_suite,
+            'id_os' => $this->id_os,
+            'user' => $this->user,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        //$query->andFilterWhere(['like', 'room', $this->name]);
+        //$query->andFilterWhere(['like', 'hostname', $this->name]);
 
         return $dataProvider;
     }

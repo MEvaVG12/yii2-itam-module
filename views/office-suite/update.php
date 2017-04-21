@@ -4,7 +4,7 @@ use marqu3s\itam\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\OfficeSuite */
+/* @var $model marqu3s\itam\models\OfficeSuite */
 
 $this->title = Module::t('app', 'Update: ') . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Office Suites'), 'url' => ['index']];

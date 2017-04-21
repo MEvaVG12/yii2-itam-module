@@ -3,15 +3,14 @@
 use marqu3s\itam\Module;
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\Location */
+/* @var $model marqu3s\itam\models\AssetWorkstation */
 
-$this->title = Module::t('app', 'Create Location');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Locations'), 'url' => ['index']];
+$this->title = Module::t('app', 'Create Workstation');
+$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Workstations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="location-create">
+<div class="workstation-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

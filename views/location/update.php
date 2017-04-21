@@ -4,7 +4,7 @@ use marqu3s\itam\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\Location */
+/* @var $model marqu3s\itam\models\Location */
 
 $this->title = Module::t('app', 'Update: ') . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Locations'), 'url' => ['index']];

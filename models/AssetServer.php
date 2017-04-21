@@ -18,14 +18,14 @@ use Yii;
  * @property Os $os
  * @property OfficeSuite $officeSuite
  */
-class AssetWorkstation extends \yii\db\ActiveRecord
+class AssetServer extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'asset_workstation';
+        return 'asset_server';
     }
 
     /**
@@ -34,8 +34,7 @@ class AssetWorkstation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_asset', 'id_os', 'id_office_suite'], 'integer'],
-            [['user'], 'string', 'max' => 100],
+            [['id_asset', 'id_os', 'id_office_suite', 'cals'], 'integer'],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
             [['id_os'], 'exist', 'skipOnError' => true, 'targetClass' => Os::className(), 'targetAttribute' => ['id_os' => 'id']],
             [['id_office_suite'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuite::className(), 'targetAttribute' => ['id_office_suite' => 'id']],
@@ -52,7 +51,7 @@ class AssetWorkstation extends \yii\db\ActiveRecord
             'id_asset' => 'Id Asset',
             'id_os' => Module::t('model', 'Os'),
             'id_office_suite' => Module::t('model', 'Office Suite'),
-            'user' => Module::t('model', 'User'),
+            'cals' => Module::t('model', 'CALs'),
         ];
     }
 
@@ -86,6 +85,6 @@ class AssetWorkstation extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new AssetWorkstationQuery(get_called_class());
+        return new AssetServerQuery(get_called_class());
     }
 }

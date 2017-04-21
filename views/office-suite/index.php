@@ -6,7 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\itam\models\OfficeSuiteSearch */
+/* @var $searchModel marqu3s\itam\models\OfficeSuiteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('app', 'Office Suites');

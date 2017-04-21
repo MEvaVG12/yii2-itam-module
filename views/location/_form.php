@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\Location */
+/* @var $model marqu3s\itam\models\Location */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

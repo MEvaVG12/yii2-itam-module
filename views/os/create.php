@@ -4,7 +4,7 @@ use marqu3s\itam\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\Os */
+/* @var $model marqu3s\itam\models\Os */
 
 $this->title = Module::t('app', 'Create Os');
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Os'), 'url' => ['index']];

@@ -2,6 +2,7 @@
 
 namespace marqu3s\itam\models;
 
+use marqu3s\itam\Module;
 use Yii;
 
 /**
@@ -20,7 +21,7 @@ use Yii;
  * @property string $updated_by
  * @property string $updated_at
  *
- * @property Location $idLocation
+ * @property Location $location
  * @property AssetAccessPoint[] $assetAccessPoints
  * @property AssetPrinter[] $assetPrinters
  * @property AssetSwitch[] $assetSwitches
@@ -59,24 +60,24 @@ class Asset extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_location' => 'Id Location',
-            'room' => 'Room',
-            'hostname' => 'Hostname',
-            'ip_address' => 'Ip Address',
-            'mac_address' => 'Mac Address',
-            'brand' => 'Brand',
-            'model' => 'Model',
-            'created_by' => 'Created By',
-            'created_at' => 'Created At',
-            'updated_by' => 'Updated By',
-            'updated_at' => 'Updated At',
+            'id_location' => Module::t('model', 'Location'),
+            'room' => Module::t('model', 'Room'),
+            'hostname' => Module::t('model', 'Hostname'),
+            'ip_address' => Module::t('model', 'IP Address'),
+            'mac_address' => Module::t('model', 'MAC Address'),
+            'brand' => Module::t('model', 'Brand'),
+            'model' => Module::t('model', 'Model'),
+            'created_by' => Module::t('model', 'Created by'),
+            'created_at' => Module::t('model', 'Created at'),
+            'updated_by' => Module::t('model', 'Updated by'),
+            'updated_at' => Module::t('model', 'Updated at'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdLocation()
+    public function getLocation()
     {
         return $this->hasOne(Location::className(), ['id' => 'id_location']);
     }

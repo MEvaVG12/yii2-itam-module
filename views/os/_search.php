@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\itam\models\OsSearch */
+/* @var $model marqu3s\itam\models\OsSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

@@ -2,7 +2,7 @@
 
 namespace marqu3s\itam\models;
 
-use app\modules\itam\Module;
+use marqu3s\itam\Module;
 use Yii;
 
 /**

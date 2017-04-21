@@ -5,7 +5,6 @@ namespace marqu3s\itam\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\itam\models\Os;
 
 /**
  * OsSearch represents the model behind the search form about `app\modules\itam\models\Os`.

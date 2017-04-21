@@ -3,9 +3,9 @@
 namespace marqu3s\itam\controllers;
 
 use Yii;
-use app\modules\itam\Module;
-use app\modules\itam\models\Os;
-use app\modules\itam\models\OsSearch;
+use marqu3s\itam\Module;
+use marqu3s\itam\models\Os;
+use marqu3s\itam\models\OsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -76,7 +76,7 @@ class OsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('app', 'Os') . ' ' . Module::t('app', 'updated successfully.'));
-            return $this->redirect(['create']);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,6 +93,7 @@ class OsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', Module::t('app', 'Os') . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }

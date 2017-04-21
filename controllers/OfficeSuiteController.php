@@ -3,9 +3,9 @@
 namespace marqu3s\itam\controllers;
 
 use Yii;
-use app\modules\itam\Module;
-use app\modules\itam\models\OfficeSuite;
-use app\modules\itam\models\OfficeSuiteSearch;
+use marqu3s\itam\Module;
+use marqu3s\itam\models\OfficeSuite;
+use marqu3s\itam\models\OfficeSuiteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -97,6 +97,7 @@ class OfficeSuiteController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', Module::t('app', 'OfficeSuite') . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }

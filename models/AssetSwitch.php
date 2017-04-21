@@ -2,6 +2,7 @@
 
 namespace marqu3s\itam\models;
 
+use marqu3s\itam\Module;
 use Yii;
 
 /**
@@ -50,12 +51,12 @@ class AssetSwitch extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_asset' => 'Id Asset',
-            'ports' => 'Ports',
-            'firmware_version' => 'Firmware Version',
-            'firmware_release_date' => 'Firmware Release Date',
-            'firmware_install_date' => 'Firmware Install Date',
-            'username' => 'Username',
-            'password' => 'Password',
+            'ports' => Module::t('model', 'Ports'),
+            'firmware_version' => Module::t('model', 'Firmware version'),
+            'firmware_release_date' => Module::t('model', 'Firmware release date'),
+            'firmware_install_date' => Module::t('model', 'Firmware install date'),
+            'username' => Module::t('model', 'Username'),
+            'password' => Module::t('model', 'Password'),
         ];
     }
 

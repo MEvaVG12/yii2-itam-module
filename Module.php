@@ -56,4 +56,5 @@ class Module extends \yii\base\Module
     {
         return Yii::t('modules/itam/' . $category, $message, $params, $language);
     }
+
 }

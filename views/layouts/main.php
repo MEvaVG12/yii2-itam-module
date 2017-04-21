@@ -27,6 +27,16 @@ $this->registerCss($css);
             'activateParents' => true,
             'items' => [
                 [
+                    'label' => Module::t('menu', 'Servers'),
+                    'url' => ['asset-server/index'],
+                    //'linkOptions' => ['class' => 'list-group-item'],
+                ],
+                [
+                    'label' => Module::t('menu', 'Workstations'),
+                    'url' => ['asset-workstation/index'],
+                    //'linkOptions' => ['class' => 'list-group-item'],
+                ],
+                [
                     'label' => Module::t('menu', 'Locations'),
                     'url' => ['location/index'],
                     //'linkOptions' => ['class' => 'list-group-item'],
