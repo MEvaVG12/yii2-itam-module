@@ -15,6 +15,7 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'marqu3s\itam\controllers';
     public $defaultRoute = 'dashboard/index';
     public $layout = 'main';
+    public $dbComponentID = 'db';
 
     /**
      * @inheritdoc
@@ -22,6 +23,7 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
         $this->registerTranslations();
     }
 

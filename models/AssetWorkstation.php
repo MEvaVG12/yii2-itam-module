@@ -3,10 +3,13 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
-use Yii;
+use marqu3s\itam\traits\TraitAsset;
+use marqu3s\itam\traits\TraitOfficeSuite;
+use marqu3s\itam\traits\TraitOs;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "asset_workstation".
+ * This is the model class for table "itam_asset_workstation".
  *
  * @property integer $id
  * @property integer $id_asset
@@ -18,14 +21,18 @@ use Yii;
  * @property Os $os
  * @property OfficeSuite $officeSuite
  */
-class AssetWorkstation extends \yii\db\ActiveRecord
+class AssetWorkstation extends ActiveRecord
 {
+    use TraitAsset;
+    use TraitOs;
+    use TraitOfficeSuite;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'asset_workstation';
+        return 'itam_asset_workstation';
     }
 
     /**
@@ -54,30 +61,6 @@ class AssetWorkstation extends \yii\db\ActiveRecord
             'id_office_suite' => Module::t('model', 'Office Suite'),
             'user' => Module::t('model', 'User'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAsset()
-    {
-        return $this->hasOne(Asset::className(), ['id' => 'id_asset']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOs()
-    {
-        return $this->hasOne(Os::className(), ['id' => 'id_os']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOfficeSuite()
-    {
-        return $this->hasOne(OfficeSuite::className(), ['id' => 'id_office_suite']);
     }
 
     /**

@@ -3,24 +3,24 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "office_suite".
+ * This is the model class for table "itam_office_suite".
  *
  * @property integer $id
  * @property string $name
  *
  * @property AssetWorkstation[] $assetWorkstations
  */
-class OfficeSuite extends \yii\db\ActiveRecord
+class OfficeSuite extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'office_suite';
+        return 'itam_office_suite';
     }
 
     /**

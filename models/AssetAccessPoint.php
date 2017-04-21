@@ -2,24 +2,24 @@
 
 namespace marqu3s\itam\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "asset_access_point".
+ * This is the model class for table "itam_asset_access_point".
  *
  * @property integer $id
  * @property integer $id_asset
  *
  * @property Asset $idAsset
  */
-class AssetAccessPoint extends \yii\db\ActiveRecord
+class AssetAccessPoint extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'asset_access_point';
+        return 'itam_asset_access_point';
     }
 
     /**

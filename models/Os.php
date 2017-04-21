@@ -3,24 +3,25 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "os".
+ * This is the model class for table "itam_os".
  *
  * @property integer $id
  * @property string $name
  *
  * @property AssetWorkstation[] $assetWorkstations
+ * @property AssetServer[] $assetServers
  */
-class Os extends \yii\db\ActiveRecord
+class Os extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'os';
+        return 'itam_os';
     }
 
     /**
@@ -50,5 +51,13 @@ class Os extends \yii\db\ActiveRecord
     public function getAssetWorkstations()
     {
         return $this->hasMany(AssetWorkstation::className(), ['id_os' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssetServers()
+    {
+        return $this->hasMany(AssetServer::className(), ['id_os' => 'id']);
     }
 }

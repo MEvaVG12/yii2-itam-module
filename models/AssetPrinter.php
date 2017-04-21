@@ -2,24 +2,24 @@
 
 namespace marqu3s\itam\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "asset_printer".
+ * This is the model class for table "itam_asset_printer".
  *
  * @property integer $id
  * @property integer $id_asset
  *
  * @property Asset $idAsset
  */
-class AssetPrinter extends \yii\db\ActiveRecord
+class AssetPrinter extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'asset_printer';
+        return 'itam_asset_printer';
     }
 
     /**

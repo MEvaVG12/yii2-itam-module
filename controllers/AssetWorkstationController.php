@@ -11,11 +11,10 @@ class AssetWorkstationController extends BaseCrudController
 {
     public function __construct($id, Module $module, array $config = [])
     {
+        # Configure the assetType
         $this->assetType = 'AssetWorkstation';
-        $this->modelClass = 'marqu3s\itam\models\AssetWorkstation';
-        $this->modelForm = 'marqu3s\itam\models\AssetWorkstationForm';
-        $this->searchClass = 'marqu3s\itam\models\AssetWorkstationSearch';
 
+        # Configure the GridView columns
         $this->gridDataColumns = [
             'asset.location.name',
             'asset.room',
@@ -29,6 +28,7 @@ class AssetWorkstationController extends BaseCrudController
             'user',
         ];
 
+        # Always call the parent constructor method!
         parent::__construct($id, $module, $config);
     }
 }

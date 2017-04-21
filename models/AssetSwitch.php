@@ -3,10 +3,10 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "asset_switch".
+ * This is the model class for table "itam_asset_switch".
  *
  * @property integer $id
  * @property integer $id_asset
@@ -19,14 +19,14 @@ use Yii;
  *
  * @property Asset $idAsset
  */
-class AssetSwitch extends \yii\db\ActiveRecord
+class AssetSwitch extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'asset_switch';
+        return 'itam_asset_switch';
     }
 
     /**

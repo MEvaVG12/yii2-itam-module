@@ -21,19 +21,20 @@ use yii\web\NotFoundHttpException;
 /**
  * Class BaseCrudController is a base CRUD controller.
  * Controllers that defines CRUD operations for assets must extend this BaseController
- * and define the values of the protected attributes.
+ * and must define at least the value of the protected attribute [[$assetType]].
+ *
+ * To customize the GridView, define the data columns by defining [[$gridDataColumns]]
+ * and the action column by defining [[$gridActionColumn]].
  *
  * @package marqu3s\itam\controllers
  */
 abstract class BaseCrudController extends Controller
 {
+    private $modelNamespace = "marqu3s\\itam\\models\\";
     protected $assetType;
-    protected $modelClass;
-    protected $modelForm;
-    protected $searchClass;
 
     protected $gridDataColumns = [];
-    private   $gridActionColumn = [];
+    protected $gridActionColumn = [];
 
 
     /**
@@ -51,39 +52,40 @@ abstract class BaseCrudController extends Controller
             throw new InvalidConfigException('assetType must be defined in the BaseCrudController child class.');
         }
 
-        if (empty($this->modelClass)) {
-            throw new InvalidConfigException('modelClass must be defined in the BaseCrudController child class.');
+        if (empty($this->gridActionColumn)) {
+            $this->gridActionColumn = [[
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} &nbsp; {delete}',
+                'header' => Module::t('app', 'Actions'),
+                'headerOptions' => [
+                    'style' => 'width: 70px'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
+                    },
+                ]
+            ]];
         }
 
-        if (empty($this->modelForm)) {
-            throw new InvalidConfigException('modelForm must be defined in the BaseCrudController child class.');
+        if (empty($this->gridDataColumns)) {
+            $this->gridDataColumns = [[
+                'asset.location.name',
+                'asset.room',
+                'asset.hostname',
+                'asset.ip_address',
+                'asset.mac_address',
+                'asset.brand',
+                'asset.model',
+            ]];
         }
-
-        if (empty($this->searchClass)) {
-            throw new InvalidConfigException('searchClass must be defined in the BaseCrudController child class.');
-        }
-
-        $this->gridActionColumn = [[
-            'class' => 'yii\grid\ActionColumn',
-            'template' => '{update} &nbsp; {delete}',
-            'header' => Module::t('app', 'Actions'),
-            'headerOptions' => [
-                'style' => 'width: 70px'
-            ],
-            'contentOptions' => [
-                'class' => 'text-center'
-            ],
-            'buttons' => [
-                'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
-                },
-                'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
-                },
-            ]
-        ]];
     }
-
 
     /**
      * @inheritdoc
@@ -107,8 +109,10 @@ abstract class BaseCrudController extends Controller
      */
     public function actionIndex()
     {
+        $modelClass = $this->getClass('search');
+
         /** @var ActiveRecord $searchModel */
-        $searchModel = new $this->searchClass();
+        $searchModel = new $modelClass();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -126,12 +130,14 @@ abstract class BaseCrudController extends Controller
      */
     public function actionCreate()
     {
+        $modelClass = $this->getClass('form');
+
         /** @var AssetForm $form */
-        $form = new $this->modelForm();
+        $form = new $modelClass();
         $form->setAttributes(Yii::$app->request->post());
 
         if (Yii::$app->request->post() && $form->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', $this->getShortModelName($this->modelClass)) . ' ' . Module::t('app', 'created successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', $this->assetType) . ' ' . Module::t('app', 'created successfully.'));
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -150,13 +156,15 @@ abstract class BaseCrudController extends Controller
      */
     public function actionUpdate($id)
     {
+        $modelClass = $this->getClass('form');
+
         /** @var AssetForm $form */
-        $form = new $this->modelForm();
+        $form = new $modelClass();
         $form->{$this->assetType} = $this->findModel($id);
         $form->setAttributes(Yii::$app->request->post());
 
         if (Yii::$app->request->post() && $form->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', $this->getShortModelName($this->modelClass)) . ' ' . Module::t('app', 'updated successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', $this->assetType) . ' ' . Module::t('app', 'updated successfully.'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -176,7 +184,7 @@ abstract class BaseCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', Module::t('app', $this->getShortModelName($this->modelClass)) . ' ' . Module::t('app', 'deleted successfully.'));
+        Yii::$app->session->setFlash('success', Module::t('app', $this->assetType) . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }
@@ -193,7 +201,8 @@ abstract class BaseCrudController extends Controller
      */
     protected function findModel($id)
     {
-        $modelClass = $this->modelClass;
+        $modelClass = $this->getClass();
+
         if (($model = $modelClass::findOne($id)) !== null) {
             return $model;
         } else {
@@ -202,16 +211,20 @@ abstract class BaseCrudController extends Controller
     }
 
     /**
-     * Returns a Class name without namespace
+     * Returns a full classname, with its namespace, based on [[$assetType]]
      *
-     * @param string $class a class name with namespace. For example: marqu3s\models\Asset
+     * @param string|null $type
      *
      * @return string
+     *
+     * @throws InvalidConfigException
      */
-    private function getShortModelName($class)
+    private function getClass($type = '')
     {
-        $tmp = array_reverse(explode("\\", $class));
+        if (!in_array($type, ['', 'form', 'search'])) {
+            throw new InvalidConfigException("The \$type parameter should be null, an empty string or one of the following values: 'form' or 'search'.");
+        }
 
-        return $tmp[0];
+        return $this->modelNamespace . $this->assetType . ucfirst($type);
     }
 }
