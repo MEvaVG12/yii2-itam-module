@@ -47,8 +47,18 @@ $this->registerCss($css);
                     //'linkOptions' => [...],
                 ],
                 [
+                    'label' => Module::t('menu', 'OS Licenses'),
+                    'url' => ['os-license/index'],
+                    //'linkOptions' => [...],
+                ],
+                [
                     'label' => Module::t('menu', 'Office Suites'),
                     'url' => ['office-suite/index'],
+                    //'linkOptions' => [...],
+                ],
+                [
+                    'label' => Module::t('menu', 'Office Suite Licenses'),
+                    'url' => ['office-suite-license/index'],
                     //'linkOptions' => [...],
                 ],
                 /*[

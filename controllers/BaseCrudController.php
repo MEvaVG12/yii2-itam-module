@@ -8,6 +8,7 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\OsLicense;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\AssetForm;
 use Yii;
@@ -52,28 +53,6 @@ abstract class BaseCrudController extends Controller
             throw new InvalidConfigException('assetType must be defined in the BaseCrudController child class.');
         }
 
-        if (empty($this->gridActionColumn)) {
-            $this->gridActionColumn = [[
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} &nbsp; {delete}',
-                'header' => Module::t('app', 'Actions'),
-                'headerOptions' => [
-                    'style' => 'width: 70px'
-                ],
-                'contentOptions' => [
-                    'class' => 'text-center'
-                ],
-                'buttons' => [
-                    'update' => function ($url, $model, $key) {
-                        return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
-                    },
-                    'delete' => function ($url, $model, $key) {
-                        return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
-                    },
-                ]
-            ]];
-        }
-
         if (empty($this->gridDataColumns)) {
             $this->gridDataColumns = [[
                 'asset.location.name',
@@ -84,6 +63,10 @@ abstract class BaseCrudController extends Controller
                 'asset.brand',
                 'asset.model',
             ]];
+        }
+
+        if (empty($this->gridActionColumn)) {
+            $this->gridActionColumn = [Module::$defaultGridActionColumn];
         }
     }
 

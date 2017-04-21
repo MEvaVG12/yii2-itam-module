@@ -2,7 +2,13 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\OfficeSuiteLicense;
+use marqu3s\itam\models\OsLicense;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Controller;
+use Yii;
+use yii\web\Response;
 
 /**
  * Controller for the `itam` module
@@ -16,5 +22,38 @@ class DashboardController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+
+    /**
+     * Return <option> tags to populate a dropdown showing licensing options for an OS.
+     *
+     * @param integer $id_os
+     *
+     * @return string
+     */
+    public function actionAjaxGetOsLicensesDropdownOptions($id_os)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $licenses = OsLicense::find()->where(['id_os' => (int) $id_os])->orderBy(['date' => SORT_DESC])->all();
+
+        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', 'key'));
+    }
+
+    /**
+     * Return <option> tags to populate a dropdown showing licensing options for an Office Suite.
+     *
+     * @param integer $id_office_suite
+     *
+     * @return string
+     */
+    public function actionAjaxGetOfficeSuiteLicensesDropdownOptions($id_office_suite)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $licenses = OfficeSuiteLicense::find()->where(['id_office_suite' => (int) $id_office_suite])->orderBy(['date' => SORT_DESC])->all();
+
+        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', 'key'));
     }
 }

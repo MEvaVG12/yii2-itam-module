@@ -3,19 +3,34 @@
 namespace marqu3s\itam;
 
 use Yii;
+use yii\helpers\Html;
+use yii\base\Module as YiiBaseModule;
 
 /**
  * itam module definition class
  */
-class Module extends \yii\base\Module
+class Module extends YiiBaseModule
 {
     /**
      * @inheritdoc
      */
     public $controllerNamespace = 'marqu3s\itam\controllers';
+
+    /**
+     * @inheritdoc
+     */
     public $defaultRoute = 'dashboard/index';
+
+    /**
+     * @inheritdoc
+     */
     public $layout = 'main';
-    public $dbComponentID = 'db';
+
+    /**
+     * @var array The default configuration for the action column of the GridViews.
+     */
+    public static $defaultGridActionColumn = [];
+
 
     /**
      * @inheritdoc
@@ -25,6 +40,26 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->registerTranslations();
+
+        self::$defaultGridActionColumn = [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{update} &nbsp; {delete}',
+            'header' => Module::t('app', 'Actions'),
+            'headerOptions' => [
+                'style' => 'width: 70px'
+            ],
+            'contentOptions' => [
+                'class' => 'text-center'
+            ],
+            'buttons' => [
+                'update' => function ($url, $model, $key) {
+                    return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
+                },
+                'delete' => function ($url, $model, $key) {
+                    return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
+                },
+            ]
+        ];
     }
 
     /**

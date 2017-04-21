@@ -8,7 +8,9 @@
             "email": "joao@jjmf.com"
         }
     ],
-    "require": {},
+    "require": {
+        "devmastersbv/yii2-fontawesome": "2.17.1"
+    },
     "autoload": {
         "psr-4": {
             "marqu3s\\itam\\": ""

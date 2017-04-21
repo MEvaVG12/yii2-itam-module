@@ -11,11 +11,14 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $name
  *
+ * @property OsLicense[] $licences
  * @property AssetWorkstation[] $assetWorkstations
  * @property AssetServer[] $assetServers
  */
 class Os extends ActiveRecord
 {
+    private $licensesCount;
+
     /**
      * @inheritdoc
      */
@@ -43,6 +46,14 @@ class Os extends ActiveRecord
             'id' => 'ID',
             'name' => Module::t('model', 'Name'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLicenses()
+    {
+        return $this->hasMany(OsLicense::className(), ['id' => 'id_os']);
     }
 
     /**
