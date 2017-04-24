@@ -16,15 +16,42 @@ class AssetWorkstationController extends BaseCrudController
 
         # Configure the GridView columns
         $this->gridDataColumns = [
-            'asset.location.name',
-            'asset.room',
-            'asset.hostname',
-            'os.name',
-            'officeSuite.name',
-            'asset.ip_address',
-            'asset.mac_address',
-            'asset.brand',
-            'asset.model',
+            [
+                'attribute' => 'locationName',
+                'value' => 'asset.location.name'
+            ],
+            [
+                'attribute' => 'room',
+                'value' => 'asset.room'
+            ],
+            [
+                'attribute' => 'hostname',
+                'value' => 'asset.hostname'
+            ],
+            [
+                'attribute' => 'osName',
+                'value' => 'os.name',
+            ],
+            [
+                'attribute' => 'officeSuiteName',
+                'value' => 'officeSuite.name',
+            ],
+            [
+                'attribute' => 'ipAddress',
+                'value' => 'asset.ip_address'
+            ],
+            [
+                'attribute' => 'macAddress',
+                'value' => 'asset.mac_address'
+            ],
+            [
+                'attribute' => 'brand',
+                'value' => 'asset.brand'
+            ],
+            [
+                'attribute' => 'model',
+                'value' => 'asset.model'
+            ],
             'user',
         ];
 

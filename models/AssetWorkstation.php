@@ -35,6 +35,17 @@ class AssetWorkstation extends ActiveRecord
     use TraitOfficeSuite;
     use TraitOfficeSuiteLicense;
 
+    # Add the custom attributes that will be used to store the data to be search
+    public $locationName;
+    public $room;
+    public $hostname;
+    public $osName;
+    public $officeSuiteName;
+    public $ipAddress;
+    public $macAddress;
+    public $brand;
+    public $model;
+
     /**
      * @inheritdoc
      */
@@ -56,6 +67,9 @@ class AssetWorkstation extends ActiveRecord
             [['id_os_license'], 'exist', 'skipOnError' => true, 'targetClass' => OsLicense::className(), 'targetAttribute' => ['id_os_license' => 'id']],
             [['id_office_suite'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuite::className(), 'targetAttribute' => ['id_office_suite' => 'id']],
             [['id_office_suite_license'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuiteLicense::className(), 'targetAttribute' => ['id_office_suite_license' => 'id']],
+
+            # Custom attributes
+            [['locationName', 'room', 'hostname', 'osName', 'officeSuiteName', 'ipAddress', 'macAddress', 'brand', 'model'], 'safe'],
         ];
     }
 
@@ -72,6 +86,17 @@ class AssetWorkstation extends ActiveRecord
             'id_office_suite' => Module::t('model', 'Office suite'),
             'id_office_suite_license' => Module::t('model', 'Office suite license'),
             'user' => Module::t('model', 'User'),
+
+            # Custom attributes used in the GridView
+            'locationName' => Module::t('model', 'Location'),
+            'room' => Module::t('model', 'Room'),
+            'hostname' => Module::t('model', 'Hostname'),
+            'osName' => Module::t('model', 'OS'),
+            'officeSuiteName' => Module::t('model', 'Office suite'),
+            'idAddress' => Module::t('model', 'IP address'),
+            'macAddress' => Module::t('model', 'MAC address'),
+            'brand' => Module::t('model', 'Brand'),
+            'model' => Module::t('model', 'Model'),
         ];
     }
 
