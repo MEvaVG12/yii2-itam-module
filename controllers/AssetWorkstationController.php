@@ -18,12 +18,15 @@ class AssetWorkstationController extends BaseCrudController
         $this->gridDataColumns = [
             [
                 'attribute' => 'locationName',
-                'value' => 'asset.location.name'
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
+                }
             ],
-            [
+            /*[
                 'attribute' => 'room',
                 'value' => 'asset.room'
-            ],
+            ],*/
             [
                 'attribute' => 'hostname',
                 'value' => 'asset.hostname'
@@ -38,12 +41,15 @@ class AssetWorkstationController extends BaseCrudController
             ],
             [
                 'attribute' => 'ipAddress',
-                'value' => 'asset.ip_address'
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->asset->ip_address . '<br><small>' . $model->asset->mac_address . '</small>';
+                }
             ],
-            [
+            /*[
                 'attribute' => 'macAddress',
                 'value' => 'asset.mac_address'
-            ],
+            ],*/
             [
                 'attribute' => 'brand',
                 'value' => 'asset.brand'
