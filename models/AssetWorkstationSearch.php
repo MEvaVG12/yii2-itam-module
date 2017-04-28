@@ -2,7 +2,6 @@
 
 namespace marqu3s\itam\models;
 
-use marqu3s\itam\Module;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -48,6 +47,10 @@ class AssetWorkstationSearch extends AssetWorkstation
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'page' => $this->getGridPage(),
+                'pageSize' => 3 // 3 for testing purposes, 20 is the default
+            ]
         ]);
 
         # Important: here is how we set up the sorting
@@ -57,37 +60,29 @@ class AssetWorkstationSearch extends AssetWorkstation
                 'asc' => ['itam_location.name' => SORT_ASC, 'itam_asset.room' => SORT_ASC],
                 'desc' => ['itam_location.name' => SORT_DESC, 'itam_asset.room' => SORT_DESC],
             ],
-            /*'room' => [
-                'asc' => ['itam_asset.room' => SORT_ASC],
-                'desc' => ['itam_asset.room' => SORT_DESC],
-            ],*/
             'hostname' => [
                 'asc' => ['itam_asset.hostname' => SORT_ASC],
                 'desc' => ['itam_asset.hostname' => SORT_DESC],
             ],
-            'osName' => [
+            'id_os' => [
                 'asc' => ['itam_os.name' => SORT_ASC],
                 'desc' => ['itam_os.name' => SORT_DESC],
             ],
-            'officeSuiteName' => [
+            'id_office_suite' => [
                 'asc' => ['itam_office_suite.name' => SORT_ASC],
                 'desc' => ['itam_office_suite.name' => SORT_DESC],
             ],
-            'ipAddress' => [
+            'ipMacAddress' => [
                 'asc' => ['itam_asset.ip_address' => SORT_ASC, 'itam_asset.mac_address' => SORT_ASC],
                 'desc' => ['itam_asset.ip_address' => SORT_DESC, 'itam_asset.mac_address' => SORT_DESC],
             ],
-            /*'macAddress' => [
-                'asc' => ['itam_asset.mac_address' => SORT_ASC],
-                'desc' => ['itam_asset.mac_address' => SORT_DESC],
-            ],*/
-            'brand' => [
-                'asc' => ['itam_asset.brand' => SORT_ASC],
-                'desc' => ['itam_asset.brand' => SORT_DESC],
+            'brandAndModel' => [
+                'asc' => ['itam_asset.brand' => SORT_ASC, 'itam_asset.model' => SORT_ASC],
+                'desc' => ['itam_asset.brand' => SORT_DESC, 'itam_asset.model' => SORT_DESC],
             ],
-            'model' => [
-                'asc' => ['itam_asset.model' => SORT_ASC],
-                'desc' => ['itam_asset.model' => SORT_DESC],
+            'serviceTag' => [
+                'asc' => ['itam_asset.service_tag' => SORT_ASC],
+                'desc' => ['itam_asset.service_tag' => SORT_DESC],
             ],
             'user' => [
                 'asc' => ['itam_asset_workstation.user' => SORT_ASC],
@@ -95,8 +90,8 @@ class AssetWorkstationSearch extends AssetWorkstation
             ],
         ];
 
-
-        $this->load($params);
+        //$this->load($params);
+        $dataProvider = $this->loadWithFilters($params, $dataProvider); // From SaveGridFiltersBehavior
 
         # No search? Then return data Provider
         if (!$this->validate()) {
@@ -115,16 +110,11 @@ class AssetWorkstationSearch extends AssetWorkstation
 
         # Here we search the attributes of our relations using our previously configured ones in "AssetWorkstationSearch"
         ->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')")
-        //->andFilterWhere(['like', 'itam_asset.room', $this->room])
         ->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname])
-        ->andFilterWhere(['like', 'itam_os.name', $this->osName])
-        ->andFilterWhere(['like', 'itam_office_suite.name', $this->officeSuiteName])
-        ->andWhere("(itam_asset.ip_address like '%$this->ipAddress%' OR itam_asset.mac_address like '%$this->macAddress%')")
-        //->andFilterWhere(['like', 'itam_asset.mac_address', $this->macAddress])
-        ->andFilterWhere(['like', 'itam_asset.brand', $this->brand])
-        ->andFilterWhere(['like', 'itam_asset.model', $this->model])
-        ->andFilterWhere(['like', 'user', $this->user])
-        ;
+        ->andWhere("(itam_asset.ip_address like '%$this->ipMacAddress%' OR itam_asset.mac_address like '%$this->ipMacAddress%')")
+        ->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')")
+        ->andFilterWhere(['like', 'itam_asset.service_tag', $this->serviceTag])
+        ->andFilterWhere(['like', 'user', $this->user]);
 
         return $dataProvider;
     }

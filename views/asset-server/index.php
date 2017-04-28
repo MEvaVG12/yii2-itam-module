@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => $gridColumns,
+            'emptyText' => '--'
         ]); ?>
     <?php Pjax::end(); ?>
 </div>

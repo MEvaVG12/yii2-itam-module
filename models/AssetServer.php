@@ -35,6 +35,14 @@ class AssetServer extends ActiveRecord
     use TraitOfficeSuite;
     use TraitOfficeSuiteLicense;
 
+    # Add the custom attributes that will be used to store the data to be search
+    public $locationName;
+    public $hostname;
+    public $ipMacAddress;
+    public $brandAndModel;
+    public $model;
+    public $serviceTag;
+
     /**
      * @inheritdoc
      */
@@ -55,6 +63,9 @@ class AssetServer extends ActiveRecord
             [['id_os_license'], 'exist', 'skipOnError' => true, 'targetClass' => OsLicense::className(), 'targetAttribute' => ['id_os_license' => 'id']],
             [['id_office_suite'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuite::className(), 'targetAttribute' => ['id_office_suite' => 'id']],
             [['id_office_suite_license'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuiteLicense::className(), 'targetAttribute' => ['id_office_suite_license' => 'id']],
+
+            # Custom attributes
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'serviceTag'], 'safe'],
         ];
     }
 
@@ -71,6 +82,13 @@ class AssetServer extends ActiveRecord
             'id_office_suite' => Module::t('model', 'Office suite'),
             'id_office_suite_license' => Module::t('model', 'Office suite license'),
             'cals' => Module::t('model', 'CALs'),
+
+            # Custom attributes used in the GridView
+            'locationName' => Module::t('model', 'Location'),
+            'hostname' => Module::t('model', 'Hostname'),
+            'ipMacAddress' => Module::t('model', 'IP/MAC address'),
+            'brandAndModel' => Module::t('model', 'Brand and model'),
+            'serviceTag' => Module::t('model', 'Service tag'),
         ];
     }
 

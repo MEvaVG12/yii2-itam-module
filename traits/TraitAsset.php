@@ -19,4 +19,27 @@ trait TraitAsset
     {
         return $this->hasOne(Asset::className(), ['id' => 'id_asset']);
     }
+
+    /**
+     * Duplicates an asset.
+     *
+     * @return int|null The ID of the new model
+     */
+    public function duplicate()
+    {
+        # Duplicate the asset model
+        $assetModel = $this->asset;
+        $assetModel->id = null;
+        $assetModel->hostname .= ' - Copy';
+        $assetModel->isNewRecord = true;
+        $assetModel->save();
+
+        # Duplicate this model
+        $this->id = null;
+        $this->id_asset = $assetModel->id;
+        $this->isNewRecord = true;
+        $this->save();
+
+        return $this->id;
+    }
 }

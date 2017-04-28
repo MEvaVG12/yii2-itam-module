@@ -2,7 +2,10 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\OfficeSuite;
+use marqu3s\itam\models\Os;
 use marqu3s\itam\Module;
+use yii\helpers\ArrayHelper;
 
 /**
  * AssetWorkstationController implements the CRUD actions for AssetWorkstation model.
@@ -23,40 +26,37 @@ class AssetWorkstationController extends BaseCrudController
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
                 }
             ],
-            /*[
-                'attribute' => 'room',
-                'value' => 'asset.room'
-            ],*/
             [
                 'attribute' => 'hostname',
                 'value' => 'asset.hostname'
             ],
             [
-                'attribute' => 'osName',
+                'attribute' => 'id_os',
                 'value' => 'os.name',
+                'filter' => ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
             ],
             [
-                'attribute' => 'officeSuiteName',
+                'attribute' => 'id_office_suite',
                 'value' => 'officeSuite.name',
+                'filter' => ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
             ],
             [
-                'attribute' => 'ipAddress',
+                'attribute' => 'ipMacAddress',
                 'format' => 'html',
                 'value' => function ($model) {
                     return $model->asset->ip_address . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
             ],
-            /*[
-                'attribute' => 'macAddress',
-                'value' => 'asset.mac_address'
-            ],*/
             [
-                'attribute' => 'brand',
-                'value' => 'asset.brand'
+                'attribute' => 'brandAndModel',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->asset->brand . '<br><small>' . $model->asset->model . '</small>';
+                }
             ],
             [
-                'attribute' => 'model',
-                'value' => 'asset.model'
+                'attribute' => 'serviceTag',
+                'value' => 'asset.service_tag'
             ],
             'user',
         ];

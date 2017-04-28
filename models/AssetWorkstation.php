@@ -8,6 +8,8 @@ use marqu3s\itam\traits\TraitOfficeSuite;
 use marqu3s\itam\traits\TraitOfficeSuiteLicense;
 use marqu3s\itam\traits\TraitOs;
 use marqu3s\itam\traits\TraitOsLicense;
+use marqu3s\behaviors\SaveGridPaginationBehavior;
+use marqu3s\behaviors\SaveGridFiltersBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -37,14 +39,25 @@ class AssetWorkstation extends ActiveRecord
 
     # Add the custom attributes that will be used to store the data to be search
     public $locationName;
-    public $room;
     public $hostname;
-    public $osName;
-    public $officeSuiteName;
-    public $ipAddress;
-    public $macAddress;
-    public $brand;
-    public $model;
+    public $ipMacAddress;
+    public $brandAndModel;
+    public $serviceTag;
+
+
+    public function behaviors()
+    {
+        return [
+            'saveGridPage' =>[
+                'class' => SaveGridPaginationBehavior::className(),
+                'sessionVarName' => self::className() . 'GridPage'
+            ],
+            'saveGridFilters' =>[
+                'class' => SaveGridFiltersBehavior::className(),
+                'sessionVarName' => self::className() . 'GridFilters'
+            ]
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -69,7 +82,7 @@ class AssetWorkstation extends ActiveRecord
             [['id_office_suite_license'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuiteLicense::className(), 'targetAttribute' => ['id_office_suite_license' => 'id']],
 
             # Custom attributes
-            [['locationName', 'room', 'hostname', 'osName', 'officeSuiteName', 'ipAddress', 'macAddress', 'brand', 'model'], 'safe'],
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'serviceTag'], 'safe'],
         ];
     }
 
@@ -89,14 +102,10 @@ class AssetWorkstation extends ActiveRecord
 
             # Custom attributes used in the GridView
             'locationName' => Module::t('model', 'Location'),
-            'room' => Module::t('model', 'Room'),
             'hostname' => Module::t('model', 'Hostname'),
-            'osName' => Module::t('model', 'OS'),
-            'officeSuiteName' => Module::t('model', 'Office suite'),
-            'idAddress' => Module::t('model', 'IP address'),
-            'macAddress' => Module::t('model', 'MAC address'),
-            'brand' => Module::t('model', 'Brand'),
-            'model' => Module::t('model', 'Model'),
+            'ipMacAddress' => Module::t('model', 'IP/MAC address'),
+            'brandAndModel' => Module::t('model', 'Brand and model'),
+            'serviceTag' => Module::t('model', 'Service tag'),
         ];
     }
 

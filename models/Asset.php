@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string $mac_address
  * @property string $brand
  * @property string $model
+ * @property string $service_tag
  * @property string $created_by
  * @property string $created_at
  * @property string $updated_by
@@ -45,7 +46,7 @@ class Asset extends ActiveRecord
         return [
             [['id_location'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['room'], 'string', 'max' => 20],
+            [['room', 'service_tag'], 'string', 'max' => 20],
             [['hostname', 'brand', 'model', 'created_by', 'updated_by'], 'string', 'max' => 100],
             [['ip_address'], 'string', 'max' => 15],
             [['mac_address'], 'string', 'max' => 14],
@@ -67,6 +68,7 @@ class Asset extends ActiveRecord
             'mac_address' => Module::t('model', 'MAC address'),
             'brand' => Module::t('model', 'Brand'),
             'model' => Module::t('model', 'Model'),
+            'service_tag' => Module::t('model', 'Service tag'),
             'created_by' => Module::t('model', 'Created by'),
             'created_at' => Module::t('model', 'Created at'),
             'updated_by' => Module::t('model', 'Updated by'),

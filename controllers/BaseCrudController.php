@@ -130,6 +130,23 @@ abstract class BaseCrudController extends Controller
     }
 
     /**
+     * Duplicates an existing model.
+     * If duplicate is successful, the browser will be redirected to the 'update' page.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDuplicate($id)
+    {
+        $model = $this->findModel($id);
+        if (($newId = $model->duplicate()) !== false) {
+            Yii::$app->session->setFlash('success', Module::t('app', $this->assetType) . ' ' . Module::t('app', 'duplicated successfully.'));
+            return $this->redirect(['update', 'id' => $newId]);
+        }
+    }
+
+    /**
      * Updates an existing model.
      * If update is successful, the browser will be redirected to the 'index' page.
      *
