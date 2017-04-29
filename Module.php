@@ -43,7 +43,7 @@ class Module extends YiiBaseModule
 
         self::$defaultGridActionColumn = [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{duplicate} &nbsp; {update} &nbsp; {delete}',
+            'template' => '{view} &nbsp; {duplicate} &nbsp; {update} &nbsp; {delete}',
             'header' => Module::t('app', 'Actions'),
             'headerOptions' => [
                 'style' => 'width: 70px'
@@ -52,6 +52,9 @@ class Module extends YiiBaseModule
                 'class' => 'text-center'
             ],
             'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a('<i class="fa fa-eye"></i>', $url, ['title' => Module::t('app', 'View'), 'data-pjax' => 0]);
+                },
                 'duplicate' => function ($url, $model, $key) {
                     return Html::a('<i class="fa fa-copy"></i>', $url, ['title' => Module::t('app', 'Duplicate'), 'data-pjax' => 0]);
                 },

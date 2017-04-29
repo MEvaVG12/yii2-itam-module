@@ -8,7 +8,7 @@
 
 namespace marqu3s\itam\traits;
 
-use marqu3s\itam\models\Os;
+use marqu3s\itam\models\OsLicense;
 
 trait TraitOsLicense
 {

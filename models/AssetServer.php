@@ -2,6 +2,8 @@
 
 namespace marqu3s\itam\models;
 
+use marqu3s\behaviors\SaveGridFiltersBehavior;
+use marqu3s\behaviors\SaveGridPaginationBehavior;
 use marqu3s\itam\Module;
 use marqu3s\itam\traits\TraitAsset;
 use marqu3s\itam\traits\TraitOfficeSuite;
@@ -42,6 +44,21 @@ class AssetServer extends ActiveRecord
     public $brandAndModel;
     public $model;
     public $serviceTag;
+
+
+    public function behaviors()
+    {
+        return [
+            'saveGridPage' =>[
+                'class' => SaveGridPaginationBehavior::className(),
+                'sessionVarName' => self::className() . 'GridPage'
+            ],
+            'saveGridFilters' =>[
+                'class' => SaveGridFiltersBehavior::className(),
+                'sessionVarName' => self::className() . 'GridFilters'
+            ]
+        ];
+    }
 
     /**
      * @inheritdoc

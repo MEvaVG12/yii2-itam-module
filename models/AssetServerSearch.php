@@ -46,6 +46,10 @@ class AssetServerSearch extends AssetServer
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'page' => $this->getGridPage(),
+                'pageSize' => 3 // 3 for testing purposes, 20 is the default
+            ]
         ]);
 
         # Important: here is how we set up the sorting
@@ -85,7 +89,8 @@ class AssetServerSearch extends AssetServer
             ],
         ];
 
-        $this->load($params);
+        //$this->load($params);
+        $dataProvider = $this->loadWithFilters($params, $dataProvider); // From SaveGridFiltersBehavior
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
