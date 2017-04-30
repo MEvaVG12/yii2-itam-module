@@ -28,8 +28,16 @@ class ReportsController extends Controller
         # Find out what are the assets using the given OS.
         $workstations = $servers = [];
         if (!empty($idLicense)) {
-            $workstations = AssetWorkstation::find()->where(['id_os_license' => $idLicense])->all();
-            $servers = AssetServer::find()->where(['id_os_license' => $idLicense])->all();
+            $workstations = AssetWorkstation::find()
+                ->joinWith('asset')
+                ->where(['id_os_license' => $idLicense])
+                ->orderBy(['itam_asset.hostname' => SORT_ASC])
+                ->all();
+            $servers = AssetServer::find()
+                ->joinWith('asset')
+                ->where(['id_os_license' => $idLicense])
+                ->orderBy(['itam_asset.hostname' => SORT_ASC])
+                ->all();
         }
 
         return $this->render('assetsByOsLicense', [
