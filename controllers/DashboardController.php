@@ -11,7 +11,7 @@ use Yii;
 use yii\web\Response;
 
 /**
- * Controller for the `itam` module
+ * DashboardController for the `itam` module
  */
 class DashboardController extends Controller
 {
@@ -21,9 +21,17 @@ class DashboardController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
+        # Show data about OS licenses in use.
+        $osLicenses = OsLicense::find()->where("allowed_activations IS NOT NULL AND allowed_activations != ''")->all();
 
+        # Show data about OS licenses in use.
+        $officeSuiteLicenses = OfficeSuiteLicense::find()->where("allowed_activations IS NOT NULL AND allowed_activations != ''")->all();
+
+        return $this->render('index', [
+            'osLicenses' => $osLicenses,
+            'officeSuiteLicenses' => $officeSuiteLicenses,
+        ]);
+    }
 
     /**
      * Return <option> tags to populate a dropdown showing licensing options for an OS.

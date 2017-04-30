@@ -48,7 +48,7 @@ class AssetServerSearch extends AssetServer
             'query' => $query,
             'pagination' => [
                 'page' => $this->getGridPage(),
-                'pageSize' => 3 // 3 for testing purposes, 20 is the default
+                //'pageSize' => 3 // 3 for testing purposes, 20 is the default
             ]
         ]);
 

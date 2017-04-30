@@ -27,6 +27,11 @@ $this->registerCss($css);
             'activateParents' => true,
             'items' => [
                 [
+                    'label' => Module::t('menu', 'Dashboard'),
+                    'url' => ['dashboard/index'],
+                    //'linkOptions' => ['class' => 'list-group-item'],
+                ],
+                [
                     'label' => Module::t('menu', 'Servers'),
                     'url' => ['asset-server/index'],
                     //'linkOptions' => ['class' => 'list-group-item'],
@@ -59,6 +64,11 @@ $this->registerCss($css);
                 [
                     'label' => Module::t('menu', 'Office Suite Licenses'),
                     'url' => ['office-suite-license/index'],
+                    //'linkOptions' => [...],
+                ],
+                [
+                    'label' => Module::t('menu', 'Reports'),
+                    'url' => ['reports/index'],
                     //'linkOptions' => [...],
                 ],
                 /*[

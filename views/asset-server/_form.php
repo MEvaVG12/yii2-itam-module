@@ -38,10 +38,10 @@ $this->registerJs($js);
     <?= $form->field($model->asset, 'hostname')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'brand')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'model')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetServer, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')) ?>
-    <?= $form->field($model->assetServer, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetServer->id_os])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key')) ?>
+    <?= $form->field($model->assetServer, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--']) ?>
+    <?= $form->field($model->assetServer, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetServer->id_os])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--']) ?>
     <?= $form->field($model->assetServer, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed')]) ?>
-    <?= $form->field($model->assetServer, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetServer->id_office_suite])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key')) ?>
+    <?= $form->field($model->assetServer, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetServer->id_office_suite])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--']) ?>
     <?= $form->field($model->asset, 'ip_address')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'mac_address')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'id_location')->dropDownList(ArrayHelper::map(Location::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')) ?>
