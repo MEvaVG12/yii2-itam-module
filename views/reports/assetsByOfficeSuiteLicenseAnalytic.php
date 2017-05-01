@@ -9,30 +9,30 @@
 use marqu3s\itam\Module;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use marqu3s\itam\models\OsLicense;
+use marqu3s\itam\models\OfficeSuiteLicense;
 
 /* @var $this yii\web\View */
-/* @var $license OsLicense */
+/* @var $license OfficeSuiteLicense */
 /* @var $workstations \marqu3s\itam\models\AssetWorkstation[] */
 /* @var $servers \marqu3s\itam\models\AssetServer[] */
 
 $js = <<<JS
     $('#idLicense').change(function() {
-        window.location.href = '/itam/reports/assets-by-os-license-analytic?idLicense=' + $(this).val();
+        window.location.href = '/itam/reports/assets-by-office-suite-license-analytic?idLicense=' + $(this).val();
     })
 JS;
 $this->registerJs($js);
 
-$this->title = Module::t('app', 'OS usage by license - Analytic');
+$this->title = Module::t('app', 'Office Suite usage by license - Analytic');
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="report-os-license">
+<div class="report-office-suite-license">
     <h1><?= $this->title ?></h1>
 
     <div class="well">
-        <?= Module::t('app', 'Choose an OS license:') ?>
-        <?= Html::dropDownList('idLicense', $license !== null ? $license->id : null, ArrayHelper::map(OsLicense::find()->joinWith(['os'])->orderBy(['itam_os.name' => SORT_ASC])->all(), 'id', function ($model) { return $model->os->name . ' - ' . $model->key; }, function ($model) { return $model->os->name; }), ['prompt' => '--', 'id' => 'idLicense']) ?>
+        <?= Module::t('app', 'Choose an Office Suite license:') ?>
+        <?= Html::dropDownList('idLicense', $license !== null ? $license->id : null, ArrayHelper::map(OfficeSuiteLicense::find()->joinWith(['officeSuite'])->orderBy(['itam_office_suite.name' => SORT_ASC])->all(), 'id', function ($model) { return $model->officeSuite->name . ' - ' . $model->key; }, function ($model) { return $model->officeSuite->name; }), ['prompt' => '--', 'id' => 'idLicense']) ?>
     </div>
 
     <?php if ($license !== null): ?>
@@ -113,6 +113,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endif ?>
 
     <?php if ($license !== null && count($servers) == 0 && count($workstations) == 0): ?>
-        <div class="alert alert-info"><?= Module::t('app', 'No asset is using this OS license.') ?></div>
+        <div class="alert alert-info"><?= Module::t('app', 'No asset is using this Office Suite license.') ?></div>
     <?php endif ?>
 </div>

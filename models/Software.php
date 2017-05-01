@@ -49,6 +49,6 @@ class Software extends ActiveRecord
      */
     public function getLicenses()
     {
-        return $this->hasMany(SoftwareLicense::className(), ['id' => 'id_software']);
+        return $this->hasMany(SoftwareLicense::className(), ['id_software' => 'id']);
     }
 }

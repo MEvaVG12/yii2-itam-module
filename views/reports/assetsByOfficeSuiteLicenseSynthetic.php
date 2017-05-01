@@ -7,16 +7,16 @@
  */
 
 use marqu3s\itam\Module;
-use marqu3s\itam\models\OsLicense;
+use marqu3s\itam\models\OfficeSuiteLicense;
 
 /* @var $this yii\web\View */
-/* @var $licenses OsLicense[] */
+/* @var $licenses OfficeSuiteLicense[] */
 
-$this->title = Module::t('app', 'OS usage by license - Synthetic');
+$this->title = Module::t('app', 'Office Suite usage by license - Synthetic');
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="report-os-license">
+<div class="report-office-suite-license">
     <h1><?= $this->title ?></h1>
 
     <?php if (count($licenses)): ?>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     ?>
                     <tr class="text-<?= $alertClass ?>">
-                        <td><?= $license->os->name ?></td>
+                        <td><?= $license->officeSuite->name ?></td>
                         <td><?= $license->key ?></td>
                         <td class="text-center"><?= $license->purchased_licenses ?></td>
                         <td class="text-center"><?= $inUse ?></td>

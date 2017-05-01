@@ -4,8 +4,10 @@ namespace marqu3s\itam\controllers;
 
 use marqu3s\itam\models\OfficeSuiteLicense;
 use marqu3s\itam\models\OsLicense;
+use marqu3s\itam\models\Software;
 use marqu3s\itam\models\SoftwareAsset;
 use marqu3s\itam\models\SoftwareLicense;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -24,16 +26,49 @@ class DashboardController extends Controller
     public function actionIndex()
     {
         # Show data about OS licenses in use.
-        $osLicenses = OsLicense::find()->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")->all();
+        $osLicenses = OsLicense::find()
+            ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->all();
 
-        # Show data about OS licenses in use.
-        $officeSuiteLicenses = OfficeSuiteLicense::find()->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")->all();
+        # Show data about Office Suite licenses in use.
+        $officeSuiteLicenses = OfficeSuiteLicense::find()
+            ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->all();
+
+        # Show data about Software license in use.
+        $idSoftwares = (new Query())
+            ->select(['id_software'])
+            ->distinct()
+            ->from('itam_software_asset')
+            ->innerJoin('itam_software', 'itam_software_asset.id_software = itam_software.id')
+            ->orderBy(['itam_software.name' => SORT_ASC])
+            ->all();
+
+        $softwareLicenses = [];
+        foreach ($idSoftwares as $id) {
+            /** @var Software $software */
+            $software = Software::findOne($id['id_software']);
+            foreach ($software->licenses as $license) {
+                $softwareLicenses[] = [
+                    'software' => $software->name,
+                    'key' => $license->key,
+                    'purchasedLicenses' => $license->purchased_licenses,
+                    'inUse' => $license->licensesInUse,
+                ];
+            }
+        }
+        //\yii\helpers\VarDumper::dump($softwareLicenses, 10, true); die;
 
         return $this->render('index', [
             'osLicenses' => $osLicenses,
             'officeSuiteLicenses' => $officeSuiteLicenses,
+            'softwareLicenses' => $softwareLicenses,
         ]);
     }
+
+
+
+    ### AJAX ACTIONS ###
 
     /**
      * Return <option> tags to populate a dropdown showing licensing options for an OS.

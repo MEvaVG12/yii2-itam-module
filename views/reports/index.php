@@ -23,5 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li><a href="/itam/reports/assets-by-os-license-analytic"><?= Module::t('app', 'OS usage by license - Analytic') ?></a></li>
         <li><a href="/itam/reports/assets-by-os-license-synthetic"><?= Module::t('app', 'OS usage by license - Synthetic') ?></a></li>
+        <li><a href="/itam/reports/assets-by-office-suite-license-analytic"><?= Module::t('app', 'Office Suite usage by license - Analytic') ?></a></li>
+        <li><a href="/itam/reports/assets-by-office-suite-license-synthetic"><?= Module::t('app', 'Office Suite usage by license - Synthetic') ?></a></li>
+        <li><a href="/itam/reports/assets-by-software-license-analytic"><?= Module::t('app', 'Software usage by license - Analytic') ?></a></li>
+        <li><a href="/itam/reports/assets-by-software-license-synthetic"><?= Module::t('app', 'Software usage by license - Synthetic') ?></a></li>
     </ul>
 </div>

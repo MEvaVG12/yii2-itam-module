@@ -7,22 +7,22 @@
  */
 
 use marqu3s\itam\Module;
-use marqu3s\itam\models\OsLicense;
+use marqu3s\itam\models\SoftwareLicense;
 
 /* @var $this yii\web\View */
-/* @var $licenses OsLicense[] */
+/* @var $licenses SoftwareLicense[] */
 
-$this->title = Module::t('app', 'OS usage by license - Synthetic');
+$this->title = Module::t('app', 'Software usage by license - Synthetic');
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="report-os-license">
+<div class="report-software-license">
     <h1><?= $this->title ?></h1>
 
     <?php if (count($licenses)): ?>
         <table class="table table-hover">
             <tr>
-                <th style="width: 30%"><?= Module::t('model', 'OS') ?></th>
+                <th style="width: 30%"><?= Module::t('model', 'Software') ?></th>
                 <th style="width: 30%"><?= Module::t('model', 'key') ?></th>
                 <th style="width: 20%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
                 <th style="width: 20%" class="text-center"><?= Module::t('model', 'In use') ?></th>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     ?>
                     <tr class="text-<?= $alertClass ?>">
-                        <td><?= $license->os->name ?></td>
+                        <td><?= $license->software->name ?></td>
                         <td><?= $license->key ?></td>
                         <td class="text-center"><?= $license->purchased_licenses ?></td>
                         <td class="text-center"><?= $inUse ?></td>

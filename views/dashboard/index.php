@@ -5,6 +5,7 @@ use marqu3s\itam\Module;
 /** @var $this \yii\web\View */
 /** @var $osLicenses \marqu3s\itam\models\OsLicense[] */
 /** @var $officeSuiteLicenses \marqu3s\itam\models\OfficeSuiteLicense[] */
+/** @var $softwareLicenses \marqu3s\itam\models\SoftwareAsset[] */
 
 $css = <<<CSS
 .progress {
@@ -24,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <table class="table table-hover">
     <tr>
         <th style="width: 30%"><?= Module::t('model', 'OS') ?></th>
-        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Allowed activations') ?></th>
+        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
         <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
-        <th></th>
+        <th><?= Module::t('model', 'Usage') ?></th>
     </tr>
     <?php foreach ($osLicenses as $license): ?>
         <?php
@@ -67,9 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <table class="table table-hover">
     <tr>
         <th style="width: 30%"><?= Module::t('model', 'Office Suite') ?></th>
-        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Allowed activations') ?></th>
+        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
         <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
-        <th></th>
+        <th><?= Module::t('model', 'Usage') ?></th>
     </tr>
     <?php foreach ($officeSuiteLicenses as $license): ?>
         <?php
@@ -102,3 +103,46 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
     <?php endforeach; ?>
 </table>
+<br>
+
+<h1><?= Module::t('app', 'Software Licenses Usage') ?></h1>
+
+<table class="table table-hover">
+    <tr>
+        <th style="width: 30%"><?= Module::t('model', 'Software') ?></th>
+        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
+        <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
+        <th><?= Module::t('model', 'Usage') ?></th>
+    </tr>
+    <?php foreach ($softwareLicenses as $license): ?>
+        <?php
+        $qtdInUse = $license['inUse'];
+        $percentage = round(100 * $qtdInUse / $license['purchasedLicenses'], 1);
+        if ($percentage < 100) {
+            $barCssClass = 'success';
+        } elseif ($percentage == 100) {
+            $barCssClass = 'warning';
+        } else {
+            $percentage = 100;
+            $barCssClass = 'danger';
+        }
+        ?>
+        <tr>
+            <td>
+                <?= $license['software'] ?><br>
+                <span class="label label-default">Key:</span> <?= $license['key'] ?>
+            </td>
+            <td class="text-center"><?= $license['purchasedLicenses'] ?></td>
+            <td class="text-center"><?= $qtdInUse ?></td>
+            <th>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-<?= $barCssClass ?>" role="progressbar" aria-valuenow="<?= $percentage ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= round($percentage, 0) ?>%">
+                        <span class="sr-only"><?= $percentage ?>%</span>
+                        <?= $percentage ?>%
+                    </div>
+                </div>
+            </th>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<br>

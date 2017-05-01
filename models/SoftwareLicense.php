@@ -20,10 +20,6 @@ use yii\db\ActiveRecord;
  */
 class SoftwareLicense extends ActiveRecord
 {
-    # Add the custom attributes that will be used to store the data to be search
-    public $licensesInUse;
-
-
     /**
      * @inheritdoc
      */
@@ -78,9 +74,7 @@ class SoftwareLicense extends ActiveRecord
      */
     public function getLicensesInUse()
     {
-        $count = SoftwareAsset::find()->where(['id_software' => $this->id])->count();
-
-        return (int) $count;
+        return (int) SoftwareAsset::find()->where(['id_software_license' => $this->id])->count();
     }
 
     /**
