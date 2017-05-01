@@ -27,17 +27,21 @@ class DashboardController extends Controller
     {
         # Show data about OS licenses in use.
         $osLicenses = OsLicense::find()
+            ->joinWith('os')
             ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->orderBy(['itam_os.name' => SORT_ASC])
             ->all();
 
         # Show data about Office Suite licenses in use.
         $officeSuiteLicenses = OfficeSuiteLicense::find()
+            ->joinWith('officeSuite')
             ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->orderBy(['itam_office_suite.name' => SORT_ASC])
             ->all();
 
         # Show data about Software license in use.
         $idSoftwares = (new Query())
-            ->select(['id_software'])
+            ->select(['id_software', 'id_software_license'])
             ->distinct()
             ->from('itam_software_asset')
             ->innerJoin('itam_software', 'itam_software_asset.id_software = itam_software.id')
@@ -50,6 +54,7 @@ class DashboardController extends Controller
             $software = Software::findOne($id['id_software']);
             foreach ($software->licenses as $license) {
                 $softwareLicenses[] = [
+                    'idSoftwareLicense' => $license->id,
                     'software' => $software->name,
                     'key' => $license->key,
                     'purchasedLicenses' => $license->purchased_licenses,

@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <tr>
             <td>
-                <?= $license->officeSuite->name ?><br>
+                <a href="/itam/reports/assets-by-office-suite-license-analytic?idLicense=<?= $license->id ?>"><?= $license->officeSuite->name ?></a><br>
                 <span class="label label-default">Key:</span> <?= $license->key ?>
             </td>
             <td class="text-center"><?= $license->purchased_licenses ?></td>
@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <tr>
             <td>
-                <?= $license['software'] ?><br>
+                <a href="/itam/reports/assets-by-software-license-analytic?idLicense=<?= $license['idSoftwareLicense']  ?>"><?= $license['software'] ?></a><br>
                 <span class="label label-default">Key:</span> <?= $license['key'] ?>
             </td>
             <td class="text-center"><?= $license['purchasedLicenses'] ?></td>
