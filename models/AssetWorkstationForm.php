@@ -10,6 +10,13 @@ namespace marqu3s\itam\models;
 
 use Yii;
 
+/**
+ * Class AssetWorkstationForm
+ *
+ * @property AssetWorkstation $assetWorkstation
+ *
+ * @package marqu3s\itam\models
+ */
 class AssetWorkstationForm extends AssetForm implements IAssetForm
 {
     /** @var AssetWorkstation */

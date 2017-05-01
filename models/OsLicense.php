@@ -11,9 +11,9 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property integer $id_os
  * @property string $key
- * @property integer $allowed_activations
+ * @property integer $purchased_licenses
  * @property integer $digital_license
- * @property string $date
+ * @property string $date_of_purchase
  *
  * @property Os $os
  */
@@ -36,9 +36,9 @@ class OsLicense extends ActiveRecord
     {
         return [
             [['id_os'], 'required'],
-            [['id_os', 'allowed_activations', 'digital_license'], 'integer'],
+            [['id_os', 'purchased_licenses', 'digital_license'], 'integer'],
             [['key'], 'string', 'max' => 50],
-            [['date'], 'string', 'max' => 10],
+            [['date_of_purchase'], 'string', 'max' => 10],
             [['id_os'], 'exist', 'skipOnError' => true, 'targetClass' => Os::className(), 'targetAttribute' => ['id_os' => 'id']],
         ];
     }
@@ -52,9 +52,9 @@ class OsLicense extends ActiveRecord
             'id' => Module::t('model', 'ID'),
             'id_os' => Module::t('model', 'OS'),
             'key' => Module::t('model', 'Activation key'),
-            'allowed_activations' => Module::t('model', 'Allowed activations'),
+            'purchased_licenses' => Module::t('model', 'Purchased licenses'),
             'digital_license' => Module::t('model', 'Digital license'),
-            'date' => Module::t('model', 'Accquisition date'),
+            'date_of_purchase' => Module::t('model', 'Date of purchase'),
         ];
     }
 

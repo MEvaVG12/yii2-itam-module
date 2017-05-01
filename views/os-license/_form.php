@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Choose an OS')]) ?>
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'allowed_activations')->textInput() ?>
+    <?= $form->field($model, 'purchased_licenses')->textInput() ?>
     <?= $form->field($model, 'digital_license')->checkbox() ?>
 
     <div class="form-group">

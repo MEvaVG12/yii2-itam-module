@@ -21,7 +21,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function actionAssetsByOsLicense($idLicense = null)
+    public function actionAssetsByOsLicenseAnalytic($idLicense = null)
     {
         $idLicense = (int) $idLicense;
 
@@ -40,10 +40,20 @@ class ReportsController extends Controller
                 ->all();
         }
 
-        return $this->render('assetsByOsLicense', [
+        return $this->render('assetsByOsLicenseAnalytic', [
             'license' => OsLicense::findOne($idLicense),
             'workstations' => $workstations,
             'servers' => $servers,
+        ]);
+    }
+
+    public function actionAssetsByOsLicenseSynthetic()
+    {
+        # Get all OS licenses
+        $licenses = OsLicense::find()->all();
+
+        return $this->render('assetsByOsLicenseSynthetic', [
+            'licenses' => $licenses,
         ]);
     }
 }

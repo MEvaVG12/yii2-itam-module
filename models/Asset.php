@@ -27,6 +27,7 @@ use yii\db\ActiveRecord;
  * @property AssetPrinter[] $assetPrinters
  * @property AssetSwitch[] $assetSwitches
  * @property AssetWorkstation[] $assetWorkstations
+ * @property SoftwareAsset[] $installedSoftwares
  */
 class Asset extends ActiveRecord
 {
@@ -44,6 +45,7 @@ class Asset extends ActiveRecord
     public function rules()
     {
         return [
+            [['hostname'], 'unique'],
             [['id_location'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['room', 'service_tag'], 'string', 'max' => 20],
@@ -114,6 +116,16 @@ class Asset extends ActiveRecord
     public function getAssetWorkstations()
     {
         return $this->hasMany(AssetWorkstation::className(), ['id_asset' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInstalledSoftwares()
+    {
+        return $this->hasMany(SoftwareAsset::className(), ['id_asset' => 'id'])
+            ->joinWith(['software'])
+            ->orderBy(['itam_software.name' => SORT_ASC]);
     }
 
     /**

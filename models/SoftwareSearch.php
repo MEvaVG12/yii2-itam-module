@@ -2,13 +2,14 @@
 
 namespace marqu3s\itam\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * OfficeSuiteLicenseSearch represents the model behind the search form about `OfficeSuiteLicence`.
+ * SoftwareSearch represents the model behind the search form about `software`.
  */
-class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
+class SoftwareSearch extends Software
 {
     /**
      * @inheritdoc
@@ -16,8 +17,8 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
     public function rules()
     {
         return [
-            [['id', 'id_office_suite', 'purchased_licenses'], 'integer'],
-            [['key'], 'safe'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
      */
     public function search($params)
     {
-        $query = OfficeSuiteLicense::find();
+        $query = Software::find();
 
         // add conditions that should always apply here
 
@@ -58,11 +59,9 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_office_suite' => $this->id_office_suite,
-            'purchased_licenses' => $this->purchased_licenses,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

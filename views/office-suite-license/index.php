@@ -1,9 +1,11 @@
 <?php
 
 use marqu3s\itam\Module;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use marqu3s\itam\models\OfficeSuite;
 use marqu3s\itam\models\OfficeSuiteLicense;
 use rmrevin\yii\fontawesome\FA;
 
@@ -28,20 +30,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'officeSuite.name',
+            [
+                'attribute' => 'id_office_suite',
+                'value' => 'officeSuite.name',
+                'filter' => ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+            ],
             'key',
-            'allowed_activations',
+            'purchased_licenses',
             [
                 'header' => Module::t('app', 'Licenses in use'),
                 'format' => 'html',
                 'value' => function (OfficeSuiteLicense $model) {
                     $inUse = $model->getLicensesInUse();
-                    $faName = ($inUse <= $model->allowed_activations) ? 'check' : 'exclamation-circle';
-                    $faClass = ($inUse <= $model->allowed_activations) ? 'text-success' : 'text-danger';
+                    $faName = ($inUse <= $model->purchased_licenses) ? 'check' : 'exclamation-circle';
+                    $faClass = ($inUse <= $model->purchased_licenses) ? 'text-success' : 'text-danger';
                         return $inUse . ' ' . FA::icon($faName, ['class' => $faClass]);
                     },
             ],
-            Module::$defaultGridActionColumn,
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} &nbsp; {delete}',
+                'header' => Module::t('app', 'Actions'),
+                'headerOptions' => [
+                    'style' => 'width: 70px'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

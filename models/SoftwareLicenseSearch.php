@@ -6,9 +6,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * OfficeSuiteLicenseSearch represents the model behind the search form about `OfficeSuiteLicence`.
+ * SoftwareLicenceSearch represents the model behind the search form about `SoftwareLicence`.
  */
-class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
+class SoftwareLicenseSearch extends SoftwareLicense
 {
     /**
      * @inheritdoc
@@ -16,7 +16,7 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
     public function rules()
     {
         return [
-            [['id', 'id_office_suite', 'purchased_licenses'], 'integer'],
+            [['id', 'id_software', 'purchased_licenses'], 'integer'],
             [['key'], 'safe'],
         ];
     }
@@ -39,9 +39,11 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
      */
     public function search($params)
     {
-        $query = OfficeSuiteLicense::find();
+        $query = SoftwareLicense::find();
 
-        // add conditions that should always apply here
+        # Add conditions that should always apply here
+        # Join with asset and asset.location
+        $query->joinWith(['software']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,7 +60,7 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_office_suite' => $this->id_office_suite,
+            'id_software' => $this->id_software,
             'purchased_licenses' => $this->purchased_licenses,
         ]);
 

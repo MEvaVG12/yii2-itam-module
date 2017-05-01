@@ -12,6 +12,13 @@ use marqu3s\itam\Module;
 use Yii;
 use yii\base\Model;
 
+/**
+ * Class AssetForm
+ *
+ * @property Asset $asset
+ *
+ * @package marqu3s\itam\models
+ */
 abstract class AssetForm extends Model implements IAssetForm
 {
     /** @var Asset */

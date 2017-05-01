@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="report-index">
     <h1>Reports</h1>
     <ul>
-        <li><a href="/itam/reports/assets-by-os-license"><?= Module::t('app', 'OS usage by license') ?></a></li>
+        <li><a href="/itam/reports/assets-by-os-license-analytic"><?= Module::t('app', 'OS usage by license - Analytic') ?></a></li>
+        <li><a href="/itam/reports/assets-by-os-license-synthetic"><?= Module::t('app', 'OS usage by license - Synthetic') ?></a></li>
     </ul>
 </div>

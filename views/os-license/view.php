@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'id_os',
             'key',
-            'allowed_activations',
+            'purchased_licenses',
         ],
     ]) ?>
 

@@ -27,5 +27,23 @@ use yii\widgets\DetailView;
         'asset.service_tag',
         'asset.ip_address',
         'asset.mac_address',
+        [
+            'label' => Module::t('app', 'Installed Softwares'),
+            'format' => 'html',
+            'value' => function ($model) {
+                if (count($model->asset->installedSoftwares) == 0) {
+                    return null;
+                } else {
+                    $str = '';
+                    foreach ($model->asset->installedSoftwares as $item) {
+                        $str .= '<p>';
+                        $str .= $item->software->name . '<br>';
+                        $str .= '<small>' . $item->softwareLicense->key . '</small>';
+                        $str .= '</p>';
+                    }
+                    return $str;
+                }
+            }
+        ]
     ],
 ]) ?>

@@ -6,27 +6,30 @@ use marqu3s\itam\Module;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "itam_office_suite_license".
+ * This is the model class for table "itam_software_license".
  *
  * @property integer $id
- * @property integer $id_office_suite
+ * @property integer $id_software
  * @property string $key
  * @property integer $purchased_licenses
  * @property integer $digital_license
  * @property string $date_of_purchase
  *
- * @property OfficeSuite $officeSuite
+ * @property Software $software
+ * @property integer $licensesInUse
  */
-class OfficeSuiteLicense extends ActiveRecord
+class SoftwareLicense extends ActiveRecord
 {
+    # Add the custom attributes that will be used to store the data to be search
     public $licensesInUse;
+
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'itam_office_suite_license';
+        return 'itam_software_license';
     }
 
     /**
@@ -35,11 +38,13 @@ class OfficeSuiteLicense extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_office_suite'], 'required'],
-            [['id_office_suite', 'purchased_licenses', 'digital_license'], 'integer'],
+            [['id_software'], 'required'],
+            [['id_software', 'purchased_licenses', 'digital_license'], 'integer'],
             [['key'], 'string', 'max' => 50],
             [['date_of_purchase'], 'string', 'max' => 10],
-            [['id_office_suite'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuite::className(), 'targetAttribute' => ['id_office_suite' => 'id']],
+            [['id_software'], 'exist', 'skipOnError' => true, 'targetClass' => Software::className(), 'targetAttribute' => ['id_software' => 'id']],
+
+            # Add the custom attributes that will be used to store the data to be search
         ];
     }
 
@@ -50,37 +55,40 @@ class OfficeSuiteLicense extends ActiveRecord
     {
         return [
             'id' => Module::t('model', 'ID'),
-            'id_office_suite' => Module::t('model', 'Office suite'),
+            'id_software' => Module::t('model', 'Software'),
             'key' => Module::t('model', 'Activation key'),
             'purchased_licenses' => Module::t('model', 'Purchased licenses'),
             'digital_license' => Module::t('model', 'Digital license'),
             'date_of_purchase' => Module::t('model', 'Date of purchase'),
+
+            # Custom attributes used in the GridView
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOfficeSuite()
+    public function getSoftware()
     {
-        return $this->hasOne(OfficeSuite::className(), ['id' => 'id_office_suite']);
+        return $this->hasOne(Software::className(), ['id' => 'id_software']);
     }
 
-
+    /**
+     * @return int
+     */
     public function getLicensesInUse()
     {
-        $workstationCount = AssetWorkstation::find()->where(['id_office_suite_license' => $this->id])->count();
-        $serverCount = AssetServer::find()->where(['id_office_suite_license' => $this->id])->count();
+        $count = SoftwareAsset::find()->where(['id_software' => $this->id])->count();
 
-        return $workstationCount + $serverCount;
+        return (int) $count;
     }
 
     /**
      * @inheritdoc
-     * @return OfficeSuiteLicenseQuery the active query used by this AR class.
+     * @return SoftwareLicenseQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new OfficeSuiteLicenseQuery(get_called_class());
+        return new SoftwareLicenseQuery(get_called_class());
     }
 }

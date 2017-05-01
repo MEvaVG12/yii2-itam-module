@@ -16,7 +16,7 @@ class OsLicenseSearch extends OsLicense
     public function rules()
     {
         return [
-            [['id', 'id_os', 'allowed_activations'], 'integer'],
+            [['id', 'id_os', 'purchased_licenses'], 'integer'],
             [['key'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class OsLicenseSearch extends OsLicense
         $query->andFilterWhere([
             'id' => $this->id,
             'id_os' => $this->id_os,
-            'allowed_activations' => $this->allowed_activations,
+            'purchased_licenses' => $this->purchased_licenses,
         ]);
 
         $query->andFilterWhere(['like', 'key', $this->key]);

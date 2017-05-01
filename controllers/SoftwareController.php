@@ -4,16 +4,16 @@ namespace marqu3s\itam\controllers;
 
 use Yii;
 use marqu3s\itam\Module;
-use marqu3s\itam\models\Os;
-use marqu3s\itam\models\OsSearch;
+use marqu3s\itam\models\Software;
+use marqu3s\itam\models\SoftwareSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OsController implements the CRUD actions for Os model.
+ * SoftwareController implements the CRUD actions for Software model.
  */
-class OsController extends Controller
+class SoftwareController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,13 +31,12 @@ class OsController extends Controller
     }
 
     /**
-     * Lists all Os models.
-     *
+     * Lists all Software models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OsSearch();
+        $searchModel = new SoftwareSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,17 +46,17 @@ class OsController extends Controller
     }
 
     /**
-     * Creates a new Os model.
+     * Creates a new Software model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Os();
+        $model = new Software();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', 'Os') . ' ' . Module::t('app', 'created successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', 'Software') . ' ' . Module::t('app', 'created successfully.'));
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -67,7 +66,7 @@ class OsController extends Controller
     }
 
     /**
-     * Updates an existing Os model.
+     * Updates an existing Software model.
      * If update is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -79,7 +78,7 @@ class OsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', 'Os') . ' ' . Module::t('app', 'updated successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', 'Software') . ' ' . Module::t('app', 'updated successfully.'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -89,7 +88,7 @@ class OsController extends Controller
     }
 
     /**
-     * Deletes an existing Os model.
+     * Deletes an existing Software model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -99,21 +98,24 @@ class OsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', Module::t('app', 'Os') . ' ' . Module::t('app', 'deleted successfully.'));
+        Yii::$app->session->setFlash('success', Module::t('app', 'Software') . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Os model based on its primary key value.
+     * Finds the Software model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
-     * @return Os the loaded model
+     *
+     * @return Software the loaded model
+     *
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Os::findOne($id)) !== null) {
+        if (($model = Software::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

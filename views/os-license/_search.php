@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'key') ?>
 
-    <?= $form->field($model, 'allowed_activations') ?>
+    <?= $form->field($model, 'purchased_licenses') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

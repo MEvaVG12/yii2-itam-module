@@ -67,6 +67,16 @@ $this->registerCss($css);
                     //'linkOptions' => [...],
                 ],
                 [
+                    'label' => Module::t('menu', 'Software'),
+                    'url' => ['software/index'],
+                    //'linkOptions' => [...],
+                ],
+                [
+                    'label' => Module::t('menu', 'Software Licenses'),
+                    'url' => ['software-license/index'],
+                    //'linkOptions' => [...],
+                ],
+                [
                     'label' => Module::t('menu', 'Reports'),
                     'url' => ['reports/index'],
                     //'linkOptions' => [...],

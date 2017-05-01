@@ -1,28 +1,28 @@
 <?php
 
 use marqu3s\itam\Module;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use marqu3s\itam\models\Os;
-use marqu3s\itam\models\OsLicense;
+use marqu3s\itam\models\Software;
+use marqu3s\itam\models\SoftwareLicense;
 use rmrevin\yii\fontawesome\FA;
 
 /* @var $this yii\web\View */
-/* @var $searchModel marqu3s\itam\models\OsLicenseSearch */
+/* @var $searchModel marqu3s\itam\models\SoftwareLicenseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'OS Licenses';
+$this->title = 'Software Licenses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="os-license-index">
+<div class="software-license-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create OS License', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Software License', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -31,16 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'id_os',
-                'value' => 'os.name',
-                'filter' => ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'attribute' => 'id_software',
+                'value' => 'software.name',
+                'filter' => ArrayHelper::map(Software::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
             ],
             'key',
             'purchased_licenses',
             [
                 'header' => Module::t('app', 'Licenses in use'),
                 'format' => 'html',
-                'value' => function (OsLicense $model) {
+                'value' => function (SoftwareLicense $model) {
                     $inUse = $model->getLicensesInUse();
                     $faName = ($inUse <= $model->purchased_licenses) ? 'check' : 'exclamation-circle';
                     $faClass = ($inUse <= $model->purchased_licenses) ? 'text-success' : 'text-danger';

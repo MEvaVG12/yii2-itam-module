@@ -18,17 +18,17 @@ use marqu3s\itam\models\OsLicense;
 
 $js = <<<JS
     $('#idLicense').change(function() {
-        window.location.href = '/itam/reports/assets-by-os-license?idLicense=' + $(this).val();
+        window.location.href = '/itam/reports/assets-by-os-license-analytic?idLicense=' + $(this).val();
     })
 JS;
 $this->registerJs($js);
 
-$this->title = Module::t('app', 'OS usage by license');
+$this->title = Module::t('app', 'OS usage by license - Analytic');
 $this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="report-os-license">
-    <h1><?= Module::t('app', 'OS usage by license') ?></h1>
+    <h1><?= $this->title ?></h1>
 
     <div class="well">
         <?= Module::t('app', 'Choose an OS license:') ?>
@@ -38,9 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if ($license !== null): ?>
         <?php
         $inUse = count($servers) + count($workstations);
-        if ($license->allowed_activations > $inUse) {
+        if ($license->purchased_licenses > $inUse) {
             $alertClass = 'success';
-        } elseif ($license->allowed_activations == $inUse) {
+        } elseif ($license->purchased_licenses == $inUse) {
             $alertClass = 'warning';
         } else {
             $alertClass = 'danger';
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-6">
                 <div class="text-center alert alert-info">
                     <h2 style="margin-top: 0"><?= Module::t('model', 'Allowed activations') ?></h2>
-                    <h3><?= $license->allowed_activations ?></h3>
+                    <h3><?= $license->purchased_licenses ?></h3>
                 </div>
             </div>
             <div class="col-md-6">
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th style="width: 3%">#</th>
                 <th style="width: 20%"><?= Module::t('model', 'Hostname') ?></th>
                 <th style="width: 15%" class=""><?= Module::t('model', 'Location') ?></th>
-                <th style="width: 10%" class=""><?= Module::t('model', 'Room') ?></th>
+                <th style="width: 15%" class=""><?= Module::t('model', 'Room') ?></th>
                 <th style="" class=""><?= Module::t('model', 'IP address') ?></th>
             </tr>
             <?php foreach ($workstations as $i => $item): ?>

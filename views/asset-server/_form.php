@@ -11,22 +11,13 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\AssetForm */
+/* @var $model marqu3s\itam\models\AssetServerForm */
 /* @var $form yii\widgets\ActiveForm */
 
-$js = <<<JS
-$('#assetserver-id_os').change(function() {
-    $.get('/itam/dashboard/ajax-get-os-licenses-dropdown-options?id_os=' + $(this).val(), function(result) {
-        $('#assetserver-id_os_license').html(result);
-    });
-});
-$('#assetserver-id_office_suite').change(function() {
-    $.get('/itam/dashboard/ajax-get-office-suite-licenses-dropdown-options?id_office_suite=' + $(this).val(), function(result) {
-        $('#assetserver-id_office_suite_license').html(result);
-    });
-});
-JS;
-$this->registerJs($js);
+\marqu3s\itam\assets\ModuleAsset::register($this);
+
+# Include de file containing the modal that adds a software to the asset.
+include(__DIR__ . '/../layouts/_softwareAssetModal.php');
 ?>
 
 <div class="server-form">
@@ -38,15 +29,23 @@ $this->registerJs($js);
     <?= $form->field($model->asset, 'hostname')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'brand')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'model')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetServer, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--']) ?>
-    <?= $form->field($model->assetServer, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetServer->id_os])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--']) ?>
-    <?= $form->field($model->assetServer, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed')]) ?>
-    <?= $form->field($model->assetServer, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetServer->id_office_suite])->orderBy(['date' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--']) ?>
+    <?= $form->field($model->assetServer, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--', 'id' => 'ddOs']) ?>
+    <?= $form->field($model->assetServer, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetServer->id_os])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOsLicense']) ?>
+    <?= $form->field($model->assetServer, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed'), 'id' => 'ddOfficeSuite']) ?>
+    <?= $form->field($model->assetServer, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetServer->id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOfficeSuiteLicense']) ?>
     <?= $form->field($model->asset, 'ip_address')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'mac_address')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->asset, 'id_location')->dropDownList(ArrayHelper::map(Location::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')) ?>
     <?= $form->field($model->asset, 'room')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->assetServer, 'cals')->textInput(['maxlength' => true]) ?>
+
+    <?php if (!$model->asset->isNewRecord): ?>
+        <h2><?= Module::t('app', 'Installed Software') ?></h2>
+        <div class="well">
+            <div id="softwareTable"><i class="fa fa-spin fa-spinner"></i></div>
+            <?= Html::button(Module::t('app', 'Add software'), ['class' => 'btn btn-success', 'id' => 'btnAddSoftware']) ?>
+        </div>
+    <?php endif ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->asset->isNewRecord ? Module::t('app', 'Create') : Module::t('app', 'Update'), ['class' => $model->asset->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

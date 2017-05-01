@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($osLicenses as $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
-        $percentage = round(100 * $qtdInUse / $license->allowed_activations, 1);
+        $percentage = round(100 * $qtdInUse / $license->purchased_licenses, 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
@@ -43,10 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <tr>
             <td>
-                <a href="/itam/reports/assets-by-os-license?idLicense=<?= $license->id ?>"><?= $license->os->name ?></a><br>
+                <a href="/itam/reports/assets-by-os-license-analytic?idLicense=<?= $license->id ?>"><?= $license->os->name ?></a><br>
                 <span class="label label-default">Key:</span> <?= $license->key ?>
             </td>
-            <td class="text-center"><?= $license->allowed_activations ?></td>
+            <td class="text-center"><?= $license->purchased_licenses ?></td>
             <td class="text-center"><?= $qtdInUse ?></td>
             <th>
                 <div class="progress">
@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($officeSuiteLicenses as $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
-        $percentage = round(100 * $qtdInUse / $license->allowed_activations, 1);
+        $percentage = round(100 * $qtdInUse / $license->purchased_licenses, 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $license->officeSuite->name ?><br>
                 <span class="label label-default">Key:</span> <?= $license->key ?>
             </td>
-            <td class="text-center"><?= $license->allowed_activations ?></td>
+            <td class="text-center"><?= $license->purchased_licenses ?></td>
             <td class="text-center"><?= $qtdInUse ?></td>
             <th>
                 <div class="progress">
