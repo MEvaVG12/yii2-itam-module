@@ -46,6 +46,11 @@ class OfficeSuiteSearch extends OfficeSuite
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' =>[
+                'defaultOrder' => [
+                    'name' => SORT_ASC
+                ]
+            ]
         ]);
 
         $this->load($params);

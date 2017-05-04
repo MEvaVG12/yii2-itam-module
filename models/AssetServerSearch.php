@@ -88,6 +88,9 @@ class AssetServerSearch extends AssetServer
                 'desc' => ['itam_asset_server.cals' => SORT_DESC],
             ],
         ];
+        $dataProvider->sort->defaultOrder = [
+            'hostname' => SORT_ASC
+        ];
 
         //$this->load($params);
         $dataProvider = $this->loadWithFilters($params, $dataProvider); // From SaveGridFiltersBehavior

@@ -42,10 +42,29 @@ class OfficeSuiteLicenseSearch extends OfficeSuiteLicense
         $query = OfficeSuiteLicense::find();
 
         // add conditions that should always apply here
+        $query->joinWith(['officeSuite']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes = [
+            'key' => [
+                'asc' => ['key' => SORT_ASC],
+                'desc' => ['key' => SORT_DESC],
+            ],
+            'purchased_licenses' => [
+                'asc' => ['purchased_licenses' => SORT_ASC],
+                'desc' => ['purchased_licenses' => SORT_DESC],
+            ],
+            'id_office_suite' => [
+                'asc' => ['itam_office_suite.name' => SORT_ASC],
+                'desc' => ['itam_office_suite.name' => SORT_DESC],
+            ],
+        ];
+        $dataProvider->sort->defaultOrder = [
+            'id_office_suite' => SORT_ASC
+        ];
 
         $this->load($params);
 

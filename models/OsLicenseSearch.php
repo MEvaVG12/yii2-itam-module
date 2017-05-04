@@ -42,10 +42,31 @@ class OsLicenseSearch extends OsLicense
         $query = OsLicense::find();
 
         // add conditions that should always apply here
+        $query->joinWith('os');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        # Important: here is how we set up the sorting
+        # The key is the attribute name on our "Search" instance
+        $dataProvider->sort->attributes = [
+            'key' => [
+                'asc' => ['key' => SORT_ASC],
+                'desc' => ['key' => SORT_DESC],
+            ],
+            'purchased_licenses' => [
+                'asc' => ['purchased_licenses' => SORT_ASC],
+                'desc' => ['purchased_licenses' => SORT_DESC],
+            ],
+            'id_os' => [
+                'asc' => ['itam_os.name' => SORT_ASC],
+                'desc' => ['itam_os.name' => SORT_DESC],
+            ],
+        ];
+        $dataProvider->sort->defaultOrder = [
+            'id_os' => SORT_ASC
+        ];
 
         $this->load($params);
 

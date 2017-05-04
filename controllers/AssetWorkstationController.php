@@ -20,13 +20,6 @@ class AssetWorkstationController extends BaseCrudController
         # Configure the GridView columns
         $this->gridDataColumns = [
             [
-                'attribute' => 'locationName',
-                'format' => 'html',
-                'value' => function ($model) {
-                    return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
-                }
-            ],
-            [
                 'attribute' => 'hostname',
                 'value' => 'asset.hostname'
             ],
@@ -57,6 +50,13 @@ class AssetWorkstationController extends BaseCrudController
             [
                 'attribute' => 'serviceTag',
                 'value' => 'asset.service_tag'
+            ],
+            [
+                'attribute' => 'locationName',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
+                }
             ],
             'user',
         ];

@@ -2,7 +2,6 @@
 
 namespace marqu3s\itam\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -46,6 +45,11 @@ class OsSearch extends Os
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' =>[
+                'defaultOrder' => [
+                    'name' => SORT_ASC
+                ]
+            ]
         ]);
 
         $this->load($params);

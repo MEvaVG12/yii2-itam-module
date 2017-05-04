@@ -20,13 +20,6 @@ class AssetServerController extends BaseCrudController
         # Configure the GridView columns
         $this->gridDataColumns = [
             [
-                'attribute' => 'locationName',
-                'format' => 'html',
-                'value' => function ($model) {
-                    return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
-                }
-            ],
-            [
                 'attribute' => 'hostname',
                 'value' => 'asset.hostname'
             ],
@@ -59,6 +52,13 @@ class AssetServerController extends BaseCrudController
                 'value' => 'asset.service_tag'
             ],
             'cals',
+            [
+                'attribute' => 'locationName',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
+                }
+            ],
         ];
 
         # Always call the parent constructor method!

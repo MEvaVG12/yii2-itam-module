@@ -49,6 +49,24 @@ class SoftwareLicenseSearch extends SoftwareLicense
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes = [
+            'key' => [
+                'asc' => ['key' => SORT_ASC],
+                'desc' => ['key' => SORT_DESC],
+            ],
+            'purchased_licenses' => [
+                'asc' => ['purchased_licenses' => SORT_ASC],
+                'desc' => ['purchased_licenses' => SORT_DESC],
+            ],
+            'id_software' => [
+                'asc' => ['itam_software.name' => SORT_ASC],
+                'desc' => ['itam_software.name' => SORT_DESC],
+            ],
+        ];
+        $dataProvider->sort->defaultOrder = [
+            'id_software' => SORT_ASC
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {

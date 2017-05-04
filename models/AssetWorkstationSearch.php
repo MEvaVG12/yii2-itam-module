@@ -89,6 +89,9 @@ class AssetWorkstationSearch extends AssetWorkstation
                 'desc' => ['itam_asset_workstation.user' => SORT_DESC],
             ],
         ];
+        $dataProvider->sort->defaultOrder = [
+            'hostname' => SORT_ASC
+        ];
 
         //$this->load($params);
         $dataProvider = $this->loadWithFilters($params, $dataProvider); // From SaveGridFiltersBehavior
