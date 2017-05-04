@@ -6,6 +6,7 @@ use Yii;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Software;
 use marqu3s\itam\models\SoftwareSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,15 @@ class SoftwareController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->rbacItemPrefix . 'SoftwareManager']
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

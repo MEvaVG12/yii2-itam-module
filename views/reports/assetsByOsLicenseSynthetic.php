@@ -8,6 +8,7 @@
 
 use marqu3s\itam\Module;
 use marqu3s\itam\models\OsLicense;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $licenses OsLicense[] */
@@ -38,9 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         $alertClass = 'danger';
                     }
                     ?>
-                    <tr class="text-<?= $alertClass ?>">
+                    <tr class="<?= $alertClass ?>">
                         <td><?= $license->os->name ?></td>
-                        <td><?= $license->key ?></td>
+                        <td><?= Html::a($license->key, ['reports/assets-by-os-license-analytic', 'idLicense' => $license->id]) ?></td>
                         <td class="text-center"><?= $license->purchased_licenses ?></td>
                         <td class="text-center"><?= $inUse ?></td>
                     </tr>

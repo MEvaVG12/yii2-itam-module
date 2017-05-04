@@ -27,9 +27,29 @@ class Module extends YiiBaseModule
     public $layout = 'main';
 
     /**
+     * Set to true to use the RBAC Authorization from Yii 2.
+     * This requires the creation of users and the configuration of access rights.
+     * @link http://www.yiiframework.com/doc-2.0/guide-security-authorization.html
+     *
+     * If set to false, (NOT RECOMMENDED) no authorization will be performed and everybody will have permission to use the module.
+     * Use at your own risk!
+     *
+     * @var bool
+     */
+    public $rbacAuthorization = true; // true is the default and recommended for security reasons!
+
+    /**
+     * The prefix used to create and query the permissions.
+     * @var string
+     */
+    public $rbacItemPrefix = 'itam';
+
+    /**
      * @var array The default configuration for the action column of the GridViews.
      */
     public static $defaultGridActionColumn = [];
+
+
 
 
     /**

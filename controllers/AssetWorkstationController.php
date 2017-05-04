@@ -5,6 +5,7 @@ namespace marqu3s\itam\controllers;
 use marqu3s\itam\models\OfficeSuite;
 use marqu3s\itam\models\Os;
 use marqu3s\itam\Module;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 
 /**

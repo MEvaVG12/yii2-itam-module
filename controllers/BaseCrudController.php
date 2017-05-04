@@ -14,6 +14,7 @@ use marqu3s\itam\models\AssetForm;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -76,6 +77,20 @@ abstract class BaseCrudController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->rbacItemPrefix . 'AssetManager']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'duplicate', 'update', 'view'],
+                        'roles' => [$this->module->rbacItemPrefix . 'AssetCreator']
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -189,6 +204,13 @@ abstract class BaseCrudController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Show an existing model.
+     *
+     * @param integer $id
+     *
+     * @return string
+     */
     public function actionView($id)
     {
         $model = $this->findModel($id);

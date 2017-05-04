@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach ($servers as $i => $item): ?>
                 <tr>
                     <td><?= $i+1 ?></td>
-                    <td><?= $item->asset->hostname ?></td>
+                    <td><?= Html::a($item->asset->hostname, ['asset-server/view', 'id' => $item->id]) ?></td>
                     <td><?= $item->asset->location->name ?></td>
                     <td><?= $item->asset->room ?></td>
                     <td><?= $item->asset->ip_address ?></td>
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach ($workstations as $i => $item): ?>
                 <tr>
                     <td><?= $i+1 ?></td>
-                    <td><?= $item->asset->hostname ?></td>
+                    <td><?= Html::a($item->asset->hostname, ['asset-workstation/view', 'id' => $item->id]) ?></td>
                     <td><?= $item->asset->location->name ?></td>
                     <td><?= $item->asset->room ?></td>
                     <td><?= $item->asset->ip_address ?></td>

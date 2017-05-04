@@ -15,11 +15,30 @@ use marqu3s\itam\models\OsLicense;
 use marqu3s\itam\models\Software;
 use marqu3s\itam\models\SoftwareAsset;
 use marqu3s\itam\models\SoftwareLicense;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ReportsController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->rbacItemPrefix . 'ViewReports']
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         return $this->render('index', [

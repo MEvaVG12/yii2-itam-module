@@ -7,7 +7,9 @@ use marqu3s\itam\models\OsLicense;
 use marqu3s\itam\models\Software;
 use marqu3s\itam\models\SoftwareAsset;
 use marqu3s\itam\models\SoftwareLicense;
+use marqu3s\itam\Module;
 use yii\db\Query;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -19,6 +21,33 @@ use yii\web\Response;
  */
 class DashboardController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        /** @var Module $module */
+        $module = $this->module;
+        if ($module->rbacAuthorization) {
+            $config = [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@']
+                        ],
+                    ],
+                ]
+            ];
+        } else {
+            $config = [];
+        }
+
+        return $config;
+    }
+
+
     /**
      * Renders the index view for the module
      * @return string

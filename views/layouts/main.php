@@ -32,69 +32,76 @@ $this->registerCss($css);
                     //'linkOptions' => ['class' => 'list-group-item'],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'AssetManager'),
                     'label' => Module::t('menu', 'Servers'),
                     'url' => ['asset-server/index'],
                     //'linkOptions' => ['class' => 'list-group-item'],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'AssetManager'),
                     'label' => Module::t('menu', 'Workstations'),
                     'url' => ['asset-workstation/index'],
                     //'linkOptions' => ['class' => 'list-group-item'],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
                     'label' => Module::t('menu', 'Locations'),
                     'url' => ['location/index'],
                     //'linkOptions' => ['class' => 'list-group-item'],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'SoftwareManager'),
                     'label' => Module::t('menu', 'OSes'),
                     'url' => ['os/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'LicenseManager'),
                     'label' => Module::t('menu', 'OS Licenses'),
                     'url' => ['os-license/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'SoftwareManager'),
                     'label' => Module::t('menu', 'Office Suites'),
                     'url' => ['office-suite/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'LicenseManager'),
                     'label' => Module::t('menu', 'Office Suite Licenses'),
                     'url' => ['office-suite-license/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'SoftwareManager'),
                     'label' => Module::t('menu', 'Software'),
                     'url' => ['software/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'LicenseManager'),
                     'label' => Module::t('menu', 'Software Licenses'),
                     'url' => ['software-license/index'],
                     //'linkOptions' => [...],
                 ],
                 [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports'),
                     'label' => Module::t('menu', 'Reports'),
                     'url' => ['reports/index'],
                     //'linkOptions' => [...],
                 ],
-                /*[
-                    'label' => 'Dropdown',
+                [
+                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
+                    'label' => 'Admin',
                     'items' => [
-                        ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                        ['label' => 'User Management', 'url' => ['user/index']],
+                        ['label' => 'User Permissions', 'url' => ['user/permissions']],
                         '<li class="divider"></li>',
-                        '<li class="dropdown-header">Dropdown Header</li>',
-                        ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+                        '<li class="dropdown-header">Authorization</li>',
+                        ['label' => 'Create authorization rules', 'url' => ['authorization/create-rules']],
                     ],
-                ],*/
-                /*[
-                    'label' => 'Login',
-                    'url' => ['site/login'],
-                    'visible' => Yii::$app->user->isGuest
-                ],*/
+                ],
             ],
             'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
         ]);

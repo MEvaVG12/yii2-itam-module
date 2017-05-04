@@ -6,6 +6,7 @@ use Yii;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Location;
 use marqu3s\itam\models\LocationSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,15 @@ class LocationController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->rbacItemPrefix . 'Admin']
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -32,6 +42,7 @@ class LocationController extends Controller
 
     /**
      * Lists all Location models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -47,7 +58,8 @@ class LocationController extends Controller
 
     /**
      * Creates a new Location model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the 'index' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -66,7 +78,7 @@ class LocationController extends Controller
 
     /**
      * Updates an existing Location model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
      *

@@ -2,7 +2,6 @@
 
 namespace marqu3s\itam\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

@@ -4,17 +4,17 @@ namespace marqu3s\itam\controllers;
 
 use Yii;
 use marqu3s\itam\Module;
-use marqu3s\itam\models\OsLicense;
-use marqu3s\itam\models\OsLicenseSearch;
+use marqu3s\itam\models\User;
+use marqu3s\itam\models\UserSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OsLicenseController implements the CRUD actions for OsLicense model.
+ * UserController implements the CRUD actions for User model.
  */
-class OsLicenseController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -27,7 +27,7 @@ class OsLicenseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => [$this->module->rbacItemPrefix . 'LicenseManager']
+                        'roles' => [$this->module->rbacItemPrefix . 'Admin']
                     ],
                 ],
             ],
@@ -41,13 +41,13 @@ class OsLicenseController extends Controller
     }
 
     /**
-     * Lists all OsLicenses models.
+     * Lists all User models.
      *
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OsLicenseSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,19 +57,20 @@ class OsLicenseController extends Controller
     }
 
     /**
-     * Creates a new OsLicense model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new OsLicense();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', 'OsLicense') . ' ' . Module::t('app', 'created successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', 'User') . ' ' . Module::t('app', 'created successfully.'));
             return $this->redirect(['index']);
         } else {
+            \yii\helpers\VarDumper::dump($model->errors, 10, true);
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -77,7 +78,7 @@ class OsLicenseController extends Controller
     }
 
     /**
-     * Updates an existing OsLicense model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -89,7 +90,7 @@ class OsLicenseController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('app', 'OsLicense') . ' ' . Module::t('app', 'updated successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('app', 'User') . ' ' . Module::t('app', 'updated successfully.'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -99,7 +100,7 @@ class OsLicenseController extends Controller
     }
 
     /**
-     * Deletes an existing OsLicense model.
+     * Deletes an existing Location model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -109,24 +110,74 @@ class OsLicenseController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', Module::t('app', 'OsLicense') . ' ' . Module::t('app', 'deleted successfully.'));
+        Yii::$app->session->setFlash('success', Module::t('app', 'User') . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the OsLicense model based on its primary key value.
+     * Show an existing model.
+     *
+     * @param integer $id
+     *
+     * @return string
+     */
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Manages the users permissions.
+     *
+     * @param null $idUser
+     *
+     * @return string
+     */
+    public function actionPermissions($idUser = null)
+    {
+        $idUser = (int) $idUser;
+        $auth = Yii::$app->authManager;
+
+        if (Yii::$app->request->isPost) {
+            # Revoke all the user permissions.
+            $auth->revokeAll($idUser);
+
+            if (count(Yii::$app->request->post('roles'))) {
+                # Add the selected roles
+                foreach (Yii::$app->request->post('roles') as $roleId) {
+                    $role = $auth->getRole($roleId);
+                    $auth->assign($role, $idUser);
+                }
+            }
+
+            Yii::$app->session->setFlash('success', 'User permissions updated.');
+        }
+        
+        return $this->render('permissions', [
+            'users' => User::find()->orderBy(['name' => SORT_ASC])->all(),
+            'user' => User::findOne($idUser),
+            'userRoles' => $auth->getRolesByUser($idUser),
+            'availableRoles' => $auth->getRoles(),
+        ]);
+    }
+
+
+    /**
+     * Finds the Location model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return OsLicense the loaded model
-     *
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OsLicense::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -8,6 +8,9 @@ use marqu3s\itam\Module;
 /** @var $softwareLicenses \marqu3s\itam\models\SoftwareAsset[] */
 
 $css = <<<CSS
+.numbersHeader {
+    margin-top: 0;
+}
 .progress {
     height: 26px;
     margin-bottom: 0;
@@ -16,12 +19,39 @@ CSS;
 $this->registerCss($css);
 
 $this->title = Module::t('app', 'Dashboard');
-//$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Dashboard'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1><?= Module::t('app', 'OS Licenses Usage') ?></h1>
+<h1>Number of assets in database:</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="well text-center">
+            <h3 class="numbersHeader">Servers</h3>
+            <h4><?= \marqu3s\itam\models\AssetServer::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="well text-center">
+            <h3 class="numbersHeader">Workstations</h3>
+            <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="well text-center">
+            <h3 class="numbersHeader">Printers</h3>
+            <h4>TBD</h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="well text-center">
+            <h3 class="numbersHeader">Wi-Fi APs</h3>
+            <h4>TBD</h4>
+        </div>
+    </div>
+</div>
 
+<?php if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports')): ?>
+<h1><?= Module::t('app', 'OS Licenses Usage') ?></h1>
 <table class="table table-hover">
     <tr>
         <th style="width: 30%"><?= Module::t('model', 'OS') ?></th>
@@ -62,9 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </table>
 <br>
 
-
 <h1><?= Module::t('app', 'Office Suite Licenses Usage') ?></h1>
-
 <table class="table table-hover">
     <tr>
         <th style="width: 30%"><?= Module::t('model', 'Office Suite') ?></th>
@@ -106,7 +134,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 
 <h1><?= Module::t('app', 'Software Licenses Usage') ?></h1>
-
 <table class="table table-hover">
     <tr>
         <th style="width: 30%"><?= Module::t('model', 'Software') ?></th>
@@ -146,3 +173,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endforeach; ?>
 </table>
 <br>
+<?php endif ?>

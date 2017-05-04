@@ -2,14 +2,13 @@
 
 namespace marqu3s\itam\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * LocationSearch represents the model behind the search form about `marqu3s\itam\models\Location`.
+ * UserSearch represents the model behind the search form about `marqu3s\itam\models\User`.
  */
-class LocationSearch extends Location
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -17,8 +16,8 @@ class LocationSearch extends Location
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['username', 'name', 'email'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class LocationSearch extends Location
      */
     public function search($params)
     {
-        $query = Location::find();
+        $query = User::find();
 
         // add conditions that should always apply here
 
@@ -64,9 +63,12 @@ class LocationSearch extends Location
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-        ]);
+            'status' => $this->status,
+        ])
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        ->andFilterWhere(['like', 'username', $this->username])
+        ->andFilterWhere(['like', 'name', $this->name])
+        ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }
