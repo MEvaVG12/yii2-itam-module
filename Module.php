@@ -96,7 +96,7 @@ class Module extends YiiBaseModule
         Yii::$app->i18n->translations['modules/itam/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
-            'basePath' => '@app/modules/itam/messages',
+            'basePath' => __DIR__ . '/messages',
             'fileMap' => [
                 'modules/itam/app' => 'app.php',
                 'modules/itam/menu' => 'menu.php',

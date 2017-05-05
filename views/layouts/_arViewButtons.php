@@ -9,7 +9,7 @@
 use marqu3s\itam\Module;
 use yii\helpers\Html;
 
-/** @var $model \marqu3s\itam\models\AssetWorkstation */
+/** @var $model \yii\db\ActiveRecord */
 ?>
 <p>
     <?= Html::a(Module::t('app', 'Index'), ['index'], ['class' => 'btn btn-success']) ?>

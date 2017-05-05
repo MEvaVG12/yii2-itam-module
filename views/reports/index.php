@@ -15,17 +15,17 @@ use yii\widgets\Pjax;
 /* @var $searchModel marqu3s\itam\models\OsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('app', 'Reports');
+$this->title = Module::t('menu', 'Reports');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="report-index">
-    <h1>Reports</h1>
+    <h1><?= $this->title ?></h1>
     <ul>
-        <li><a href="/itam/reports/assets-by-os-license-analytic"><?= Module::t('app', 'OS usage by license - Analytic') ?></a></li>
-        <li><a href="/itam/reports/assets-by-os-license-synthetic"><?= Module::t('app', 'OS usage by license - Synthetic') ?></a></li>
-        <li><a href="/itam/reports/assets-by-office-suite-license-analytic"><?= Module::t('app', 'Office Suite usage by license - Analytic') ?></a></li>
-        <li><a href="/itam/reports/assets-by-office-suite-license-synthetic"><?= Module::t('app', 'Office Suite usage by license - Synthetic') ?></a></li>
-        <li><a href="/itam/reports/assets-by-software-license-analytic"><?= Module::t('app', 'Software usage by license - Analytic') ?></a></li>
-        <li><a href="/itam/reports/assets-by-software-license-synthetic"><?= Module::t('app', 'Software usage by license - Synthetic') ?></a></li>
+        <li><?= Html::a(Module::t('app', 'OS usage by license - Analytic'), ['reports/assets-by-os-license-analytic']) ?></li>
+        <li><?= Html::a(Module::t('app', 'OS usage by license - Synthetic'), ['reports/assets-by-os-license-synthetic']) ?></li>
+        <li><?= Html::a(Module::t('app', 'Office Suite usage by license - Analytic'), ['reports/assets-by-office-suite-license-analytic']) ?></li>
+        <li><?= Html::a(Module::t('app', 'Office Suite usage by license - Synthetic'), ['reports/assets-by-office-suite-license-synthetic']) ?></li>
+        <li><?= Html::a(Module::t('app', 'Software usage by license - Analytic'), ['reports/assets-by-software-license-analytic']) ?></li>
+        <li><?= Html::a(Module::t('app', 'Software usage by license - Synthetic'), ['reports/assets-by-software-license-synthetic']) ?></li>
     </ul>
 </div>

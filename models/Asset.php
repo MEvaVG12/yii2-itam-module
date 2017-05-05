@@ -3,7 +3,11 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
+use yii\behaviors\AttributeTypecastBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "itam_asset".
@@ -31,6 +35,32 @@ use yii\db\ActiveRecord;
  */
 class Asset extends ActiveRecord
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'value' => Yii::$app->user->identity->username
+            ],
+            [
+                'class' => AttributeTypecastBehavior::className(),
+                // 'attributeTypes' will be composed automatically according to `rules()`
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

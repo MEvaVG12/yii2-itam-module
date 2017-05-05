@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\Location */
 
 $this->title = Module::t('app', 'Create Location');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Locations'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Locations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="location-create">

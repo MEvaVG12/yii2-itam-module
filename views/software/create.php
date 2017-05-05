@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\Software */
 
 $this->title = Module::t('app', 'Create Software');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Software'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Softwares'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="software-create">

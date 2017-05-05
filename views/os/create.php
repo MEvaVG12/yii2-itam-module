@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\Os */
 
 $this->title = Module::t('app', 'Create Os');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Os'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'OSes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="os-create">

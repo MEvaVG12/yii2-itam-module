@@ -14,7 +14,7 @@ use yii\helpers\Html;
 /* @var $licenses SoftwareLicense[] */
 
 $this->title = Module::t('app', 'Software usage by license - Synthetic');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="report-software-license">

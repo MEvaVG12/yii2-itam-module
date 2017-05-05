@@ -13,7 +13,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $searchModel marqu3s\itam\models\OfficeSuiteLicenseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Office Suite Licenses';
+$this->title = Module::t('menu', 'Office Suite Licenses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="office-suite-license-index">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Office Suite License', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Module::t('app', 'Create Office Suite License'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

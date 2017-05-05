@@ -24,7 +24,7 @@ JS;
 $this->registerJs($js);
 
 $this->title = Module::t('app', 'Software usage by license - Analytic');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Reports'), 'url' => ['reports/index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="report-software-license">

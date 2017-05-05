@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\AssetWorkstation */
 
 $this->title = Module::t('app', 'Create Workstation');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Workstations'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Workstations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="workstation-create">

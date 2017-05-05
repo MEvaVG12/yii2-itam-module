@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><?= Module::t('app', 'Add Software') ?></h4>
+                <h4 class="modal-title"><?= Module::t('app', 'Add software') ?></h4>
             </div>
             <div class="modal-body">
                 <?php $softwareAssetModel = new SoftwareAsset(); ?>

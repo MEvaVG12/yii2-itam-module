@@ -17,7 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Dashboard' => 'Painel de indicadores',
     'Locations' => 'Locais',
-    'OSes' => 'Sist. Oper.',
+    'OS Licenses' => 'Licenças SO',
+    'OSes' => 'SO',
+    'Office Suite Licenses' => 'Licenças Office',
     'Office Suites' => 'Pacotes Office',
+    'Reports' => 'Relatórios',
+    'Servers' => 'Servidores',
+    'Software Licenses' => 'Licenças de programas',
+    'Softwares' => 'Programas',
+    'Workstations' => 'Estações',
 ];

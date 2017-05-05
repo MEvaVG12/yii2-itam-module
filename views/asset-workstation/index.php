@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $gridColumns array */
 
-$this->title = Module::t('app', 'Workstations');
+$this->title = Module::t('menu', 'Workstations');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="workstation-index">

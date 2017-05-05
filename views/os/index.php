@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel marqu3s\itam\models\OsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('app', 'Os');
+$this->title = Module::t('menu', 'OSes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="os-index">

@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\OfficeSuite */
 
 $this->title = Module::t('app', 'Create Office Suite');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Office Suites'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Office Suites'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="office-suite-create">

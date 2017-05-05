@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel marqu3s\itam\models\Software */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('app', 'Software');
+$this->title = Module::t('menu', 'Softwares');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="software-index">

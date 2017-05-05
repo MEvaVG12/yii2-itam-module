@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\AssetWorkstationForm */
 
 $this->title = Module::t('app', 'Update: ') . $model->asset->hostname;
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Servers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Servers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->asset->hostname, 'url' => ['view', 'id' => $model->assetServer->id]];
 $this->params['breadcrumbs'][] = Module::t('app', 'Update');
 ?>

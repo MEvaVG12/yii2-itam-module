@@ -96,8 +96,8 @@ class AssetWorkstation extends ActiveRecord
             'id_asset' => 'Id Asset',
             'id_os' => Module::t('model', 'OS'),
             'id_os_license' => Module::t('model', 'OS license'),
-            'id_office_suite' => Module::t('model', 'Office suite'),
-            'id_office_suite_license' => Module::t('model', 'Office suite license'),
+            'id_office_suite' => Module::t('model', 'Office Suite'),
+            'id_office_suite_license' => Module::t('model', 'Office Suite license'),
             'user' => Module::t('model', 'User'),
 
             # Custom attributes used in the GridView

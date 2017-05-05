@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model marqu3s\itam\models\Software */
 
-$this->title = 'Create Software License';
-$this->params['breadcrumbs'][] = ['label' => 'Software Licenses', 'url' => ['index']];
+$this->title = Module::t('app', 'Create Software License');
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Software Licenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="software-license-create">

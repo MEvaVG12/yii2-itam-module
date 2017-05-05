@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php include(__DIR__ . '/../layouts/_assetViewButtons.php') ?>
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
     <?php include(__DIR__ . '/../layouts/_assetViewBaseDetails.php') ?>
 
@@ -32,19 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->osLicense !== null ? $model->osLicense->key : null,
             ],
             [
-                'label' => Module::t('model', 'Office suite'),
+                'label' => Module::t('model', 'Office Suite'),
                 'value' => $model->officeSuite !== null ? $model->officeSuite->name : null,
             ],
             [
-                'label' => Module::t('model', 'Office suite') . ' ' . Module::t('model', 'Activation key'),
+                'label' => Module::t('model', 'Office Suite') . ' ' . Module::t('model', 'Activation key'),
                 'value' => $model->officeSuiteLicense !== null ? $model->officeSuiteLicense->key : null,
             ],
             'cals'
         ],
     ]) ?>
 
-    <?php include(__DIR__ . '/../layouts/_assetViewRecordDetails.php') ?>
-
-    <?php include(__DIR__ . '/../layouts/_assetViewButtons.php') ?>
+    <?= $this->render('/layouts/_arViewRecordDetails', ['model' => $model->asset]) ?>
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
 </div>

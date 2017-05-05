@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model marqu3s\itam\models\AssetServer */
 
 $this->title = Module::t('app', 'Create Server');
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Server'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Servers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="server-create">

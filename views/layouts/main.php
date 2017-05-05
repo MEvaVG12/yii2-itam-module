@@ -76,7 +76,7 @@ $this->registerCss($css);
                     ],
                     [
                         'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'SoftwareManager'),
-                        'label' => Module::t('menu', 'Software'),
+                        'label' => Module::t('menu', 'Softwares'),
                         'url' => ['software/index'],
                         //'linkOptions' => [...],
                     ],

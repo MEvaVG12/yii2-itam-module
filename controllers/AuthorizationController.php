@@ -3,7 +3,7 @@
 namespace marqu3s\itam\controllers;
 
 use Yii;
-use yii\rbac\ManagerInterface;
+use yii\rbac\DbManager;
 use yii\rbac\Role;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
  */
 class AuthorizationController extends Controller
 {
-    /** @var ManagerInterface */
+    /** @var DbManager */
     private $auth;
 
     /** @var Role */
@@ -45,8 +45,8 @@ class AuthorizationController extends Controller
         if (Yii::$app->request->isPost) {
             $trans = Yii::$app->db->beginTransaction();
             try {
-                $this->eraseRules();
                 $this->auth = Yii::$app->authManager;
+                $this->eraseRules();
                 $this->adminRole = $this->createAdminRole();
                 $this->createAssetRoles();
                 $this->createSoftwareRoles();
@@ -194,14 +194,13 @@ class AuthorizationController extends Controller
 
     private function eraseRules()
     {
-        $sql = "DELETE FROM auth_assignment WHERE item_name LIKE '" . $this->module->rbacItemPrefix . "%'";
+        $sql = "DELETE FROM {$this->auth->assignmentTable} WHERE item_name LIKE '" . $this->module->rbacItemPrefix . "%'";
         Yii::$app->db->createCommand($sql)->execute();
 
-        $sql = "DELETE FROM auth_item WHERE name LIKE '" . $this->module->rbacItemPrefix . "%'";
+        $sql = "DELETE FROM {$this->auth->itemTable} WHERE name LIKE '" . $this->module->rbacItemPrefix . "%'";
         Yii::$app->db->createCommand($sql)->execute();
 
-        $sql = "DELETE FROM auth_rule WHERE name LIKE '" . $this->module->rbacItemPrefix . "%'";
+        $sql = "DELETE FROM {$this->auth->ruleTable} WHERE name LIKE '" . $this->module->rbacItemPrefix . "%'";
         Yii::$app->db->createCommand($sql)->execute();
     }
-
 }

@@ -14,6 +14,10 @@ use yii\db\ActiveRecord;
  * @property integer $purchased_licenses
  * @property integer $digital_license
  * @property string $date_of_purchase
+ * @property string $created_by
+ * @property string $created_at
+ * @property string $updated_by
+ * @property string $updated_at
  *
  * @property OfficeSuite $officeSuite
  */
@@ -50,11 +54,15 @@ class OfficeSuiteLicense extends ActiveRecord
     {
         return [
             'id' => Module::t('model', 'ID'),
-            'id_office_suite' => Module::t('model', 'Office suite'),
+            'id_office_suite' => Module::t('model', 'Office Suite'),
             'key' => Module::t('model', 'Activation key'),
             'purchased_licenses' => Module::t('model', 'Purchased licenses'),
             'digital_license' => Module::t('model', 'Digital license'),
             'date_of_purchase' => Module::t('model', 'Date of purchase'),
+            'created_by' => Module::t('model', 'Created by'),
+            'created_at' => Module::t('model', 'Created at'),
+            'updated_by' => Module::t('model', 'Updated by'),
+            'updated_at' => Module::t('model', 'Updated at'),
         ];
     }
 

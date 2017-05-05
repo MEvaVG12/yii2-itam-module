@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model marqu3s\itam\models\Software */
 
-$this->title = 'Update: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Software Licenses', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Module::t('app', 'Update') . ': ' . $model->software->name;
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Software Licenses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->software->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Module::t('app', 'Update');
 ?>
 <div class="software-license-update">
 

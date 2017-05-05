@@ -23,7 +23,7 @@ $this->title = Module::t('app', 'Dashboard');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1>Number of assets in database:</h1>
+<h1><?= Module::t('app', 'Number of assets in database') ?>:</h1>
 <div class="row">
     <div class="col-md-3">
         <div class="well text-center">
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <td>
                 <a href="/itam/reports/assets-by-os-license-analytic?idLicense=<?= $license->id ?>"><?= $license->os->name ?></a><br>
-                <span class="label label-default">Key:</span> <?= $license->key ?>
+                <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license->key ?>
             </td>
             <td class="text-center"><?= $license->purchased_licenses ?></td>
             <td class="text-center"><?= $qtdInUse ?></td>
@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <td>
                 <a href="/itam/reports/assets-by-office-suite-license-analytic?idLicense=<?= $license->id ?>"><?= $license->officeSuite->name ?></a><br>
-                <span class="label label-default">Key:</span> <?= $license->key ?>
+                <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license->key ?>
             </td>
             <td class="text-center"><?= $license->purchased_licenses ?></td>
             <td class="text-center"><?= $qtdInUse ?></td>
@@ -158,7 +158,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <td>
                 <a href="/itam/reports/assets-by-software-license-analytic?idLicense=<?= $license['idSoftwareLicense']  ?>"><?= $license['software'] ?></a><br>
-                <span class="label label-default">Key:</span> <?= $license['key'] ?>
+                <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license['key'] ?>
             </td>
             <td class="text-center"><?= $license['purchasedLicenses'] ?></td>
             <td class="text-center"><?= $qtdInUse ?></td>

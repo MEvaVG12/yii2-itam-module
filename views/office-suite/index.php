@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel marqu3s\itam\models\OfficeSuiteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('app', 'Office Suites');
+$this->title = Module::t('menu', 'Office Suites');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="office-suite-index">

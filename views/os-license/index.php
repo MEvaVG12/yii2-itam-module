@@ -13,7 +13,7 @@ use rmrevin\yii\fontawesome\FA;
 /* @var $searchModel marqu3s\itam\models\OsLicenseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'OS Licenses';
+$this->title = Module::t('menu', 'OS Licenses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="os-license-index">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create OS License', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Module::t('app', 'Create OS License'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

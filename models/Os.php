@@ -10,6 +10,10 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property string $name
+ * @property string $created_by
+ * @property string $created_at
+ * @property string $updated_by
+ * @property string $updated_at
  *
  * @property OsLicense[] $licences
  * @property AssetWorkstation[] $assetWorkstations
@@ -17,8 +21,6 @@ use yii\db\ActiveRecord;
  */
 class Os extends ActiveRecord
 {
-    private $licensesCount;
-
     /**
      * @inheritdoc
      */
@@ -45,6 +47,10 @@ class Os extends ActiveRecord
         return [
             'id' => 'ID',
             'name' => Module::t('model', 'Name'),
+            'created_by' => Module::t('model', 'Created by'),
+            'created_at' => Module::t('model', 'Created at'),
+            'updated_by' => Module::t('model', 'Updated by'),
+            'updated_at' => Module::t('model', 'Updated at'),
         ];
     }
 
