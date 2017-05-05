@@ -177,6 +177,10 @@ class AuthorizationController extends Controller
 
         # add "ViewReports" role to the "admin" role.
         $this->auth->addChild($this->adminRole, $accessReports);
+
+        # add "ViewReports" role to the "LicenseManager" role.
+        $licenseManagerRole = $this->auth->getRole($this->module->rbacItemPrefix . 'LicenseManager');
+        $this->auth->addChild($licenseManagerRole, $accessReports);
     }
 
     private function createAdminRole()

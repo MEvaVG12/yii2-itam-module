@@ -26,17 +26,23 @@ class ReportsController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => [$this->module->rbacItemPrefix . 'ViewReports']
+        $config = [];
+
+        if ($this->module->rbacAuthorization) {
+            $config = array_merge($config, [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => [$this->module->rbacItemPrefix . 'ViewReports']
+                        ],
                     ],
                 ],
-            ],
-        ];
+            ]);
+        }
+
+        return $config;
     }
 
     public function actionIndex()

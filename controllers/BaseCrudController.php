@@ -76,28 +76,35 @@ abstract class BaseCrudController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => [$this->module->rbacItemPrefix . 'AssetManager']
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'create', 'duplicate', 'update', 'view'],
-                        'roles' => [$this->module->rbacItemPrefix . 'AssetCreator']
-                    ],
-                ],
-            ],
+        $config = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
+            ]
         ];
+
+        if ($this->module->rbacAuthorization) {
+            $config = array_merge($config, [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => [$this->module->rbacItemPrefix . 'AssetManager']
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'create', 'duplicate', 'update', 'view'],
+                            'roles' => [$this->module->rbacItemPrefix . 'AssetCreator']
+                        ],
+                    ],
+                ],
+            ]);
+        }
+
+        return $config;
     }
 
     /**

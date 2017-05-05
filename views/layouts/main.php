@@ -92,7 +92,7 @@ $this->registerCss($css);
                     //'linkOptions' => [...],
                 ],
                 [
-                    'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
+                    'visible' => $this->context->module->rbacAuthorization && Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
                     'label' => 'Admin',
                     'items' => [
                         ['label' => 'User Management', 'url' => ['user/index']],
