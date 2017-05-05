@@ -1,6 +1,7 @@
 <?php
 
 use marqu3s\itam\Module;
+use yii\helpers\Html;
 
 /** @var $this \yii\web\View */
 /** @var $osLicenses \marqu3s\itam\models\OsLicense[] */
@@ -26,25 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-md-3">
         <div class="well text-center">
-            <h3 class="numbersHeader">Servers</h3>
+            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Servers'), ['asset-server/index']) ?></h3>
             <h4><?= \marqu3s\itam\models\AssetServer::find()->count(); ?></h4>
         </div>
     </div>
     <div class="col-md-3">
         <div class="well text-center">
-            <h3 class="numbersHeader">Workstations</h3>
+            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Workstations'), ['asset-workstation/index']) ?></h3>
             <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="well text-center">
-            <h3 class="numbersHeader">Printers</h3>
+        <div class="well text-center text-muted">
+            <h3 class="numbersHeader"><?= Module::t('app', 'Printers') ?></h3>
             <h4>TBD</h4>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="well text-center">
-            <h3 class="numbersHeader">Wi-Fi APs</h3>
+        <div class="well text-center text-muted">
+            <h3 class="numbersHeader"><?= Module::t('app', 'Wi-Fi APs') ?></h3>
             <h4>TBD</h4>
         </div>
     </div>
