@@ -50,8 +50,6 @@ class Module extends YiiBaseModule
     public static $defaultGridActionColumn = [];
 
 
-
-
     /**
      * @inheritdoc
      */
