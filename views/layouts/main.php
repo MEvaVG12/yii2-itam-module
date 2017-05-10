@@ -121,7 +121,7 @@ if (!$this->context->module->rbacAuthorization || ($this->context->module->rbacA
                 ['label' => Module::t('menu', 'User Permissions'), 'url' => ['user/permissions']],
                 '<li class="divider"></li>',
                 '<li class="dropdown-header">' . Module::t('menu', 'Authorization') . '</li>',
-                ['label' => Module::t('menu', 'Create authorization rules'), 'url' => ['authorization/create-rules']],
+                ['label' => Module::t('menu', 'Create authorization rules'), 'url' => ['authorization/index']],
             ],
         ],
     ]);

@@ -36,6 +36,18 @@ class AuthorizationController extends Controller
     }
 
     /**
+     * Index page.
+     *
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        return $this->render('index', [
+            'prefix' => $this->module->rbacItemPrefix
+        ]);
+    }
+
+    /**
      * Creates the basic authorization rules.
      *
      * @return mixed
@@ -52,23 +64,42 @@ class AuthorizationController extends Controller
                 $this->createSoftwareRoles();
                 $this->createReportsRoles();
 
-                # Assign admin role to the admin user
-                $this->auth->assign($this->adminRole, 1);
-
                 # All done
                 $trans->commit();
 
                 Yii::$app->session->setFlash('success', 'Rules created successfully.');
-                $this->refresh();
             } catch (\Exception $e) {
                 $trans->rollBack();
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
+
+            return $this->redirect(['index']);
         }
 
-        return $this->render('createRules', [
+        return $this->render('index', [
             'prefix' => $this->module->rbacItemPrefix
         ]);
+    }
+
+    /**
+     * Assign a user ID to the admin role.
+     *
+     * @return \yii\web\Response
+     */
+    public function actionAssignAdmin()
+    {
+        if (Yii::$app->request->isPost) {
+            # Get the admin role
+            $this->auth = Yii::$app->authManager;
+            $this->adminRole = $this->auth->getRole($this->module->rbacItemPrefix . 'Admin');
+
+            # Assign admin role to the admin user
+            $this->auth->assign($this->adminRole, (int)Yii::$app->request->post('user_id', 1));
+
+            Yii::$app->session->setFlash('success', 'Admin assigned successfully.');
+        }
+
+        return $this->redirect(['index']);
     }
 
 
