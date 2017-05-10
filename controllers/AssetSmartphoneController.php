@@ -41,6 +41,7 @@ class AssetSmartphoneController extends BaseCrudController
                 'attribute' => 'brandAndModel',
                 'format' => 'html',
                 'value' => function ($model) {
+                    if (empty($model->asset->brand) && empty($model->asset->model)) return null;
                     return $model->asset->brand . '<br><small>' . $model->asset->model . '</small>';
                 }
             ],

@@ -45,6 +45,7 @@ use yii\widgets\DetailView;
                     return $str;
                 }
             }
-        ]
+        ],
+        'asset.annotations',
     ],
 ]) ?>

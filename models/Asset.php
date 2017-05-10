@@ -22,6 +22,7 @@ use Yii;
  * @property string $model
  * @property string $serial_number
  * @property string $service_tag
+ * @property string $annotations
  * @property string $created_by
  * @property string $created_at
  * @property string $updated_by
@@ -76,6 +77,7 @@ class Asset extends ActiveRecord
     public function rules()
     {
         return [
+            [['hostname'], 'required'],
             [['hostname'], 'unique'],
             [['id_location'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -84,7 +86,11 @@ class Asset extends ActiveRecord
             [['serial_number'], 'string', 'max' => 30],
             [['ip_address'], 'string', 'max' => 15],
             [['mac_address'], 'string', 'max' => 14],
+            [['annotations'], 'string'],
             [['id_location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['id_location' => 'id']],
+
+            # Use NULL instead of '' (empty string)
+            [['room', 'brand', 'model', 'service_tag', 'serial_number', 'ip_address', 'mac_address', 'annotations'], 'default', 'value' => null],
         ];
     }
 
@@ -104,6 +110,7 @@ class Asset extends ActiveRecord
             'model' => Module::t('model', 'Model'),
             'serial_number' => Module::t('model', 'Serial number'),
             'service_tag' => Module::t('model', 'Service tag'),
+            'annotations' => Module::t('model', 'Annotations'),
             'created_by' => Module::t('model', 'Created by'),
             'created_at' => Module::t('model', 'Created at'),
             'updated_by' => Module::t('model', 'Updated by'),

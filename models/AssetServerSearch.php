@@ -110,12 +110,18 @@ class AssetServerSearch extends AssetServer
             'cals' => $this->cals,
         ])
 
-        # Here we search the attributes of our relations using our previously configured ones in "AssetWorkstationSearch"
-        ->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')")
+        # Here we search the attributes of our relations using our previously configured ones in "AssetServerSearch"
         ->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname])
-        ->andWhere("(itam_asset.ip_address like '%$this->ipMacAddress%' OR itam_asset.mac_address like '%$this->ipMacAddress%')")
-        ->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')")
         ->andFilterWhere(['like', 'itam_asset.service_tag', $this->serviceTag]);
+        if (!empty($this->locationName)) {
+            $query->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')");
+        }
+        if (!empty($this->ipMacAddress)) {
+            $query->andWhere("(itam_asset.ip_address like '%$this->ipMacAddress%' OR itam_asset.mac_address like '%$this->ipMacAddress%')");
+        }
+        if (!empty($this->brandAndModel)) {
+            $query->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')");
+        }
 
         return $dataProvider;
     }

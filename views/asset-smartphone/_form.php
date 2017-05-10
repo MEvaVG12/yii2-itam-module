@@ -29,6 +29,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model->assetSmartphone, 'os_version')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->assetSmartphone, 'user')->textInput(['maxlength' => true]) ?>
 
+    <?php
+    # Include the file containing the form field to add an annotation to the asset.
+    include(__DIR__ . '/../layouts/_assetAnnotations.php');
+    ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->asset->isNewRecord ? Module::t('app', 'Create') : Module::t('app', 'Update'), ['class' => $model->asset->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

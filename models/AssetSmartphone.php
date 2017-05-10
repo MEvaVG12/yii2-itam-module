@@ -46,6 +46,9 @@ class AssetSmartphone extends ActiveRecord
             [['os', 'os_version', 'user'], 'string', 'max' => 30],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
 
+            # Use NULL instead of '' (empty string)
+            [['imei', 'os', 'os_version', 'user'], 'default', 'value' => null],
+
             # Custom attributes
             [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel'], 'safe'],
         ];
@@ -63,6 +66,13 @@ class AssetSmartphone extends ActiveRecord
             'os' => Module::t('model', 'OS'),
             'os_version' => Module::t('model', 'OS version'),
             'user' => Module::t('model', 'User'),
+
+            # Custom attributes used in the GridView
+            'locationName' => Module::t('model', 'Location'),
+            'hostname' => Module::t('model', 'Hostname'),
+            'ipMacAddress' => Module::t('model', 'IP/MAC address'),
+            'brandAndModel' => Module::t('model', 'Brand and model'),
+            'serviceTag' => Module::t('model', 'Service tag'),
         ];
     }
 

@@ -28,5 +28,5 @@ use marqu3s\itam\models\Location;
         'removeMaskOnSubmit' => true,
     ]
 ]) ?>
-<?= $form->field($model->asset, 'id_location')->dropDownList(ArrayHelper::map(Location::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')) ?>
+<?= $form->field($model->asset, 'id_location')->dropDownList(ArrayHelper::map(Location::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--']) ?>
 <?= $form->field($model->asset, 'room')->textInput(['maxlength' => true]) ?>

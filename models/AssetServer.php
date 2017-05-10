@@ -61,6 +61,9 @@ class AssetServer extends ActiveRecord
             [['id_office_suite'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuite::className(), 'targetAttribute' => ['id_office_suite' => 'id']],
             [['id_office_suite_license'], 'exist', 'skipOnError' => true, 'targetClass' => OfficeSuiteLicense::className(), 'targetAttribute' => ['id_office_suite_license' => 'id']],
 
+            # Use NULL instead of '' (empty string)
+            [['cals'], 'default', 'value' => null],
+
             # Custom attributes
             [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'serviceTag'], 'safe'],
         ];

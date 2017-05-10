@@ -17,11 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Create Smartphone' => 'Novo Smartphone',
     'Smartphones' => '',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
-    'Add software' => 'Novo software',
+    'Add software' => 'Novo programa',
     'Are you sure you want to delete this item?' => 'Tem certeza que deseja apagar este item?',
     'Asset Base Info' => 'Informações Básicas do Ativo',
     'Asset Details' => 'Detalhes do Ativo',
@@ -43,6 +42,7 @@ return [
     'Create Os' => 'Novo SO',
     'Create Rules' => 'Criar regras',
     'Create Server' => 'Novo Servidor',
+    'Create Smartphone' => 'Novo Smartphone',
     'Create Software' => 'Novo Programa',
     'Create Software License' => 'Nova licença de programa',
     'Create User' => 'Novo Usuário',
@@ -55,7 +55,6 @@ return [
     'ID' => 'ID',
     'Inactive' => 'Inativo',
     'Index' => 'Índice',
-    'Installed Software' => 'Programa instalado',
     'Installed Softwares' => 'Programas instalados',
     'Licenses in use' => 'Licenças em uso',
     'Location' => 'Local',
@@ -81,7 +80,7 @@ return [
     'Password Hash' => 'Senha encriptada',
     'Password Reset Token' => 'Código para troca de senha',
     'Permissions' => 'Permissões',
-    'Please fix the following errors for' => 'Por favor corrija os seguintes erros para',
+    'Please fix the following errors for' => 'Por favor corrija os seguintes erros para ',
     'Printers' => 'Impressoras',
     'Record Details' => 'Detalhes do Registro',
     'Reset' => 'Reiniciar',

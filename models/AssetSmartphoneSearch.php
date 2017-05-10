@@ -105,12 +105,20 @@ class AssetSmartphoneSearch extends AssetSmartphone
         ])
 
         # Here we search the attributes of our relations using our previously configured ones in "AssetWorkstationSearch"
-        ->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')")
         ->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname])
-        ->andWhere("(itam_asset.ip_address like '%$this->ipMacAddress%' OR itam_asset.mac_address like '%$this->ipMacAddress%')")
-        ->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')")
-        ->andWhere("(itam_asset_smartphone.os like '%$this->os%' OR itam_asset_smartphone.os_version like '%$this->os%')")
         ->andFilterWhere(['like', 'itam_asset_smartphone.user', $this->user]);
+        if (!empty($this->locationName)) {
+            $query->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')");
+        }
+        if (!empty($this->ipMacAddress)) {
+            $query->andWhere("(itam_asset.ip_address like '%$this->ipMacAddress%' OR itam_asset.mac_address like '%$this->ipMacAddress%')");
+        }
+        if (!empty($this->brandAndModel)) {
+            $query->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')");
+        }
+        if (!empty($this->brandAndModel)) {
+            $query->andWhere("(itam_asset_smartphone.os like '%$this->os%' OR itam_asset_smartphone.os_version like '%$this->os%')");
+        }
 
         return $dataProvider;
     }

@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
 \marqu3s\itam\assets\ModuleAsset::register($this);
 
-# Include de file containing the modal that adds a software to the asset.
+# Include the file containing the modal that adds a software to the asset.
 include(__DIR__ . '/../layouts/_softwareAssetModal.php');
 ?>
 
@@ -33,12 +33,13 @@ include(__DIR__ . '/../layouts/_softwareAssetModal.php');
     <?= $form->field($model->assetWorkstation, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed'), 'id' => 'ddOfficeSuite']) ?>
     <?= $form->field($model->assetWorkstation, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetWorkstation->id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOfficeSuiteLicense']) ?>
 
-    <?php if (!$model->asset->isNewRecord): ?>
-        <div style="margin: 40px 0">
-        <h2><?= Module::t('app', 'Installed Software') ?> <?= Html::button(Module::t('app', 'Add software'), ['class' => 'btn btn-success btn-sm', 'id' => 'btnAddSoftware']) ?></h2>
-            <div id="softwareTable"><i class="fa fa-spin fa-spinner"></i></div>
-        </div>
-    <?php endif ?>
+    <?php
+    # Include the file containing the form part that adds a software to the asset.
+    include(__DIR__ . '/../layouts/_softwareAssetForm.php');
+
+    # Include the file containing the form field to add an annotation to the asset.
+    include(__DIR__ . '/../layouts/_assetAnnotations.php');
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->asset->isNewRecord ? Module::t('app', 'Create') : Module::t('app', 'Update'), ['class' => $model->asset->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

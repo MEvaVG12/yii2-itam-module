@@ -9,6 +9,7 @@
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Software;
 use marqu3s\itam\models\SoftwareAsset;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
