@@ -17,10 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'OS License Report' => 'Relatório das licenças de SO',
-    'Office Suite License Report' => 'Relatório das licenças de Office',
+    'Authorization item prefix to be used when creating permissions in the database (can be configured in application config/main.php file, in the module settings):' => 'Prefixo a ser usado ao criar os itens de permissão no banco de dados (pode ser configurado no arquivo de configuração config/main.php na configuração do módulo):',
     'Smartphones' => '',
-    'Software License Report' => 'Relatório das licenças dos Programas',
+    'This page must be used only once to create the authorization rules.' => 'Esta página só deve ser utilizada uma vez para criar as regras de autorização.',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
     'Add software' => 'Novo programa',
@@ -70,9 +69,11 @@ return [
     'No software installed' => 'Nenhum programa instalado',
     'Not installed' => 'Não instalado',
     'Number of assets in database' => 'Número de ativos no sistema',
+    'OS License Report' => 'Relatório das licenças de SO',
     'OS Licenses Usage' => 'Utilização das licenças de SO',
     'OS usage by license - Analytic' => 'Uso das licenças de SO - Analítico',
     'OS usage by license - Synthetic' => 'Uso das licenças de SO - Sintético',
+    'Office Suite License Report' => 'Relatório das licenças de Office',
     'Office Suite Licenses Usage' => 'Utilização das licenças de Office',
     'Office Suite usage by license - Analytic' => 'Uso das licenças de Office - Analítico',
     'Office Suite usage by license - Synthetic' => 'Uso das licenças de Office - Sintético',
@@ -92,6 +93,7 @@ return [
     'Search' => 'Buscar',
     'Servers' => 'Servidores',
     'Software' => 'Programa',
+    'Software License Report' => 'Relatório das licenças dos Programas',
     'Software Licenses Usage' => 'Utilização das licenças de Programas',
     'Software license' => 'Licença do programa',
     'Software usage by license - Analytic' => 'Uso das licenças de Programas - Analítico',

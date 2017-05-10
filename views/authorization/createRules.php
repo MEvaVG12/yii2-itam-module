@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>This page must be used only once to create the authorization rules.</p>
-    <p>Authorization item prefix to be used: <?= $prefix ?></p>
+    <p><?= Module::t('app', 'This page must be used only once to create the authorization rules.') ?></p>
+    <p><?= Module::t('app', 'Authorization item prefix to be used when creating permissions in the database (can be configured in application config/main.php file, in the module settings):') ?> <code><?= $prefix ?></code></p>
 
     <?php $form = ActiveForm::begin(); ?>
     <?= Html::submitButton(Module::t('app', 'Create Rules'), ['class' => 'btn btn-success']) ?>
