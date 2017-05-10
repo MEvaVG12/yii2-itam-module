@@ -72,7 +72,7 @@ return [
     'OS usage by license - Synthetic' => 'Uso das licenças de SO - Sintético',
     'Office Suite Licenses Usage' => 'Utilização das licenças de Office',
     'Office Suite usage by license - Analytic' => 'Uso das licenças de Office - Analítico',
-    'Office Suite usage by license - Synthetic' => 'Uso das licenças de Office - Analítico',
+    'Office Suite usage by license - Synthetic' => 'Uso das licenças de Office - Sintético',
     'OfficeSuite' => 'Pacote Office',
     'OfficeSuiteLicense' => 'licença de Office',
     'Os' => 'SO',

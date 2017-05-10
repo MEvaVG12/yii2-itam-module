@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="well">
         <?= Module::t('app', 'Choose a Software license:') ?>
-        <?= Html::dropDownList('idLicense', $license !== null ? $license->id : null, ArrayHelper::map(SoftwareLicense::find()->joinWith(['software'])->orderBy(['itam_software.name' => SORT_ASC])->all(), 'id', function ($model) { return $model->software->name . ' - ' . $model->key; }, function ($model) { return $model->software->name; }), ['prompt' => '--', 'id' => 'idLicense']) ?>
+        <?= Html::dropDownList('idLicense', $license !== null ? $license->id : null, ArrayHelper::map(SoftwareLicense::find()->joinWith(['software'])->orderBy(['itam_software.name' => SORT_ASC])->all(), 'id', function ($model) { return $model->software->name . ' - ' . $model->key; }, function ($model) { return $model->software->name; }), ['prompt' => '--', 'id' => 'idLicense', 'class' => 'form-control']) ?>
     </div>
 
     <?php if ($license !== null): ?>

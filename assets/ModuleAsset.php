@@ -11,16 +11,16 @@ class ModuleAsset extends AssetBundle
 {
     public $sourcePath = __DIR__;
 
-    //public $css = [
-    //    'css/site.css',
-    //];
+    public $css = [
+        'itam.css',
+    ];
 
     public $js = [
-        'main.js'
+        'itam.js'
     ];
 
     public $depends = [
-        //'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
         'yii\web\JqueryAsset',
     ];
 }

@@ -13,8 +13,6 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model marqu3s\itam\models\AssetSmartphoneForm */
 /* @var $form yii\widgets\ActiveForm */
-
-\marqu3s\itam\assets\ModuleAsset::register($this);
 ?>
 
 <div class="smartphone-form">

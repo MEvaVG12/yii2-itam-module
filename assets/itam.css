@@ -1,0 +1,54 @@
+.itam-module {
+    margin-top: 10px;
+}
+.nav-pills>li {
+    float: none;
+}
+.divider {
+    height: 1px;
+    margin: 9.5px 0;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.2);
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: "\f15d";
+}
+
+a.desc:after {
+    content: "\f15e";
+}
+
+.sort-numerical a.asc:after {
+    content: "\f162";
+}
+
+.sort-numerical a.desc:after {
+    content: "\f163";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+/** Label column width of the DetailView */
+.table.detail-view tr th:first-child {
+    width: 200px;
+}
+

@@ -9,25 +9,10 @@
 use marqu3s\itam\Module;
 
 rmrevin\yii\fontawesome\AssetBundle::register($this);
+marqu3s\itam\assets\ModuleAsset::register($this);
 
 /** @var $this \yii\web\View */
 /** @var $content string */
-
-$css = <<<CSS
-.itam-module {
-    margin-top: 10px;
-}
-.nav-pills>li {
-    float: none;
-}
-.divider {
-    height: 1px;
-    margin: 9.5px 0;
-    overflow: hidden;
-    background-color: rgba(0,0,0,0.2);
-}
-CSS;
-$this->registerCss($css);
 
 # Create menu items
 $items = [

@@ -14,7 +14,10 @@ use yii\widgets\ActiveForm;
 /* @var $model marqu3s\itam\models\AssetServerForm */
 /* @var $form yii\widgets\ActiveForm */
 
-\marqu3s\itam\assets\ModuleAsset::register($this);
+$js = <<<JS
+updateGrid();
+JS;
+$this->registerJs($js);
 
 # Include the file containing the modal that adds a software to the asset.
 include(__DIR__ . '/../layouts/_softwareAssetModal.php');
