@@ -17,7 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Authorization' => 'Autorização',
+    'Create authorization rules' => 'Criar regras de autorização',
     'Smartphones' => '',
+    'User Management' => 'Gerência de usuários',
+    'User Permissions' => 'Permissões de usuários',
     'Dashboard' => 'Painel de indicadores',
     'Locations' => 'Locais',
     'OS Licenses' => 'Licenças de SO',

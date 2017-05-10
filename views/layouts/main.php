@@ -111,17 +111,17 @@ if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->co
         ],
     ]);
 }
-if ($this->context->module->rbacAuthorization && Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin')) {
+if (!$this->context->module->rbacAuthorization || ($this->context->module->rbacAuthorization && Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'))) {
     $items = array_merge($items, [
         [
             //'visible' => $this->context->module->rbacAuthorization && Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
             'label' => 'Admin',
             'items' => [
-                ['label' => 'User Management', 'url' => ['user/index']],
-                ['label' => 'User Permissions', 'url' => ['user/permissions']],
+                ['label' => Module::t('menu', 'User Management'), 'url' => ['user/index']],
+                ['label' => Module::t('menu', 'User Permissions'), 'url' => ['user/permissions']],
                 '<li class="divider"></li>',
-                '<li class="dropdown-header">Authorization</li>',
-                ['label' => 'Create authorization rules', 'url' => ['authorization/create-rules']],
+                '<li class="dropdown-header">' . Module::t('menu', 'Authorization') . '</li>',
+                ['label' => Module::t('menu', 'Create authorization rules'), 'url' => ['authorization/create-rules']],
             ],
         ],
     ]);

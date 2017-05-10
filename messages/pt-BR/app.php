@@ -17,8 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Dynamic IP' => 'IP dinâmico',
+    'OS License Report' => 'Relatório das licenças de SO',
+    'Office Suite License Report' => 'Relatório das licenças de Office',
     'Smartphones' => '',
+    'Software License Report' => 'Relatório das licenças dos Programas',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
     'Add software' => 'Novo programa',
@@ -29,8 +31,8 @@ return [
     'Authorization - Create rules' => 'Autorização - Criar regras',
     'Cancel' => 'Cancelar',
     'Choose a Software license:' => 'Escolha uma licença de software:',
-    'Choose a User to set permissions:' => 'Escolha um usuário para configurar as permissões:',
     'Choose a software' => 'Escolha um programa',
+    'Choose a user to set permissions:' => 'Escolha um usuário para configurar as permissões:',
     'Choose an OS' => 'Esolha um SO',
     'Choose an OS license:' => 'Escolha uma licença de SO',
     'Choose an Office Suite license:' => 'Escolha uma licença de Office:',
@@ -52,6 +54,7 @@ return [
     'Dashboard' => 'Painel de indicadores',
     'Delete' => 'Apagar',
     'Duplicate' => 'Duplicar',
+    'Dynamic IP' => 'IP dinâmico',
     'Email' => 'E-mail',
     'ID' => 'ID',
     'Inactive' => 'Inativo',

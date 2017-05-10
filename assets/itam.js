@@ -54,4 +54,10 @@ $('document').ready(function () {
         });
         return false;
     });
+    $('#idLicense').change(function() {
+        window.location.href = window.location.pathname + '?idLicense=' + $(this).val();
+    });
+    $('#idUser').change(function() {
+        window.location.href = '/itam/user/permissions?idUser=' + $(this).val();
+    });
 });

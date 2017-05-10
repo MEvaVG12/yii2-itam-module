@@ -16,13 +16,6 @@ use marqu3s\itam\models\OfficeSuiteLicense;
 /* @var $workstations \marqu3s\itam\models\AssetWorkstation[] */
 /* @var $servers \marqu3s\itam\models\AssetServer[] */
 
-$js = <<<JS
-    $('#idLicense').change(function() {
-        window.location.href = '/itam/reports/assets-by-office-suite-license-analytic?idLicense=' + $(this).val();
-    })
-JS;
-$this->registerJs($js);
-
 $this->title = Module::t('app', 'Office Suite usage by license - Analytic');
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Reports'), 'url' => ['reports/index']];
 $this->params['breadcrumbs'][] = $this->title;

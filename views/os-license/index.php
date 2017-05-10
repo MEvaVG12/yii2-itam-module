@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Module::t('app', 'Create OS License'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Module::t('app', 'OS License Report'), ['reports/assets-by-os-license-synthetic'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
