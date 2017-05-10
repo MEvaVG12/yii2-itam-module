@@ -14,6 +14,9 @@ rmrevin\yii\fontawesome\AssetBundle::register($this);
 /** @var $content string */
 
 $css = <<<CSS
+.itam-module {
+    margin-top: 10px;
+}
 .nav-pills>li {
     float: none;
 }

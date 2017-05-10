@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{permissions} &nbsp; {view} &nbsp; {update} &nbsp; {delete}',
                     'header' => Module::t('app', 'Actions'),
                     'headerOptions' => [
-                        'style' => 'width: 70px'
+                        'style' => 'width: 100px'
                     ],
                     'contentOptions' => [
                         'class' => 'text-center'

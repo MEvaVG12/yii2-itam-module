@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{view} &nbsp; {update} &nbsp; {delete}',
                     'header' => Module::t('app', 'Actions'),
                     'headerOptions' => [
-                        'style' => 'width: 70px'
+                        'style' => 'width: 75px'
                     ],
                     'contentOptions' => [
                         'class' => 'text-center'

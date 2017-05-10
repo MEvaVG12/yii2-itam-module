@@ -64,7 +64,7 @@ class Module extends YiiBaseModule
             'template' => '{view} &nbsp; {duplicate} &nbsp; {update} &nbsp; {delete}',
             'header' => Module::t('app', 'Actions'),
             'headerOptions' => [
-                'style' => 'width: 80px'
+                'style' => 'width: 100px'
             ],
             'contentOptions' => [
                 'class' => 'text-center'
