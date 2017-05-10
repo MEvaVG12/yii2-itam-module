@@ -5,13 +5,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\OsLicense */
+/* @var $model marqu3s\itam\models\SoftwareLicense */
 
-$this->title = $model->os->name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'OS Licenses'), 'url' => ['index']];
+$this->title = $model->software->name;
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Software Licenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="os-license-view">
+<div class="software-license-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'os.name',
+            'software.name',
             'key',
             'purchased_licenses',
         ],

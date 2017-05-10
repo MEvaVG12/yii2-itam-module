@@ -28,7 +28,7 @@ class Location extends ActiveRecord
      */
     public function behaviors()
     {
-        return [
+        $config = [
             [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
@@ -39,14 +39,21 @@ class Location extends ActiveRecord
                 // 'value' => new Expression('NOW()'),
             ],
             [
-                'class' => BlameableBehavior::className(),
-                'value' => Yii::$app->user->identity->username
-            ],
-            [
                 'class' => AttributeTypecastBehavior::className(),
                 // 'attributeTypes' will be composed automatically according to `rules()`
             ],
         ];
+
+        if (Yii::$app->getModule('itam')->rbacAuthorization) {
+            $config = array_merge($config, [
+                [
+                    'class' => BlameableBehavior::className(),
+                    'value' => Yii::$app->user->identity->username
+                ],
+            ]);
+        }
+
+        return $config;
     }
 
     /**

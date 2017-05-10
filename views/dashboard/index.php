@@ -33,6 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-md-3">
         <div class="well text-center">
+            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Smartphones'), ['asset-smartphone/index']) ?></h3>
+            <h4><?= \marqu3s\itam\models\AssetSmartphone::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="well text-center">
             <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Workstations'), ['asset-workstation/index']) ?></h3>
             <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
         </div>

@@ -8,23 +8,14 @@ use yii\widgets\DetailView;
 /* @var $model marqu3s\itam\models\Os */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Os'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'OSes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="os-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Module::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Module::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Module::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -33,5 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
         ],
     ]) ?>
+
+    <?= $this->render('/layouts/_arViewRecordDetails', ['model' => $model]) ?>
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
 </div>

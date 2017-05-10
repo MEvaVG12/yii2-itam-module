@@ -26,18 +26,12 @@ include(__DIR__ . '/../layouts/_softwareAssetModal.php');
 
     <?= $model->errorSummary($form); ?>
 
-    <?= $form->field($model->asset, 'hostname')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->asset, 'brand')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->asset, 'model')->textInput(['maxlength' => true]) ?>
+    <?php include (__DIR__ . '/../layouts/_assetForm.php') ?>
+    <?= $form->field($model->assetWorkstation, 'user')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model->assetWorkstation, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--', 'id' => 'ddOs']) ?>
     <?= $form->field($model->assetWorkstation, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetWorkstation->id_os])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOsLicense']) ?>
     <?= $form->field($model->assetWorkstation, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed'), 'id' => 'ddOfficeSuite']) ?>
     <?= $form->field($model->assetWorkstation, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetWorkstation->id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOfficeSuiteLicense']) ?>
-    <?= $form->field($model->asset, 'ip_address')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->asset, 'mac_address')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->asset, 'id_location')->dropDownList(ArrayHelper::map(Location::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')) ?>
-    <?= $form->field($model->asset, 'room')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetWorkstation, 'user')->textInput(['maxlength' => true]) ?>
 
     <?php if (!$model->asset->isNewRecord): ?>
         <div style="margin: 40px 0">

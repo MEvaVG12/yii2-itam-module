@@ -7,20 +7,18 @@ use marqu3s\itam\traits\TraitAsset;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "itam_asset_switch".
+ * This is the model class for table "itam_asset_smartphone".
  *
  * @property integer $id
  * @property integer $id_asset
- * @property integer $ports
- * @property string $firmware_version
- * @property string $firmware_release_date
- * @property string $firmware_install_date
- * @property string $username
- * @property string $password
+ * @property string $imei
+ * @property string $os
+ * @property string $os_version
+ * @property string $user
  *
  * @property Asset $asset
  */
-class AssetSwitch extends ActiveRecord
+class AssetSmartphone extends ActiveRecord
 {
     /**
      * TraitAsset adds properties used to filter the GridView and methods
@@ -34,7 +32,7 @@ class AssetSwitch extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'itam_asset_switch';
+        return 'itam_asset_smartphone';
     }
 
     /**
@@ -43,10 +41,9 @@ class AssetSwitch extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_asset', 'ports'], 'integer'],
-            [['firmware_release_date', 'firmware_install_date'], 'safe'],
-            [['firmware_version'], 'string', 'max' => 30],
-            [['username', 'password'], 'string', 'max' => 20],
+            [['id_asset'], 'integer'],
+            [['imei'], 'string', 'max' => 20],
+            [['os', 'os_version', 'user'], 'string', 'max' => 30],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
         ];
     }
@@ -59,12 +56,10 @@ class AssetSwitch extends ActiveRecord
         return [
             'id' => 'ID',
             'id_asset' => 'Id Asset',
-            'ports' => Module::t('model', 'Ports'),
-            'firmware_version' => Module::t('model', 'Firmware version'),
-            'firmware_release_date' => Module::t('model', 'Firmware release date'),
-            'firmware_install_date' => Module::t('model', 'Firmware install date'),
-            'username' => Module::t('model', 'Username'),
-            'password' => Module::t('model', 'Password'),
+            'imei' => Module::t('model', 'IMEI Number'),
+            'os' => Module::t('model', 'OS'),
+            'os_version' => Module::t('model', 'OS version'),
+            'user' => Module::t('model', 'User'),
         ];
     }
 
@@ -78,10 +73,10 @@ class AssetSwitch extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return AssetSwitchQuery the active query used by this AR class.
+     * @return AssetSmartphoneQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new AssetSwitchQuery(get_called_class());
+        return new AssetSmartphoneQuery(get_called_class());
     }
 }

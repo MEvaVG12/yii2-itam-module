@@ -64,7 +64,7 @@ class Module extends YiiBaseModule
             'template' => '{view} &nbsp; {duplicate} &nbsp; {update} &nbsp; {delete}',
             'header' => Module::t('app', 'Actions'),
             'headerOptions' => [
-                'style' => 'width: 70px'
+                'style' => 'width: 80px'
             ],
             'contentOptions' => [
                 'class' => 'text-center'
@@ -80,7 +80,9 @@ class Module extends YiiBaseModule
                     return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
+                    if (!Yii::$app->getModule('itam')->rbacAuthorization || Yii::$app->user->can(Yii::$app->getModule('itam')->rbacItemPrefix . 'AssetManager')) {
+                        return Html::a('<i class="fa fa-trash"></i>', $url, ['title' => Module::t('app', 'Delete'), 'data' => ['pjax' => 0, 'method' => 'post', 'confirm' => Module::t('app', 'Are you sure you want to delete this item?')]]);
+                    } else return '';
                 },
             ]
         ];

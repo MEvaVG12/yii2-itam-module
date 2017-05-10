@@ -17,11 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'CALs' => '',
+    'Hostname' => '',
+    'IMEI Number' => 'Número IMEI',
+    'OS version' => 'Versão do SO',
+    'Serial number' => 'Número de série',
     'Activation key' => 'Chave de ativação',
     'Asset' => 'Ativo',
     'Brand' => 'Marca',
     'Brand and model' => 'Marca e modelo',
-    'CALs' => '',
     'Created at' => 'Criado em',
     'Created by' => 'Criado por',
     'Date of purchase' => 'Data de aquisição',
@@ -29,7 +33,6 @@ return [
     'Firmware install date' => 'Data de instalação do firmware',
     'Firmware release date' => 'Data do firmware',
     'Firmware version' => 'Versão de firmware',
-    'Hostname' => '',
     'ID' => 'ID',
     'IP address' => 'Endereço IP',
     'IP/MAC address' => 'Endereço IP/MAC',
@@ -38,6 +41,7 @@ return [
     'Location name' => 'Local',
     'MAC address' => 'Endereço MAC',
     'Model' => 'Modelo',
+    'Name' => 'Nome',
     'OS' => 'SO',
     'OS license' => 'Licença do SO',
     'Office Suite' => 'Pacote Office',
@@ -55,5 +59,4 @@ return [
     'User' => 'Usuário',
     'Username' => 'Nome de usuário',
     'key' => 'chave',
-    'Name' => 'Nome',
 ];

@@ -24,6 +24,7 @@ use yii\widgets\DetailView;
         'asset.room',
         'asset.brand',
         'asset.model',
+        'asset.serial_number',
         'asset.service_tag',
         'asset.ip_address',
         'asset.mac_address',

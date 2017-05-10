@@ -16,8 +16,14 @@ use yii\widgets\DetailView;
     'model' => $model,
     'attributes' => [
         'created_at:datetime', // creation date formatted as datetime
-        'created_by',
+        [
+            'attribute' => 'created_by',
+            'visible' => $this->context->module->rbacAuthorization
+        ],
         'updated_at:datetime', // update date formatted as datetime
-        'updated_by',
+        [
+            'attribute' => 'updated_by',
+            'visible' => $this->context->module->rbacAuthorization
+        ],
     ],
 ]) ?>

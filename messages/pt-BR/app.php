@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Create Smartphone' => 'Novo Smartphone',
+    'Smartphones' => '',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
     'Add software' => 'Novo software',
@@ -71,7 +73,6 @@ return [
     'Office Suite Licenses Usage' => 'Utilização das licenças de Office',
     'Office Suite usage by license - Analytic' => 'Uso das licenças de Office - Analítico',
     'Office Suite usage by license - Synthetic' => 'Uso das licenças de Office - Analítico',
-    'Office Suites' => 'Pacotes Office',
     'OfficeSuite' => 'Pacote Office',
     'OfficeSuiteLicense' => 'licença de Office',
     'Os' => 'SO',

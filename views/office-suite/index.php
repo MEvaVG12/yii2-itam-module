@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{update} &nbsp; {delete}',
+                    'template' => '{view} &nbsp; {update} &nbsp; {delete}',
                     'header' => Module::t('app', 'Actions'),
                     'headerOptions' => [
                         'style' => 'width: 70px'
@@ -38,6 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'text-center'
                     ],
                     'buttons' => [
+                        'view' => function ($url, $model, $key) {
+                            return Html::a('<i class="fa fa-eye"></i>', $url, ['title' => Module::t('app', 'View'), 'data-pjax' => 0]);
+                        },
                         'update' => function ($url, $model, $key) {
                             return Html::a('<i class="fa fa-pencil"></i>', $url, ['title' => Module::t('app', 'Update'), 'data-pjax' => 0]);
                         },

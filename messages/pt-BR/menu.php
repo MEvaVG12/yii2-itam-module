@@ -17,11 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Smartphones' => '',
     'Dashboard' => 'Painel de indicadores',
     'Locations' => 'Locais',
-    'OS Licenses' => 'Licenças SO',
+    'OS Licenses' => 'Licenças de SO',
     'OSes' => 'SO',
-    'Office Suite Licenses' => 'Licenças Office',
+    'Office Suite Licenses' => 'Licenças de Office',
     'Office Suites' => 'Pacotes Office',
     'Reports' => 'Relatórios',
     'Servers' => 'Servidores',

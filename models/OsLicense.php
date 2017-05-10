@@ -3,7 +3,11 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
+use yii\behaviors\AttributeTypecastBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "itam_os_license".
@@ -24,6 +28,39 @@ use yii\db\ActiveRecord;
 class OsLicense extends ActiveRecord
 {
     public $licensesInUse;
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        $config = [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => AttributeTypecastBehavior::className(),
+                // 'attributeTypes' will be composed automatically according to `rules()`
+            ],
+        ];
+
+        if (Yii::$app->getModule('itam')->rbacAuthorization) {
+            $config = array_merge($config, [
+                [
+                    'class' => BlameableBehavior::className(),
+                    'value' => Yii::$app->user->identity->username
+                ],
+            ]);
+        }
+
+        return $config;
+    }
 
     /**
      * @inheritdoc

@@ -2,8 +2,6 @@
 
 namespace marqu3s\itam\models;
 
-use marqu3s\behaviors\SaveGridFiltersBehavior;
-use marqu3s\behaviors\SaveGridPaginationBehavior;
 use marqu3s\itam\Module;
 use marqu3s\itam\traits\TraitAsset;
 use marqu3s\itam\traits\TraitOfficeSuite;
@@ -31,34 +29,16 @@ use yii\db\ActiveRecord;
  */
 class AssetServer extends ActiveRecord
 {
+    /**
+     * TraitAsset adds properties used to filter the GridView and methods
+     * to work with the related Asset model.
+     */
     use TraitAsset;
     use TraitOs;
     use TraitOsLicense;
     use TraitOfficeSuite;
     use TraitOfficeSuiteLicense;
 
-    # Add the custom attributes that will be used to store the data to be search
-    public $locationName;
-    public $hostname;
-    public $ipMacAddress;
-    public $brandAndModel;
-    public $model;
-    public $serviceTag;
-
-
-    public function behaviors()
-    {
-        return [
-            'saveGridPage' =>[
-                'class' => SaveGridPaginationBehavior::className(),
-                'sessionVarName' => self::className() . 'GridPage'
-            ],
-            'saveGridFilters' =>[
-                'class' => SaveGridFiltersBehavior::className(),
-                'sessionVarName' => self::className() . 'GridFilters'
-            ]
-        ];
-    }
 
     /**
      * @inheritdoc

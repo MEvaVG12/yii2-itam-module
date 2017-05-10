@@ -122,6 +122,21 @@ class SoftwareLicenseController extends Controller
     }
 
     /**
+     * Show an existing model.
+     *
+     * @param integer $id
+     *
+     * @return string
+     */
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Finds the SoftwareLicense model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *

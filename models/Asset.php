@@ -20,6 +20,7 @@ use Yii;
  * @property string $mac_address
  * @property string $brand
  * @property string $model
+ * @property string $serial_number
  * @property string $service_tag
  * @property string $created_by
  * @property string $created_at
@@ -80,6 +81,7 @@ class Asset extends ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['room', 'service_tag'], 'string', 'max' => 20],
             [['hostname', 'brand', 'model', 'created_by', 'updated_by'], 'string', 'max' => 100],
+            [['serial_number'], 'string', 'max' => 30],
             [['ip_address'], 'string', 'max' => 15],
             [['mac_address'], 'string', 'max' => 14],
             [['id_location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['id_location' => 'id']],
@@ -100,6 +102,7 @@ class Asset extends ActiveRecord
             'mac_address' => Module::t('model', 'MAC address'),
             'brand' => Module::t('model', 'Brand'),
             'model' => Module::t('model', 'Model'),
+            'serial_number' => Module::t('model', 'Serial number'),
             'service_tag' => Module::t('model', 'Service tag'),
             'created_by' => Module::t('model', 'Created by'),
             'created_at' => Module::t('model', 'Created at'),
@@ -130,6 +133,22 @@ class Asset extends ActiveRecord
     public function getAssetPrinters()
     {
         return $this->hasMany(AssetPrinter::className(), ['id_asset' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssetServers()
+    {
+        return $this->hasMany(AssetServer::className(), ['id_asset' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssetSmartphones()
+    {
+        return $this->hasMany(AssetSmartphone::className(), ['id_asset' => 'id']);
     }
 
     /**

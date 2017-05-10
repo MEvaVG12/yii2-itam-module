@@ -8,10 +8,33 @@
 
 namespace marqu3s\itam\traits;
 
+use marqu3s\behaviors\SaveGridFiltersBehavior;
+use marqu3s\behaviors\SaveGridPaginationBehavior;
 use marqu3s\itam\models\Asset;
 
 trait TraitAsset
 {
+    # Add the custom attributes that will be used to store the data to be searched
+    public $locationName;
+    public $hostname;
+    public $ipMacAddress;
+    public $brandAndModel;
+    public $serviceTag;
+
+    public function behaviors()
+    {
+        return [
+            'saveGridPage' =>[
+                'class' => SaveGridPaginationBehavior::className(),
+                'sessionVarName' => static::className() . 'GridPage'
+            ],
+            'saveGridFilters' =>[
+                'class' => SaveGridFiltersBehavior::className(),
+                'sessionVarName' => static::className() . 'GridFilters'
+            ]
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
