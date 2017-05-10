@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Dynamic IP' => 'IP dinâmico',
     'Smartphones' => '',
     'Actions' => 'Ações',
     'Active' => 'Ativo',

@@ -37,7 +37,7 @@ class AssetServerController extends BaseCrudController
                 'attribute' => 'ipMacAddress',
                 'format' => 'html',
                 'value' => function ($model) {
-                    $ip = empty($model->asset->ip_address) ? 'DHCP' : $model->asset->ip_address;
+                    $ip = empty($model->asset->ip_address) ? Module::t('app', 'Dynamic IP') : $model->asset->ip_address;
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
             ],
