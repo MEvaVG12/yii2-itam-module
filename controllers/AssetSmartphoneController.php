@@ -33,7 +33,8 @@ class AssetSmartphoneController extends BaseCrudController
                 'attribute' => 'ipMacAddress',
                 'format' => 'html',
                 'value' => function ($model) {
-                    return $model->asset->ip_address . '<br><small>' . $model->asset->mac_address . '</small>';
+                    $ip = empty($model->asset->ip_address) ? 'DHCP' : $model->asset->ip_address;
+                    return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
             ],
             [

@@ -45,6 +45,9 @@ class AssetSmartphone extends ActiveRecord
             [['imei'], 'string', 'max' => 20],
             [['os', 'os_version', 'user'], 'string', 'max' => 30],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
+
+            # Custom attributes
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel'], 'safe'],
         ];
     }
 
