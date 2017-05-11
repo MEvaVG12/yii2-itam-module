@@ -32,15 +32,33 @@ include(__DIR__ . '/../layouts/_softwareAssetModal.php');
     <?= $model->errorSummary($form); ?>
 
     <?php include (__DIR__ . '/../layouts/_assetForm.php') ?>
+
     <?= $form->field($model->assetWorkstation, 'user')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetWorkstation, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--', 'id' => 'ddOs']) ?>
-    <?= $form->field($model->assetWorkstation, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetWorkstation->id_os])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOsLicense']) ?>
-    <?= $form->field($model->assetWorkstation, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed'), 'id' => 'ddOfficeSuite']) ?>
-    <?= $form->field($model->assetWorkstation, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetWorkstation->id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOfficeSuiteLicense']) ?>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model->assetWorkstation, 'id_os')->dropDownList(ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => '--', 'id' => 'ddOs']) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model->assetWorkstation, 'id_os_license')->dropDownList(ArrayHelper::map(OsLicense::find()->where(['id_os' => $model->assetWorkstation->id_os])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOsLicense']) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model->assetWorkstation, 'id_office_suite')->dropDownList(ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['prompt' => Module::t('app', 'Not installed'), 'id' => 'ddOfficeSuite']) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model->assetWorkstation, 'id_office_suite_license')->dropDownList(ArrayHelper::map(OfficeSuiteLicense::find()->where(['id_office_suite' => $model->assetWorkstation->id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all(), 'id', 'key'), ['prompt' => '--', 'id' => 'ddOfficeSuiteLicense']) ?>
+        </div>
+    </div>
 
     <?php
     # Include the file containing the form part that adds a software to the asset.
     include(__DIR__ . '/../layouts/_softwareAssetForm.php');
+
+    # Include the file containing the form part that adds an asset to a group.
+    include(__DIR__ . '/../layouts/_assetGroupForm.php');
 
     # Include the file containing the form field to add an annotation to the asset.
     include(__DIR__ . '/../layouts/_assetAnnotations.php');

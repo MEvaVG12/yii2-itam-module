@@ -46,6 +46,21 @@ use yii\widgets\DetailView;
                 }
             }
         ],
+        [
+            'label' => Module::t('app', 'Belongs to groups'),
+            'format' => 'html',
+            'value' => function ($model) {
+                if (count($model->asset->groups) == 0) {
+                    return null;
+                } else {
+                    $str = '';
+                    foreach ($model->asset->groups as $item) {
+                        $str .= $item->group->name . '<br>';
+                    }
+                    return $str;
+                }
+            }
+        ],
         'asset.annotations',
     ],
 ]) ?>

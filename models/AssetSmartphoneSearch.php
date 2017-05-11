@@ -43,7 +43,7 @@ class AssetSmartphoneSearch extends AssetSmartphone
 
         # Add conditions that should always apply here
         # Join with asset and asset.location
-        $query->joinWith(['asset', 'asset.location']);
+        $query->joinWith(['asset', 'asset.location', 'asset.groups']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -76,10 +76,10 @@ class AssetSmartphoneSearch extends AssetSmartphone
                 'asc' => ['itam_asset.brand' => SORT_ASC, 'itam_asset.model' => SORT_ASC],
                 'desc' => ['itam_asset.brand' => SORT_DESC, 'itam_asset.model' => SORT_DESC],
             ],
-            /*'serviceTag' => [
-                'asc' => ['itam_asset.service_tag' => SORT_ASC],
-                'desc' => ['itam_asset.service_tag' => SORT_DESC],
-            ],*/
+            'group' => [
+                'asc' => ['itam_asset_group.name' => SORT_ASC],
+                'desc' => ['itam_asset_group.name' => SORT_DESC],
+            ],
             'user' => [
                 'asc' => ['itam_asset_smartphone.user' => SORT_ASC],
                 'desc' => ['itam_asset_smartphone.user' => SORT_DESC],
@@ -102,6 +102,7 @@ class AssetSmartphoneSearch extends AssetSmartphone
         $query->andFilterWhere([
             'id' => $this->id,
             'id_asset' => $this->id_asset,
+            'itam_group_asset.id_group' => $this->group,
         ])
 
         # Here we search the attributes of our relations using our previously configured ones in "AssetWorkstationSearch"

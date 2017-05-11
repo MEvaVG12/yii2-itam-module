@@ -21,6 +21,7 @@ trait TraitAsset
     public $ipMacAddress;
     public $brandAndModel;
     public $serviceTag;
+    public $group;
 
     public function behaviors()
     {
@@ -79,7 +80,7 @@ trait TraitAsset
             return $this->id;
         } catch (\Exception $e) {
             $trans->rollback();
-
+            \yii\helpers\VarDumper::dump($e->getMessage(), 10, true);
             return false;
 
         }

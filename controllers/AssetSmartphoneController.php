@@ -3,7 +3,9 @@
 namespace marqu3s\itam\controllers;
 
 use marqu3s\itam\models\AssetSmartphone;
+use marqu3s\itam\models\Group;
 use marqu3s\itam\Module;
+use yii\helpers\ArrayHelper;
 
 /**
  * AssetSmartphoneController implements the CRUD actions for AssetSmartphone model.
@@ -36,6 +38,19 @@ class AssetSmartphoneController extends BaseCrudController
                     $ip = empty($model->asset->ip_address) ? Module::t('app', 'Dynamic IP') : $model->asset->ip_address;
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
+            ],
+            [
+                'attribute' => 'group',
+                'format' => 'html',
+                'value' => function (AssetSmartphone $model) {
+                    if (empty($model->asset->groups)) return null;
+                    $str = '';
+                    foreach ($model->asset->groups as $item) {
+                        $str .= $item->group->name . '<br>';
+                    }
+                    return $str;
+                },
+                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
             ],
             [
                 'attribute' => 'brandAndModel',

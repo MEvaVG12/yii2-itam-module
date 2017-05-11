@@ -30,7 +30,6 @@ TBD
 
 ## Future Enhancements
 
-* Ability to group assets
 * Monitoring tool
 * New types of assets:
     * Wi-Fi APs

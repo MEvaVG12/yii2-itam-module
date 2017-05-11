@@ -50,7 +50,7 @@ class AssetSmartphone extends ActiveRecord
             [['imei', 'os', 'os_version', 'user'], 'default', 'value' => null],
 
             # Custom attributes
-            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel'], 'safe'],
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'group'], 'safe'],
         ];
     }
 
@@ -73,6 +73,7 @@ class AssetSmartphone extends ActiveRecord
             'ipMacAddress' => Module::t('model', 'IP/MAC address'),
             'brandAndModel' => Module::t('model', 'Brand and model'),
             'serviceTag' => Module::t('model', 'Service tag'),
+            'group' => Module::t('model', 'Group'),
         ];
     }
 

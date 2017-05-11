@@ -105,6 +105,12 @@ if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->co
         '<li class="divider"></li>',
         [
             //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
+            'label' => Module::t('menu', 'Asset Groups'),
+            'url' => ['group/index'],
+            //'linkOptions' => ['class' => 'list-group-item'],
+        ],
+        [
+            //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),
             'label' => Module::t('menu', 'Locations'),
             'url' => ['location/index'],
             //'linkOptions' => ['class' => 'list-group-item'],

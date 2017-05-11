@@ -2,6 +2,8 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\AssetServer;
+use marqu3s\itam\models\Group;
 use marqu3s\itam\models\OfficeSuite;
 use marqu3s\itam\models\Os;
 use marqu3s\itam\Module;
@@ -42,6 +44,19 @@ class AssetServerController extends BaseCrudController
                 }
             ],
             [
+                'attribute' => 'group',
+                'format' => 'html',
+                'value' => function (AssetServer $model) {
+                    if (empty($model->asset->groups)) return null;
+                    $str = '';
+                    foreach ($model->asset->groups as $item) {
+                        $str .= $item->group->name . '<br>';
+                    }
+                    return $str;
+                },
+                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+            ],
+            /*[
                 'attribute' => 'brandAndModel',
                 'format' => 'html',
                 'value' => function ($model) {
@@ -52,7 +67,7 @@ class AssetServerController extends BaseCrudController
             [
                 'attribute' => 'serviceTag',
                 'value' => 'asset.service_tag'
-            ],
+            ],*/
             'cals',
             [
                 'attribute' => 'locationName',

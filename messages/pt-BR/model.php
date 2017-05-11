@@ -17,10 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Annotations' => 'Anotações',
     'CALs' => '',
+    'Description' => 'Descrição',
+    'Group' => 'Grupo',
+    'Groups' => 'Grupos',
     'Hostname' => '',
     'Activation key' => 'Chave de ativação',
+    'Annotations' => 'Anotações',
     'Asset' => 'Ativo',
     'Brand' => 'Marca',
     'Brand and model' => 'Marca e modelo',

@@ -22,12 +22,29 @@ use yii\widgets\ActiveForm;
     <?= $model->errorSummary($form); ?>
 
     <?php include (__DIR__ . '/../layouts/_assetForm.php') ?>
-    <?= $form->field($model->assetSmartphone, 'imei')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetSmartphone, 'os')->dropDownList(['Android' => 'Android', 'iOS' => 'iOS'], ['prompt' => '--']) ?>
-    <?= $form->field($model->assetSmartphone, 'os_version')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model->assetSmartphone, 'user')->textInput(['maxlength' => true]) ?>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model->assetSmartphone, 'os')->dropDownList(['Android' => 'Android', 'iOS' => 'iOS'], ['prompt' => '--']) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model->assetSmartphone, 'os_version')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model->assetSmartphone, 'imei')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model->assetSmartphone, 'user')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
     <?php
+    # Include the file containing the form part that adds an asset to a group.
+    include(__DIR__ . '/../layouts/_assetGroupForm.php');
+
     # Include the file containing the form field to add an annotation to the asset.
     include(__DIR__ . '/../layouts/_assetAnnotations.php');
     ?>

@@ -205,7 +205,8 @@ abstract class BaseCrudController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        # Always delete the model Asset. Relations on the database will take care of the rest.
+        $this->findModel($id)->asset->delete();
         Yii::$app->session->setFlash('success', Module::t('app', $this->assetType) . ' ' . Module::t('app', 'deleted successfully.'));
 
         return $this->redirect(['index']);

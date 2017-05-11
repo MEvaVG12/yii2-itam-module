@@ -17,11 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Asset Groups' => 'Grupos de ativos',
+    'Smartphones' => '',
     'Authorization' => 'Autorização',
     'Create authorization rules' => 'Criar regras de autorização',
-    'Smartphones' => '',
-    'User Management' => 'Gerência de usuários',
-    'User Permissions' => 'Permissões de usuários',
     'Dashboard' => 'Painel de indicadores',
     'Locations' => 'Locais',
     'OS Licenses' => 'Licenças de SO',
@@ -32,5 +31,7 @@ return [
     'Servers' => 'Servidores',
     'Software Licenses' => 'Licenças de programas',
     'Softwares' => 'Programas',
+    'User Management' => 'Gerência de usuários',
+    'User Permissions' => 'Permissões de usuários',
     'Workstations' => 'Estações de trabalho',
 ];
