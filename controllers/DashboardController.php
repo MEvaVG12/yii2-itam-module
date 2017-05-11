@@ -57,14 +57,14 @@ class DashboardController extends Controller
         # Show data about OS licenses in use.
         $osLicenses = OsLicense::find()
             ->joinWith('os')
-            ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->where("purchased_licenses IS NOT NULL AND purchased_licenses >= 0")
             ->orderBy(['itam_os.name' => SORT_ASC])
             ->all();
 
         # Show data about Office Suite licenses in use.
         $officeSuiteLicenses = OfficeSuiteLicense::find()
             ->joinWith('officeSuite')
-            ->where("purchased_licenses IS NOT NULL AND purchased_licenses != ''")
+            ->where("purchased_licenses IS NOT NULL AND purchased_licenses >= 0")
             ->orderBy(['itam_office_suite.name' => SORT_ASC])
             ->all();
 
@@ -117,7 +117,23 @@ class DashboardController extends Controller
 
         $licenses = OsLicense::find()->where(['id_os' => (int) $id_os])->orderBy(['date_of_purchase' => SORT_DESC])->all();
 
-        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', 'key'));
+        # If there are no licenses available to choose from...
+        if (count($licenses) === 0) {
+            return Html::renderSelectOptions(null, ['' => '--']);
+        }
+
+        # Find out wich licenses are available to use and pre-select the first one.
+        $selectedOption = null;
+        foreach ($licenses as $license) {
+            if ($license->purchased_licenses - $license->getLicensesInUse() > 0) {
+                $selectedOption = $license->id;
+                break;
+            }
+        }
+
+        return Html::renderSelectOptions($selectedOption, ArrayHelper::map($licenses, 'id', function (OsLicense $model) {
+            return $model->key . ' (' . ($model->purchased_licenses - $model->getLicensesInUse()) . ' ' . Module::t('app', 'available') . ')';
+        }));
     }
 
     /**
@@ -133,7 +149,18 @@ class DashboardController extends Controller
 
         $licenses = OfficeSuiteLicense::find()->where(['id_office_suite' => (int) $id_office_suite])->orderBy(['date_of_purchase' => SORT_DESC])->all();
 
-        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', 'key'));
+        # Find out wich licenses are available to use and pre-select the first one.
+        $selectedOption = null;
+        foreach ($licenses as $license) {
+            if ($license->purchased_licenses - $license->getLicensesInUse() > 0) {
+                $selectedOption = $license->id;
+                break;
+            }
+        }
+
+        return Html::renderSelectOptions($selectedOption, ArrayHelper::map($licenses, 'id', function (OfficeSuiteLicense $model) {
+            return $model->key . ' (' . ($model->purchased_licenses - $model->getLicensesInUse()) . ' ' . Module::t('app', 'available') . ')';
+        }));
     }
 
     /**
@@ -149,7 +176,23 @@ class DashboardController extends Controller
 
         $licenses = SoftwareLicense::find()->where(['id_software' => (int) $id_software])->orderBy(['date_of_purchase' => SORT_DESC])->all();
 
-        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', 'key'));
+        # If there are no licenses available to choose from...
+        if (count($licenses) === 0) {
+            return Html::renderSelectOptions(null, ['' => '--']);
+        }
+
+        # Find out wich licenses are available to use and pre-select the first one.
+        $selectedOption = null;
+        foreach ($licenses as $license) {
+            if ($license->purchased_licenses - $license->getLicensesInUse() > 0) {
+                $selectedOption = $license->id;
+                break;
+            }
+        }
+
+        return Html::renderSelectOptions(null, ArrayHelper::map($licenses, 'id', function (SoftwareLicense $model) {
+            return $model->key . ' (' . ($model->purchased_licenses - $model->getLicensesInUse()) . ' ' . Module::t('app', 'available') . ')';
+        }));
     }
 
     /**

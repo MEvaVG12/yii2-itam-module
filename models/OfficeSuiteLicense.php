@@ -111,7 +111,11 @@ class OfficeSuiteLicense extends ActiveRecord
         return $this->hasOne(OfficeSuite::className(), ['id' => 'id_office_suite']);
     }
 
-
+    /**
+     * Return the number os licenses in use.
+     *
+     * @return int
+     */
     public function getLicensesInUse()
     {
         $workstationCount = AssetWorkstation::find()->where(['id_office_suite_license' => $this->id])->count();

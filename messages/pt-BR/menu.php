@@ -32,5 +32,5 @@ return [
     'Servers' => 'Servidores',
     'Software Licenses' => 'Licenças de programas',
     'Softwares' => 'Programas',
-    'Workstations' => 'Estações',
+    'Workstations' => 'Estações de trabalho',
 ];

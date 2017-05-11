@@ -80,7 +80,7 @@ class ReportsController extends Controller
     public function actionAssetsByOsLicenseSynthetic()
     {
         # Get all OS licenses
-        $licenses = OsLicense::find()->all();
+        $licenses = OsLicense::find()->joinWith(['os'])->orderBy(['itam_os.name' => SORT_ASC])->all();
 
         return $this->render('assetsByOsLicenseSynthetic', [
             'licenses' => $licenses,
@@ -116,7 +116,7 @@ class ReportsController extends Controller
     public function actionAssetsByOfficeSuiteLicenseSynthetic()
     {
         # Get all Office Suite licenses
-        $licenses = OfficeSuiteLicense::find()->all();
+        $licenses = OfficeSuiteLicense::find()->joinWith(['officeSuite'])->orderBy(['itam_office_suite.name' => SORT_ASC])->all();
 
         return $this->render('assetsByOfficeSuiteLicenseSynthetic', [
             'licenses' => $licenses,
@@ -157,7 +157,7 @@ class ReportsController extends Controller
     public function actionAssetsBySoftwareLicenseSynthetic()
     {
         # Get all Software licenses
-        $licenses = SoftwareLicense::find()->all();
+        $licenses = SoftwareLicense::find()->joinWith(['software'])->orderBy(['itam_software.name' => SORT_ASC])->all();
 
         return $this->render('assetsBySoftwareLicenseSynthetic', [
             'licenses' => $licenses,

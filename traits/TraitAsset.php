@@ -11,6 +11,7 @@ namespace marqu3s\itam\traits;
 use marqu3s\behaviors\SaveGridFiltersBehavior;
 use marqu3s\behaviors\SaveGridPaginationBehavior;
 use marqu3s\itam\models\Asset;
+use Yii;
 
 trait TraitAsset
 {
@@ -50,19 +51,37 @@ trait TraitAsset
      */
     public function duplicate()
     {
-        # Duplicate the asset model
-        $assetModel = $this->asset;
-        $assetModel->id = null;
-        $assetModel->hostname .= ' - Copy';
-        $assetModel->isNewRecord = true;
-        $assetModel->save();
+        $trans = Yii::$app->db->beginTransaction();
+        try {
+            # Duplicate the asset model
+            $assetModel = clone($this->asset);
+            $assetModel->id = null;
+            $assetModel->hostname .= ' - Copy';
+            $assetModel->isNewRecord = true;
+            $assetModel->save();
 
-        # Duplicate this model
-        $this->id = null;
-        $this->id_asset = $assetModel->id;
-        $this->isNewRecord = true;
-        $this->save();
+            # Duplicate this model
+            $this->id = null;
+            $this->id_asset = $assetModel->id;
+            $this->isNewRecord = true;
+            $this->save();
 
-        return $this->id;
+            # Duplicate the installed software
+            foreach ($this->asset->installedSoftwares as $item) {
+                $newItem = clone($item);
+                $newItem->id_asset = $assetModel->id;
+                $newItem->isNewRecord = true;
+                $newItem->save();
+            }
+
+            $trans->commit();
+
+            return $this->id;
+        } catch (\Exception $e) {
+            $trans->rollback();
+
+            return false;
+
+        }
     }
 }

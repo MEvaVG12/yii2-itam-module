@@ -15,27 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Module::t('app', 'Index'), ['index'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Module::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Module::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Module::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
             'username',
-            'email',
-            'created_at:datetime'
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
+
+    <?= $this->render('/layouts/_arViewButtons', ['model' => $model]) ?>
 
 </div>

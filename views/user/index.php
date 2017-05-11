@@ -26,9 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                'name',
                 'username',
-                'email',
                 [
                     'attribute' => 'status',
                     'headerOptions' => [

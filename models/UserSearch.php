@@ -47,7 +47,7 @@ class UserSearch extends User
             'query' => $query,
             'sort' =>[
                 'defaultOrder' => [
-                    'name' => SORT_ASC
+                    'username' => SORT_ASC
                 ]
             ]
         ]);
@@ -66,9 +66,7 @@ class UserSearch extends User
             'status' => $this->status,
         ])
 
-        ->andFilterWhere(['like', 'username', $this->username])
-        ->andFilterWhere(['like', 'name', $this->name])
-        ->andFilterWhere(['like', 'email', $this->email]);
+        ->andFilterWhere(['like', 'username', $this->username]);
 
         return $dataProvider;
     }

@@ -42,7 +42,7 @@ class AssetWorkstationController extends BaseCrudController
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
             ],
-            [
+            /*[
                 'attribute' => 'brandAndModel',
                 'format' => 'html',
                 'value' => function ($model) {
@@ -53,7 +53,7 @@ class AssetWorkstationController extends BaseCrudController
             [
                 'attribute' => 'serviceTag',
                 'value' => 'asset.service_tag'
-            ],
+            ],*/
             [
                 'attribute' => 'locationName',
                 'format' => 'html',

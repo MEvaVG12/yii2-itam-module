@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($osLicenses as $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
-        $percentage = round(100 * $qtdInUse / $license->purchased_licenses, 1);
+        $percentage = $license->purchased_licenses == 0 ? 101 : round(100 * $qtdInUse / $license->purchased_licenses, 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($officeSuiteLicenses as $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
-        $percentage = round(100 * $qtdInUse / $license->purchased_licenses, 1);
+        $percentage = $license->purchased_licenses == 0 ? 101 : round(100 * $qtdInUse / $license->purchased_licenses, 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
@@ -151,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($softwareLicenses as $license): ?>
         <?php
         $qtdInUse = $license['inUse'];
-        $percentage = round(100 * $qtdInUse / $license['purchasedLicenses'], 1);
+        $percentage = (int) $license['purchasedLicenses'] == 0 ? 101 : round(100 * $qtdInUse / $license['purchasedLicenses'], 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
