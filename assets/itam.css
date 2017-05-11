@@ -49,6 +49,6 @@ a.desc:after {
 
 /** Label column width of the DetailView */
 .table.detail-view tr th:first-child {
-    width: 200px;
+    width: 230px;
 }
 

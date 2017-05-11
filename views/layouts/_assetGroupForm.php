@@ -13,9 +13,7 @@ use yii\helpers\Html;
 
 /** @var $model \marqu3s\itam\models\AssetWorkstationForm */
 ?>
-<?php if (!$model->asset->isNewRecord): ?>
-    <h2><?= Module::t('app', 'Belongs to groups') ?></h2>
-    <div class="well">
-        <?= $form->field($model->asset, 'groupId')->checkboxList(ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['separator' => '<br>'])->label(false); ?>
-    </div>
-<?php endif ?>
+<h2><?= Module::t('app', 'Belongs to groups') ?></h2>
+<div class="well">
+    <?= $form->field($model->asset, 'groupId')->checkboxList(ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), ['separator' => '<br>'])->label(false); ?>
+</div>

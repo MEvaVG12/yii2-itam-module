@@ -30,8 +30,9 @@ TBD
 
 ## Future Enhancements
 
+* Better setup wizard (mainly the creation of tables in DB and some setup instructions)
 * Monitoring tool
-* New types of assets:
+* New types of assets
     * Wi-Fi APs
     * Switches
     * IP Cameras
