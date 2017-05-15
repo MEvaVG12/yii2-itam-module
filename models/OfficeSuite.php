@@ -55,6 +55,7 @@ class OfficeSuite extends ActiveRecord
 
         return $config;
     }
+
     /**
      * @inheritdoc
      */

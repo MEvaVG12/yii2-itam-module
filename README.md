@@ -31,6 +31,7 @@ TBD
 ## Future Enhancements
 
 * Better setup wizard (mainly the creation of tables in DB and some setup instructions)
+* Collapsable menu for smaller screens
 * Monitoring tool
 * New types of assets
     * Wi-Fi APs

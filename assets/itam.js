@@ -6,6 +6,29 @@ function updateGrid() {
     $('#softwareTable').load('/itam/dashboard/ajax-get-software-table?idAsset=' + $('#idAsset').val());
 }
 
+function scanAssetPorts() {
+    $.ajax({
+        type: 'post',
+        url: '/itam/dashboard/ajax-scan-asset-ports',
+        data: {'id_asset': $('#monitor-id_asset').val()},
+        success: function (data) {
+            $('#monitor-socket_port').html(data);
+        }
+    });
+}
+
+function activateMonitoringSettings() {
+    var check_type = $('#monitor-check_type').val();
+    if (check_type === 'ping') {
+        $('#pingSettings').show();
+        $('#socketSettings').hide();
+    } else if (check_type === 'socket') {
+        $('#pingSettings').hide();
+        $('#socketSettings').show();
+        scanAssetPorts();
+    }
+}
+
 $('document').ready(function () {
     $('#ddOs').change(function() {
         $.get('/itam/dashboard/ajax-get-os-licenses-dropdown-options?id_os=' + $(this).val(), function(result) {
@@ -59,5 +82,8 @@ $('document').ready(function () {
     });
     $('#idUser').change(function() {
         window.location.href = '/itam/user/permissions?idUser=' + $(this).val();
+    });
+    $('#monitor-check_type').change(function() {
+        activateMonitoringSettings();
     });
 });

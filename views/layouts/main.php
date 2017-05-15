@@ -102,6 +102,12 @@ if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->co
 }
 if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin')) {
     $items = array_merge($items, [
+        [
+            //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports'),
+            'label' => Module::t('menu', 'Monitoring'),
+            'url' => ['monitor/index'],
+            //'linkOptions' => [...],
+        ],
         '<li class="divider"></li>',
         [
             //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'Admin'),

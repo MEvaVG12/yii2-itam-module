@@ -25,16 +25,20 @@ trait TraitAsset
 
     public function behaviors()
     {
-        return [
-            'saveGridPage' =>[
-                'class' => SaveGridPaginationBehavior::className(),
-                'sessionVarName' => static::className() . 'GridPage'
-            ],
-            'saveGridFilters' =>[
-                'class' => SaveGridFiltersBehavior::className(),
-                'sessionVarName' => static::className() . 'GridFilters'
-            ]
-        ];
+        if (is_a(Yii::$app, '\yii\web\Application')) {
+            return [
+                'saveGridPage' => [
+                    'class' => SaveGridPaginationBehavior::className(),
+                    'sessionVarName' => static::className() . 'GridPage'
+                ],
+                'saveGridFilters' => [
+                    'class' => SaveGridFiltersBehavior::className(),
+                    'sessionVarName' => static::className() . 'GridFilters'
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 
     /**

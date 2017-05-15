@@ -44,7 +44,7 @@ class Asset extends ActiveRecord
      */
     public function behaviors()
     {
-        return [
+        $config = [
             [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
@@ -55,14 +55,20 @@ class Asset extends ActiveRecord
                 // 'value' => new Expression('NOW()'),
             ],
             [
-                'class' => BlameableBehavior::className(),
-                'value' => Yii::$app->user->identity->username
-            ],
-            [
                 'class' => AttributeTypecastBehavior::className(),
                 // 'attributeTypes' will be composed automatically according to `rules()`
             ],
         ];
+
+        # Add the BlameableBehavior only in web application
+        if (is_a(Yii::$app, '\yii\web\Application')) {
+            $config[] = [
+                'class' => BlameableBehavior::className(),
+                'value' => Yii::$app->user->identity->username
+            ];
+        }
+
+        return $config;
     }
 
     /**

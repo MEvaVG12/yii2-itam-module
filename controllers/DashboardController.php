@@ -2,6 +2,7 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\Asset;
 use marqu3s\itam\models\OfficeSuiteLicense;
 use marqu3s\itam\models\OsLicense;
 use marqu3s\itam\models\Software;
@@ -247,5 +248,32 @@ class DashboardController extends Controller
         return $this->renderAjax('../layouts/_softwareAssetTable', [
             'models' => $models,
         ]);
+    }
+
+    public function actionAjaxScanAssetPorts()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $idAsset = $_POST['id_asset'];
+        $asset = Asset::findOne($idAsset);
+        $result = exec(Yii::$app->getModule('itam')->nmapPath . 'nmap ' . escapeshellarg($asset->ip_address) . ' 2>&1', $output, $return);
+
+        if (strstr($output[2], 'Nmap scan report for') !== false) {
+            $output = array_splice($output, 6);
+            $opts = [];
+            foreach ($output as $line) {
+                if (strstr($line, 'Nmap done') !== false) break;
+                $data = array_merge([], array_filter(explode(' ', $line)));
+                //\yii\helpers\VarDumper::dump($data, 10);
+                list($portProtocol, $status, $description) = $data;
+                //\yii\helpers\VarDumper::dump($portProtocol, 10);die;
+                list($port, $protocol) = explode('/', $portProtocol);
+                $opts[$port] = $port . ' - ' . $description;
+            }
+        } else {
+            $opts = ['' => 'No ports open'];
+        }
+
+        return Html::renderSelectOptions(null, $opts);
     }
 }

@@ -45,9 +45,17 @@ class Module extends YiiBaseModule
     public $rbacItemPrefix = 'itam';
 
     /**
+     * The path to the nmap executable
+     * @var string
+     */
+    public $nmapPath = '/usr/local/Cellar/nmap/7.40/bin/';
+
+    /**
      * @var array The default configuration for the action column of the GridViews.
      */
     public static $defaultGridActionColumn = [];
+
+
 
 
     /**
