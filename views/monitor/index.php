@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => 'asset.hostname',
                 ],
                 [
+                    'attribute' => 'description',
+                    //'value' => 'asset.hostname',
+                ],
+                [
                     'attribute' => 'check_type',
                     'contentOptions' => [
                         'class' => 'text-center'

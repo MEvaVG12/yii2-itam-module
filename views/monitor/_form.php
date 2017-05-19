@@ -20,16 +20,37 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map(Asset::find()->where("ip_address IS NOT NULL && ip_address != ''")->orderBy(['hostname' => SORT_ASC])->all(), 'id', 'hostname')) ?>
-
     <div class="row">
+        <div class="col-sm-4">
+            <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map(Asset::find()->where("ip_address IS NOT NULL && ip_address != ''")->orderBy(['hostname' => SORT_ASC])->all(), 'id', 'hostname')) ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model, 'description')->textInput(['maxlenght' => true]) ?>
+        </div>
         <div class="col-sm-4">
             <?= $form->field($model, 'check_type')->dropDownList(['ping' => 'Ping', 'socket' => 'Socket']) ?>
         </div>
+    </div>
 
+    <div class="row">
         <div id="socketSettings">
             <div class="col-sm-4">
-                <?= $form->field($model, 'socket_port')->dropDownList([$model->socket_port => $model->socket_port]) ?>
+                <?php
+                if (!empty($model->socket_open_ports)) {
+                    $availablePorts = explode(',', $model->socket_open_ports);
+                    foreach ($availablePorts as $port) {
+                        $tmp = explode(' - ', $port);
+                        $options[$tmp[0]] = $port;
+                    }
+                } else {
+                    $options = ['' => 'No ports open detected'];
+                }
+                ?>
+                <?= $form->field($model, 'socket_port')->dropDownList($options) ?>
+            </div>
+            <div class="col-sm-4">
+                <br>
+                <button id="btnScanPorts" class="btn btn-sm btn-success" style="margin-top: 10px"><?= Module::t('app', 'Scan ports') ?></button>
             </div>
             <div class="col-sm-4">
                 <?= $form->field($model, 'socket_timeout')->textInput(['maxlenght' => true]) ?>
@@ -49,6 +70,8 @@ $this->registerJs($js);
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Module::t('app', 'Create') : Module::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
+
+    <?= $form->field($model, 'socket_open_ports')->hiddenInput()->label(false) ?>
 
     <?php ActiveForm::end(); ?>
 

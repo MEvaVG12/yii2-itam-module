@@ -12,7 +12,7 @@ use marqu3s\itam\models\Monitor;
 
 class ConsoleController extends \yii\console\Controller
 {
-    public function actionCheck()
+    public function actionQueryAssets()
     {
         # Get assets to check
         /** @var Monitor[] $itemsToMonitor */

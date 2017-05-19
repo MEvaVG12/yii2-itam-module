@@ -7,12 +7,20 @@ function updateGrid() {
 }
 
 function scanAssetPorts() {
+    $('#monitor-socket_port').attr('disabled', 'disabled');
+    $('#btnScanPorts').addClass('disabled').attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i> Scanning...');
     $.ajax({
         type: 'post',
         url: '/itam/dashboard/ajax-scan-asset-ports',
         data: {'id_asset': $('#monitor-id_asset').val()},
         success: function (data) {
-            $('#monitor-socket_port').html(data);
+            $('#btnScanPorts').removeClass('disabled').removeAttr('disabled').html('Scan ports');
+            $('#monitor-socket_port').removeAttr('disabled').html(data);
+            var options = [];
+            $('#monitor-socket_port > option').each(function() {
+                if ($(this).val() !== '') options.push($(this).text());
+            });
+            $('#monitor-socket_open_ports').val(options.join(','));
         }
     });
 }
@@ -25,7 +33,7 @@ function activateMonitoringSettings() {
     } else if (check_type === 'socket') {
         $('#pingSettings').hide();
         $('#socketSettings').show();
-        scanAssetPorts();
+        if ($('#monitor-socket_open_ports').val() === '') scanAssetPorts();
     }
 }
 
@@ -85,5 +93,8 @@ $('document').ready(function () {
     });
     $('#monitor-check_type').change(function() {
         activateMonitoringSettings();
+    });
+    $('#btnScanPorts').click(function() {
+        scanAssetPorts();
     });
 });

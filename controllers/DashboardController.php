@@ -250,6 +250,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * Returns open ports in an asset.
+     *
+     * @return string
+     */
     public function actionAjaxScanAssetPorts()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -262,16 +267,14 @@ class DashboardController extends Controller
             $output = array_splice($output, 6);
             $opts = [];
             foreach ($output as $line) {
-                if (strstr($line, 'Nmap done') !== false) break;
+                if (strstr($line, 'Nmap done') !== false || empty($line)) break;
                 $data = array_merge([], array_filter(explode(' ', $line)));
-                //\yii\helpers\VarDumper::dump($data, 10);
                 list($portProtocol, $status, $description) = $data;
-                //\yii\helpers\VarDumper::dump($portProtocol, 10);die;
                 list($port, $protocol) = explode('/', $portProtocol);
                 $opts[$port] = $port . ' - ' . $description;
             }
         } else {
-            $opts = ['' => 'No ports open'];
+            $opts = ['' => 'No ports open detected'];
         }
 
         return Html::renderSelectOptions(null, $opts);

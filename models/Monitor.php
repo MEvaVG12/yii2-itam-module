@@ -16,8 +16,10 @@ use marqu3s\itam\traits\TraitAsset;
  *
  * @property integer $id
  * @property integer $id_asset
+ * @property string $description
  * @property string $check_type
  * @property integer $socket_port
+ * @property string $socket_open_ports
  * @property integer $socket_timeout
  * @property integer $ping_count
  * @property integer $ping_timeout
@@ -48,7 +50,9 @@ class Monitor extends \yii\db\ActiveRecord
             [['id_asset', 'check_type'], 'required'],
             [['id', 'id_asset', 'socket_port', 'socket_timeout', 'ping_count', 'ping_timeout', 'up', 'fail_count'], 'integer'],
             [['check_type'], 'string', 'max' => 15],
-            [['last_check'], 'safe'],
+            [['description'], 'string', 'max' => 50],
+            [['description', 'socket_open_ports'], 'default'],
+            [['last_check', 'socket_open_ports'], 'safe'],
         ];
     }
 
@@ -60,6 +64,7 @@ class Monitor extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_asset' => Module::t('model', 'Asset'),
+            'description' => Module::t('model', 'Description'),
             'check_type' => Module::t('model', 'Check type'),
             'socket_port' => Module::t('model', 'Socket port'),
             'socket_timeout' => Module::t('model', 'Socket timeout'),

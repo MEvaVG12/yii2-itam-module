@@ -18,7 +18,7 @@ class MonitorSearch extends Monitor
     {
         return [
             [['id', 'fail_count', 'up'], 'integer'],
-            [['hostname', 'check_type', 'socket_port', 'socket_timout', 'ping_count', 'ping_timeout'], 'safe'],
+            [['hostname', 'description', 'check_type', 'socket_port', 'socket_timout', 'ping_count', 'ping_timeout'], 'safe'],
         ];
     }
 
@@ -56,6 +56,10 @@ class MonitorSearch extends Monitor
                 'asc' => ['itam_asset.hostname' => SORT_ASC],
                 'desc' => ['itam_asset.hostname' => SORT_DESC],
             ],
+            'description' => [
+                'asc' => ['description' => SORT_ASC],
+                'desc' => ['description' => SORT_DESC],
+            ],
             'check_type' => [
                 'asc' => ['check_type' => SORT_ASC],
                 'desc' => ['check_type' => SORT_DESC],
@@ -86,6 +90,7 @@ class MonitorSearch extends Monitor
             ],
         ];
         $dataProvider->sort->defaultOrder = [
+            'up' => SORT_ASC,
             'fail_count' => SORT_DESC,
             'hostname' => SORT_ASC
         ];
@@ -109,6 +114,9 @@ class MonitorSearch extends Monitor
 
         if (!empty($this->hostname)) {
             $query->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname]);
+        }
+        if (!empty($this->description)) {
+            $query->andFilterWhere(['like', 'description', $this->description]);
         }
 
         return $dataProvider;
