@@ -105,7 +105,7 @@ if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->co
         [
             //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports'),
             'label' => Module::t('menu', 'Monitoring'),
-            'url' => ['monitor/index'],
+            'url' => ['monitoring/index'],
             //'linkOptions' => [...],
         ],
         '<li class="divider"></li>',

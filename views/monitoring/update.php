@@ -4,7 +4,7 @@ use marqu3s\itam\Module;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\monitor */
+/* @var $model marqu3s\itam\models\Monitoring */
 
 $this->title = Module::t('app', 'Update: ') . $model->asset->hostname;
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];

@@ -67,6 +67,12 @@ $this->registerJs($js);
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-4">
+            <?= $form->field($model, 'alert_after_x_consecutive_fails')->textInput() ?>
+        </div>
+    </div>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Module::t('app', 'Create') : Module::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

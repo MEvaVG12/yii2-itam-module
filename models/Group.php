@@ -45,7 +45,7 @@ class Group extends ActiveRecord
             ],
         ];
 
-        if (Yii::$app->getModule('itam')->rbacAuthorization) {
+        if (Yii::$app->getModule('itam') !== null && Yii::$app->getModule('itam')->rbacAuthorization) {
             $config = array_merge($config, [
                 [
                     'class' => BlameableBehavior::className(),

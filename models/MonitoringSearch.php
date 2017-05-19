@@ -7,9 +7,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * MonitorSearch represents the model behind the search form about `marqu3s\itam\models\Monitor`.
+ * MonitorSearch represents the model behind the search form about `marqu3s\itam\models\Monitoring`.
  */
-class MonitorSearch extends Monitor
+class MonitoringSearch extends Monitoring
 {
     /**
      * @inheritdoc
@@ -40,7 +40,7 @@ class MonitorSearch extends Monitor
      */
     public function search($params)
     {
-        $query = Monitor::find();
+        $query = Monitoring::find();
 
         // add conditions that should always apply here
         $query->joinWith(['asset']);

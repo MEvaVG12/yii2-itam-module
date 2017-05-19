@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\Monitor */
+/* @var $model marqu3s\itam\models\Monitoring */
 
 $this->title = $model->asset->hostname;
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];

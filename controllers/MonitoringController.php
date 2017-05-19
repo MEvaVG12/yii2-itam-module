@@ -4,17 +4,17 @@ namespace marqu3s\itam\controllers;
 
 use Yii;
 use marqu3s\itam\Module;
-use marqu3s\itam\models\Monitor;
-use marqu3s\itam\models\MonitorSearch;
+use marqu3s\itam\models\Monitoring;
+use marqu3s\itam\models\MonitoringSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MonitorController implements the CRUD actions for Monitor model.
+ * MonitoringController implements the CRUD actions for Monitoring model.
  */
-class MonitorController extends Controller
+class MonitoringController extends Controller
 {
     /**
      * @inheritdoc
@@ -54,7 +54,7 @@ class MonitorController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MonitorSearch();
+        $searchModel = new MonitoringSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -71,7 +71,7 @@ class MonitorController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Monitor();
+        $model = new Monitoring();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('app', 'Monitor') . ' ' . Module::t('app', 'created successfully.'));
@@ -142,12 +142,12 @@ class MonitorController extends Controller
      *
      * @param integer $id
      *
-     * @return Monitor the loaded model
+     * @return Monitoring the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Monitor::findOne($id)) !== null) {
+        if (($model = Monitoring::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -261,7 +261,7 @@ class DashboardController extends Controller
 
         $idAsset = $_POST['id_asset'];
         $asset = Asset::findOne($idAsset);
-        $result = exec(Yii::$app->getModule('itam')->nmapPath . 'nmap ' . escapeshellarg($asset->ip_address) . ' 2>&1', $output, $return);
+        $result = exec(Yii::$app->getModule('itam')->nmapPath . 'nmap -F ' . escapeshellarg($asset->ip_address) . ' 2>&1', $output, $return);
 
         if (strstr($output[2], 'Nmap scan report for') !== false) {
             $output = array_splice($output, 6);

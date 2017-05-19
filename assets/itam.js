@@ -7,33 +7,33 @@ function updateGrid() {
 }
 
 function scanAssetPorts() {
-    $('#monitor-socket_port').attr('disabled', 'disabled');
+    $('#monitoring-socket_port').attr('disabled', 'disabled');
     $('#btnScanPorts').addClass('disabled').attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i> Scanning...');
     $.ajax({
         type: 'post',
         url: '/itam/dashboard/ajax-scan-asset-ports',
-        data: {'id_asset': $('#monitor-id_asset').val()},
+        data: {'id_asset': $('#monitoring-id_asset').val()},
         success: function (data) {
             $('#btnScanPorts').removeClass('disabled').removeAttr('disabled').html('Scan ports');
-            $('#monitor-socket_port').removeAttr('disabled').html(data);
+            $('#monitoring-socket_port').removeAttr('disabled').html(data);
             var options = [];
-            $('#monitor-socket_port > option').each(function() {
+            $('#monitoring-socket_port > option').each(function() {
                 if ($(this).val() !== '') options.push($(this).text());
             });
-            $('#monitor-socket_open_ports').val(options.join(','));
+            $('#monitoring-socket_open_ports').val(options.join(','));
         }
     });
 }
 
 function activateMonitoringSettings() {
-    var check_type = $('#monitor-check_type').val();
+    var check_type = $('#monitoring-check_type').val();
     if (check_type === 'ping') {
         $('#pingSettings').show();
         $('#socketSettings').hide();
     } else if (check_type === 'socket') {
         $('#pingSettings').hide();
         $('#socketSettings').show();
-        if ($('#monitor-socket_open_ports').val() === '') scanAssetPorts();
+        if ($('#monitoring-socket_open_ports').val() === '') scanAssetPorts();
     }
 }
 
@@ -91,7 +91,7 @@ $('document').ready(function () {
     $('#idUser').change(function() {
         window.location.href = '/itam/user/permissions?idUser=' + $(this).val();
     });
-    $('#monitor-check_type').change(function() {
+    $('#monitoring-check_type').change(function() {
         activateMonitoringSettings();
     });
     $('#btnScanPorts').click(function() {

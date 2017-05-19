@@ -38,3 +38,4 @@ TBD
     * Switches
     * IP Cameras
     * Projectors
+    * WAN Links

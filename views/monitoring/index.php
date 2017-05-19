@@ -6,7 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel marqu3s\itam\models\MonitorSearch */
+/* @var $searchModel marqu3s\itam\models\MonitoringSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Module::t('menu', 'Monitoring');
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'text-center'
                     ],
                     'format' => 'html',
-                    'value' => function(\marqu3s\itam\models\Monitor $model) {
+                    'value' => function(\marqu3s\itam\models\Monitoring $model) {
                         $faIcon = ($model->up === 1) ? 'circle-o' : 'circle';
                         $cssClass = ($model->up === 1) ? 'success' : 'danger';
                         return \rmrevin\yii\fontawesome\FA::i($faIcon, ['class' => 'text-' . $cssClass]);

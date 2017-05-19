@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\Monitor */
+/* @var $model marqu3s\itam\models\Monitoring */
 
 $this->title = Module::t('app', 'New monitoring item');
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];

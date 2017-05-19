@@ -12,7 +12,7 @@ use marqu3s\itam\Module;
 use marqu3s\itam\traits\TraitAsset;
 
 /**
- * This is the model class for table "itam_monitor".
+ * This is the model class for table "itam_monitoring".
  *
  * @property integer $id
  * @property integer $id_asset
@@ -26,10 +26,11 @@ use marqu3s\itam\traits\TraitAsset;
  * @property integer $up
  * @property string $last_check
  * @property integer $fail_count
+ * @property integer $alert_after_x_consecutive_fails
  *
  * @property Asset $asset
  */
-class Monitor extends \yii\db\ActiveRecord
+class Monitoring extends \yii\db\ActiveRecord
 {
     use TraitAsset;
 
@@ -38,7 +39,7 @@ class Monitor extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'itam_monitor';
+        return 'itam_monitoring';
     }
 
     /**
@@ -48,7 +49,7 @@ class Monitor extends \yii\db\ActiveRecord
     {
         return [
             [['id_asset', 'check_type'], 'required'],
-            [['id', 'id_asset', 'socket_port', 'socket_timeout', 'ping_count', 'ping_timeout', 'up', 'fail_count'], 'integer'],
+            [['id', 'id_asset', 'socket_port', 'socket_timeout', 'ping_count', 'ping_timeout', 'up', 'fail_count', 'alert_after_x_consecutive_fails'], 'integer'],
             [['check_type'], 'string', 'max' => 15],
             [['description'], 'string', 'max' => 50],
             [['description', 'socket_open_ports'], 'default'],
@@ -73,6 +74,7 @@ class Monitor extends \yii\db\ActiveRecord
             'up' => Module::t('model', 'Up'),
             'last_check' => Module::t('model', 'Last check'),
             'fail_count' => Module::t('model', 'Fail count'),
+            'alert_after_x_consecutive_fails' => Module::t('model', 'Alert after this consecutive fails'),
         ];
     }
 
