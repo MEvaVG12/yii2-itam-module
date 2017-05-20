@@ -8,8 +8,10 @@
 
 namespace marqu3s\itam\controllers;
 
+use consynki\yii\pushover\Pushover;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Monitoring;
+use Yii;
 
 class ConsoleController extends \yii\console\Controller
 {
@@ -17,7 +19,7 @@ class ConsoleController extends \yii\console\Controller
     {
         # Get assets to check
         /** @var Monitoring[] $itemsToMonitor */
-        $itemsToMonitor = Monitor::find()->all();
+        $itemsToMonitor = Monitoring::find()->all();
 
         # Check the assets
         $results = [];
@@ -41,7 +43,7 @@ class ConsoleController extends \yii\console\Controller
             }
 
             $item->up = $results[$item->description];
-            $item->fail_count = $item->up === 1 ? 0 : $item->fail_count++;
+            $item->fail_count = ($item->up === 1) ? 0 : $item->fail_count + 1;
             $item->last_check = date('Y-m-d H:i:s');
             $item->save();
 
@@ -52,14 +54,14 @@ class ConsoleController extends \yii\console\Controller
 
         # Send alerts
         if (count($assetsToAlert)) {
-            $subject = 'ITAM: ' . Module::t('alert', 'You have') . ' ' . count($assetsToAlert) . ' ' . Module::t('alert', ' assets down!');
+            $subject = 'ITAM: ' . Module::t('alert', 'You have') . ' ' . count($assetsToAlert) . ' ' . Module::t('alert', 'assets down!');
             $body = Module::t('alert', 'Assets not responding:<br>');
             foreach ($assetsToAlert as $i => $item) {
-                $item->description . '<br>';
+                $body .= $item->description . '<br>';
             }
 
-            # TODO: Pushover alerts
-
+            # Pushover alerts
+            $this->pushover()->send($body, $subject);
         }
 
         \yii\helpers\VarDumper::dump($results, 10);
@@ -70,8 +72,19 @@ class ConsoleController extends \yii\console\Controller
     public function actionPortscan($ip)
     {
         $result = exec("nmap {$ip}", $output, $return);
-        \yii\helpers\VarDumper::dump($output, 10); die;
-        if (strstr($output[2], 'Nmap scan report for') !== false) {
-        }
+        \yii\helpers\VarDumper::dump($output, 10);
+    }
+
+
+    /**
+     * Return a pushover component
+     */
+    public function pushover()
+    {
+        $pushover = new Pushover();
+        $pushover->api_key = Yii::$app->getModule('itam')->pushoverAPIKey;
+        $pushover->user_key = Yii::$app->getModule('itam')->pushoverUserKey;
+
+        return $pushover;
     }
 }
