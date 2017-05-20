@@ -29,8 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'ping_timeout',
             'fail_count',
             'alert_after_x_consecutive_fails',
-            'enabled',
-            'up',
+            [
+                'attribute' => 'enabled',
+                'format' => 'html',
+                'value' => function(\marqu3s\itam\models\Monitoring $model) {
+                    $icon = (int) $model->enabled === 1 ? 'check-circle' : 'ban';
+                    $color = (int) $model->enabled === 1 ? 'success' : 'muted';
+                    return \rmrevin\yii\fontawesome\FA::i($icon, ['class' => 'text-' . $color]);
+                },
+            ],
+            [
+                'attribute' => 'up',
+                'format' => 'html',
+                'value' => function(\marqu3s\itam\models\Monitoring $model) {
+                    $faIcon = ($model->up === 1) ? 'circle-o' : 'circle';
+                    $cssClass = ($model->up === 1) ? 'success' : 'danger';
+                    return \rmrevin\yii\fontawesome\FA::i($faIcon, ['class' => 'text-' . $cssClass]);
+                },
+            ],
             'last_check:datetime'
         ],
     ]) ?>
