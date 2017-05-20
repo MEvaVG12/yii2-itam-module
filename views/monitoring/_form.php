@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 use marqu3s\itam\models\Asset;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\Monitor */
+/* @var $model marqu3s\itam\models\Monitoring */
 /* @var $form yii\widgets\ActiveForm */
 
 $js = <<<JS
@@ -70,6 +70,9 @@ $this->registerJs($js);
     <div class="row">
         <div class="col-sm-4">
             <?= $form->field($model, 'alert_after_x_consecutive_fails')->textInput() ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model, 'enabled')->checkbox() ?>
         </div>
     </div>
 

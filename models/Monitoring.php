@@ -27,6 +27,7 @@ use marqu3s\itam\traits\TraitAsset;
  * @property string $last_check
  * @property integer $fail_count
  * @property integer $alert_after_x_consecutive_fails
+ * @property integer $enabled
  *
  * @property Asset $asset
  */
@@ -49,7 +50,7 @@ class Monitoring extends \yii\db\ActiveRecord
     {
         return [
             [['id_asset', 'check_type'], 'required'],
-            [['id', 'id_asset', 'socket_port', 'socket_timeout', 'ping_count', 'ping_timeout', 'up', 'fail_count', 'alert_after_x_consecutive_fails'], 'integer'],
+            [['id', 'id_asset', 'socket_port', 'socket_timeout', 'ping_count', 'ping_timeout', 'up', 'fail_count', 'alert_after_x_consecutive_fails', 'enabled'], 'integer'],
             [['check_type'], 'string', 'max' => 15],
             [['description'], 'string', 'max' => 50],
             [['description', 'socket_open_ports'], 'default'],
@@ -75,6 +76,7 @@ class Monitoring extends \yii\db\ActiveRecord
             'last_check' => Module::t('model', 'Last check'),
             'fail_count' => Module::t('model', 'Fail count'),
             'alert_after_x_consecutive_fails' => Module::t('model', 'Alert after this consecutive fails'),
+            'enabled' => Module::t('model', 'Enabled'),
         ];
     }
 

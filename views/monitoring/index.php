@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 $this->title = Module::t('menu', 'Monitoring');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="monitor-index">
+<div class="monitoring-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -101,6 +101,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => [
                         'class' => 'text-center'
                     ],
+                ],
+                [
+                    'attribute' => 'enabled',
+                    'format' => 'html',
+                    'value' => function(\marqu3s\itam\models\Monitoring $model) {
+                        $icon = (int) $model->enabled === 1 ? 'check-circle' : 'ban';
+                        $color = (int) $model->enabled === 1 ? 'success' : 'muted';
+                        return \rmrevin\yii\fontawesome\FA::i($icon, ['class' => 'text-' . $color]);
+                    },
+                    'headerOptions' => [
+                        'style' => 'width: 100px;'
+                    ],
+                    'contentOptions' => [
+                        'class' => 'text-center'
+                    ],
+                    'filter' => ['0' => Module::t('app', 'No'), '1' => Module::t('app', 'Yes')]
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',

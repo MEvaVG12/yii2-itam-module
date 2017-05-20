@@ -5,11 +5,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\LocationSearch */
+/* @var $model marqu3s\itam\models\MonitoringSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="location-search">
+<div class="monitor-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

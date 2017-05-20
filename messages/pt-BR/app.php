@@ -17,7 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Please save this asset first and than edit it to configure the installed softwares.' => 'Por favor salve esse ativo primeiro e então edite-o para informar os programas instalados.',
+    'Monitor' => '',
+    'New monitoring item' => '',
+    'Offline' => '',
+    'Online' => '',
+    'Scan ports' => '',
     'Smartphones' => '',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
@@ -91,6 +95,7 @@ return [
     'Password Reset Token' => 'Código para troca de senha',
     'Permissions' => 'Permissões',
     'Please fix the following errors for' => 'Por favor corrija os seguintes erros para ',
+    'Please save this asset first and than edit it to configure the installed softwares.' => 'Por favor salve esse ativo primeiro e então edite-o para informar os programas instalados.',
     'Printers' => 'Impressoras',
     'Record Details' => 'Detalhes do Registro',
     'Reset' => 'Reiniciar',

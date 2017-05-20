@@ -11,7 +11,7 @@ $this->title = Module::t('app', 'New monitoring item');
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="monitor-create">
+<div class="monitoring-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

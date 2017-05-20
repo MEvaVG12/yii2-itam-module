@@ -17,8 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Asset Groups' => 'Grupos de ativos',
+    'Monitoring' => '',
     'Smartphones' => '',
+    'Asset Groups' => 'Grupos de ativos',
     'Authorization' => 'Autorização',
     'Create authorization rules' => 'Criar regras de autorização',
     'Dashboard' => 'Painel de indicadores',

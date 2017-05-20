@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'u
 $this->params['breadcrumbs'][] = ['label' => $model->asset->hostname, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Module::t('app', 'Update');
 ?>
-<div class="monitor-update">
+<div class="monitoring-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

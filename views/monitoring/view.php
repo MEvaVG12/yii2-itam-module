@@ -11,7 +11,7 @@ $this->title = $model->asset->hostname;
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="monitor-view">
+<div class="monitoring-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,8 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'socket_timeout',
             'ping_count',
             'ping_timeout',
-            'up',
             'fail_count',
+            'alert_after_x_consecutive_fails',
+            'enabled',
+            'up',
+            'last_check:datetime'
         ],
     ]) ?>
 

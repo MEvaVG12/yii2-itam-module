@@ -18,7 +18,7 @@ class MonitoringSearch extends Monitoring
     {
         return [
             [['id', 'fail_count', 'up'], 'integer'],
-            [['hostname', 'description', 'check_type', 'socket_port', 'socket_timout', 'ping_count', 'ping_timeout'], 'safe'],
+            [['hostname', 'description', 'check_type', 'socket_port', 'socket_timout', 'ping_count', 'ping_timeout', 'enabled'], 'safe'],
         ];
     }
 
@@ -88,6 +88,10 @@ class MonitoringSearch extends Monitoring
                 'asc' => ['fail_count' => SORT_ASC],
                 'desc' => ['fail_count' => SORT_DESC],
             ],
+            'enabled' => [
+                'asc' => ['enabled' => SORT_ASC],
+                'desc' => ['enabled' => SORT_DESC],
+            ],
         ];
         $dataProvider->sort->defaultOrder = [
             'up' => SORT_ASC,
@@ -110,6 +114,7 @@ class MonitoringSearch extends Monitoring
             'check_type' => $this->check_type,
             'up' => $this->up,
             'fail_count' => $this->fail_count,
+            'enabled' => $this->enabled,
         ]);
 
         if (!empty($this->hostname)) {

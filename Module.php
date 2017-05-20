@@ -116,6 +116,7 @@ class Module extends YiiBaseModule
             'sourceLanguage' => 'en-US',
             'basePath' => __DIR__ . '/messages',
             'fileMap' => [
+                'modules/itam/alert' => 'alert.php',
                 'modules/itam/app' => 'app.php',
                 'modules/itam/menu' => 'menu.php',
                 'modules/itam/model' => 'model.php',
