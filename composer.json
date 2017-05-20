@@ -11,7 +11,8 @@
     "require": {
         "devmastersbv/yii2-fontawesome": "2.17.1",
         "marqu3s/yii2-behaviors": "*",
-        "consynki/yii2-pushover": "*"
+        "consynki/yii2-pushover": "*",
+        "yesaulov/yii2-pushbullet": "2.*"
     },
     "autoload": {
         "psr-4": {

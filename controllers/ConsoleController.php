@@ -11,6 +11,7 @@ namespace marqu3s\itam\controllers;
 use consynki\yii\pushover\Pushover;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Monitoring;
+use yesaulov\pushbullet\Pushbullet;
 use Yii;
 
 class ConsoleController extends \yii\console\Controller
@@ -61,7 +62,10 @@ class ConsoleController extends \yii\console\Controller
             }
 
             # Pushover alerts
-            $this->pushover()->send($body, $subject);
+            //$this->pushover()->send($body, $subject);
+
+            # Pushbullet alerts
+            $this->pushbullet()->pushNote('iPhone 6S P', $body, $subject);
         }
 
         \yii\helpers\VarDumper::dump($results, 10);
@@ -84,6 +88,17 @@ class ConsoleController extends \yii\console\Controller
         $pushover = new Pushover();
         $pushover->api_key = Yii::$app->getModule('itam')->pushoverAPIKey;
         $pushover->user_key = Yii::$app->getModule('itam')->pushoverUserKey;
+
+        return $pushover;
+    }
+
+    /**
+     * Return a pushbullet component
+     */
+    public function pushbullet()
+    {
+        $pushover = new Pushbullet();
+        $pushover->apiKey = Yii::$app->getModule('itam')->pushbulletAPIKey;
 
         return $pushover;
     }

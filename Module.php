@@ -51,8 +51,14 @@ class Module extends YiiBaseModule
      */
     public $nmapPath = '/usr/local/Cellar/nmap/7.40/bin/';
 
+    /** @var string  */
     public $pushoverUserKey = '';
+
+    /** @var string  */
     public $pushoverAPIKey = '';
+
+    /** @var string  */
+    public $pushbulletAPIKey = '';
 
     /**
      * @var array The default configuration for the action column of the GridViews.
