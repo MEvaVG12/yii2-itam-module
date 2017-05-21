@@ -11,16 +11,16 @@ namespace marqu3s\itam\models;
 use Yii;
 
 /**
- * Class AssetSmartphoneForm
+ * Class AssetSwitchForm
  *
- * @property AssetSmartphone $assetSmartphone
+ * @property AssetSwitch $assetSwitch
  *
  * @package marqu3s\itam\models
  */
-class AssetSmartphoneForm extends AssetForm implements IAssetForm
+class AssetSwitchForm extends AssetForm implements IAssetForm
 {
-    /** @var AssetSmartphone */
-    private $_assetSmartphone;
+    /** @var AssetSwitch */
+    private $_assetSwitch;
 
 
     /**
@@ -29,8 +29,8 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
     public function init()
     {
         parent::init();
-        $this->_assetSmartphone = new AssetSmartphone();
-        $this->_assetSmartphone->loadDefaultValues();
+        $this->_assetSwitch = new AssetSwitch();
+        $this->_assetSwitch->loadDefaultValues();
     }
 
     /**
@@ -39,7 +39,7 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['AssetSmartphone'], 'required'],
+            [['AssetSwitch'], 'required'],
         ]);
     }
 
@@ -50,7 +50,7 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
     {
         $error = !parent::afterValidate();
 
-        if (!$this->_assetSmartphone->validate()) {
+        if (!$this->_assetSwitch->validate()) {
             $error = true;
         }
 
@@ -75,8 +75,8 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
             return false;
         }
 
-        $this->_assetSmartphone->id_asset = $this->asset->id;
-        if (!$this->_assetSmartphone->save()) {
+        $this->_assetSwitch->id_asset = $this->asset->id;
+        if (!$this->_assetSwitch->save()) {
             $transaction->rollBack();
             return false;
         }
@@ -86,22 +86,22 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
     }
 
     /**
-     * @return AssetSmartphone
+     * @return AssetSwitch
      */
-    public function getAssetSmartphone()
+    public function getAssetSwitch()
     {
-        return $this->_assetSmartphone;
+        return $this->_assetSwitch;
     }
 
     /**
-     * @param AssetSmartphone|array $value
+     * @param AssetSwitch|array $value
      */
-    public function setAssetSmartphone($value)
+    public function setAssetSwitch($value)
     {
         if (is_array($value)) {
-            $this->_assetSmartphone->setAttributes($value);
-        } elseif ($value instanceof AssetSmartphone) {
-            $this->_assetSmartphone = $value;
+            $this->_assetSwitch->setAttributes($value);
+        } elseif ($value instanceof AssetSwitch) {
+            $this->_assetSwitch = $value;
             $this->asset = $value->asset;
         }
     }
@@ -112,7 +112,7 @@ class AssetSmartphoneForm extends AssetForm implements IAssetForm
     public function getAllModels()
     {
         return array_merge(parent::getAllModels(), [
-            'AssetSmartphone' => $this->_assetSmartphone,
+            'AssetSwitch' => $this->_assetSwitch,
         ]);
     }
 }

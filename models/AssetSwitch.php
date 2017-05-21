@@ -69,14 +69,6 @@ class AssetSwitch extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAsset()
-    {
-        return $this->hasOne(Asset::className(), ['id' => 'id_asset']);
-    }
-
-    /**
      * @inheritdoc
      * @return AssetSwitchQuery the active query used by this AR class.
      */

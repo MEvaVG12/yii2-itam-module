@@ -13,10 +13,12 @@ class ModuleAsset extends AssetBundle
 
     public $css = [
         'itam.css',
+        'menu.css',
     ];
 
     public $js = [
-        'itam.js'
+        'itam.js',
+        'menu.js',
     ];
 
     public $depends = [

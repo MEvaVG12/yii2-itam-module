@@ -69,7 +69,7 @@ class DashboardController extends Controller
             ->orderBy(['itam_office_suite.name' => SORT_ASC])
             ->all();
 
-        # Show data about Software license in use.
+        # Show data about Software licenses in use.
         $idSoftwares = (new Query())
             ->select(['id_software', 'id_software_license'])
             ->distinct()

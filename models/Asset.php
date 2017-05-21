@@ -3,6 +3,8 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
+use yii\base\InvalidConfigException;
+use yii\base\InvalidParamException;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -37,6 +39,10 @@ use Yii;
  */
 class Asset extends ActiveRecord
 {
+    const ASSET_TYPES = [
+        'server', 'smartphone', 'switch', 'workstation'
+    ];
+
     public $groupId = [];
 
     /**
@@ -245,5 +251,35 @@ class Asset extends ActiveRecord
                 Yii::$app->db->createCommand($sql)->execute();
             }
         }
+    }
+
+    /**
+     * Return a URL to an asset according to its type.
+     *
+     * @param string $action 'view', 'create', 'update'
+     *
+     * @return array|null
+     *
+     * @throws InvalidParamException
+     */
+    public function getUrl($action = 'view')
+    {
+        if (!in_array($action, ['view', 'update', 'create'])) {
+            throw new InvalidParamException('The $action parameter only accepts "create", "update" or "view" values.');
+        }
+
+        foreach (self::ASSET_TYPES as $type) {
+            $classname = 'marqu3s\itam\models\Asset' . ucfirst($type);
+            if (($model = $classname::find()->where(['id_asset' => $this->id])->one()) !== null) {
+                $url = ['asset-' . $type . '/' . $action];
+                if (in_array($action, ['view', 'update'])) {
+                    $url['id'] = $model->id;
+                }
+
+                return $url;
+            }
+        }
+
+        return null;
     }
 }

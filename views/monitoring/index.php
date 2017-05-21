@@ -28,11 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 [
                     'attribute' => 'hostname',
-                    'value' => 'asset.hostname',
+                    'format' => 'html',
+                    'value' => function (\marqu3s\itam\models\Monitoring $model) {
+                        return Html::a($model->asset->hostname, $model->asset->getUrl(), ['target' => 'blank']);
+                    }
                 ],
                 [
                     'attribute' => 'description',
-                    //'value' => 'asset.hostname',
                 ],
                 [
                     'attribute' => 'check_type',

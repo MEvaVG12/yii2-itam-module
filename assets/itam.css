@@ -52,3 +52,7 @@ a.desc:after {
     width: 230px;
 }
 
+h1 {
+    font-size: 45px;
+    margin-top: 0;
+}

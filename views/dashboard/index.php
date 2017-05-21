@@ -25,33 +25,39 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1><?= Module::t('app', 'Number of assets in database') ?>:</h1>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center">
-            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Servers'), ['asset-server/index']) ?></h3>
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Servers'), ['asset-server/index']) ?></h4>
             <h4><?= \marqu3s\itam\models\AssetServer::find()->count(); ?></h4>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center">
-            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Smartphones'), ['asset-smartphone/index']) ?></h3>
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Smartphones'), ['asset-smartphone/index']) ?></h4>
             <h4><?= \marqu3s\itam\models\AssetSmartphone::find()->count(); ?></h4>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center">
-            <h3 class="numbersHeader"><?= Html::a(Module::t('app', 'Workstations'), ['asset-workstation/index']) ?></h3>
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Switches'), ['asset-switch/index']) ?></h4>
+            <h4><?= \marqu3s\itam\models\AssetSwitch::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="well text-center">
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Workstations'), ['asset-workstation/index']) ?></h4>
             <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center text-muted">
-            <h3 class="numbersHeader"><?= Module::t('app', 'Printers') ?></h3>
+            <h4 class="numbersHeader"><?= Module::t('app', 'Printers') ?></h4>
             <h4>TBD</h4>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center text-muted">
-            <h3 class="numbersHeader"><?= Module::t('app', 'Wi-Fi APs') ?></h3>
+            <h4 class="numbersHeader"><?= Module::t('app', 'Wi-Fi APs') ?></h4>
             <h4>TBD</h4>
         </div>
     </div>

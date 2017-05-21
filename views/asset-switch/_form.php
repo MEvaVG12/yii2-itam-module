@@ -5,11 +5,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\AssetSmartphoneForm */
+/* @var $model marqu3s\itam\models\AssetSwitchForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="smartphone-form">
+<div class="switch-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -18,20 +18,26 @@ use yii\widgets\ActiveForm;
     <?php include (__DIR__ . '/../layouts/_assetForm.php') ?>
 
     <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($model->assetSmartphone, 'os')->dropDownList(['Android' => 'Android', 'iOS' => 'iOS'], ['prompt' => '--']) ?>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'ports')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-6">
-            <?= $form->field($model->assetSmartphone, 'os_version')->textInput(['maxlength' => true]) ?>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'username')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'password')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($model->assetSmartphone, 'imei')->textInput(['maxlength' => true]) ?>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'firmware_version')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-6">
-            <?= $form->field($model->assetSmartphone, 'user')->textInput(['maxlength' => true]) ?>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'firmware_release_date')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model->assetSwitch, 'firmware_install_date')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
