@@ -107,22 +107,22 @@ class AuthorizationController extends Controller
     {
         # Add "createAsset" permission
         $createAsset = $this->auth->createPermission($this->module->rbacItemPrefix . 'CreateAsset');
-        $createAsset->description = 'Create an asset';
+        $createAsset->description = '[ITAM] Create an asset';
         $this->auth->add($createAsset);
 
         # Add "updateAsset" permission
         $updateAsset = $this->auth->createPermission($this->module->rbacItemPrefix . 'UpdateAsset');
-        $updateAsset->description = 'Update an asset';
+        $updateAsset->description = '[ITAM] Update an asset';
         $this->auth->add($updateAsset);
 
         # Add "deleteAsset" permission
         $deleteAsset = $this->auth->createPermission($this->module->rbacItemPrefix . 'DeleteAsset');
-        $deleteAsset->description = 'Delete an asset';
+        $deleteAsset->description = '[ITAM] Delete an asset';
         $this->auth->add($deleteAsset);
 
         # Add "assetManager" role and give all the roles to it.
         $assetManager = $this->auth->createRole($this->module->rbacItemPrefix . 'AssetManager');
-        $assetManager->description = 'Asset manager';
+        $assetManager->description = '[ITAM] Asset manager';
         $this->auth->add($assetManager);
         $this->auth->addChild($assetManager, $createAsset);
         $this->auth->addChild($assetManager, $updateAsset);
@@ -130,7 +130,7 @@ class AuthorizationController extends Controller
 
         # Add "assetCreator" role and give "createAsset" and "updateAsset" roles to it.
         $assetCreator = $this->auth->createRole($this->module->rbacItemPrefix . 'AssetCreator');
-        $assetCreator->description = 'Asset creator';
+        $assetCreator->description = '[ITAM] Asset creator';
         $this->auth->add($assetCreator);
         $this->auth->addChild($assetCreator, $createAsset);
         $this->auth->addChild($assetCreator, $updateAsset);
@@ -143,22 +143,22 @@ class AuthorizationController extends Controller
     {
         # Add "createSoftware" permission
         $createSoftware = $this->auth->createPermission($this->module->rbacItemPrefix . 'CreateSoftware');
-        $createSoftware->description = 'Create a software';
+        $createSoftware->description = '[ITAM] Create a software';
         $this->auth->add($createSoftware);
 
         # Add "updateSoftware" permission
         $updateSoftware = $this->auth->createPermission($this->module->rbacItemPrefix . 'UpdateSoftware');
-        $updateSoftware->description = 'Update a software';
+        $updateSoftware->description = '[ITAM] Update a software';
         $this->auth->add($updateSoftware);
 
         # Add "deleteSoftware" permission
         $deleteSoftware = $this->auth->createPermission($this->module->rbacItemPrefix . 'DeleteSoftware');
-        $deleteSoftware->description = 'Delete a software';
+        $deleteSoftware->description = '[ITAM] Delete a software';
         $this->auth->add($deleteSoftware);
 
         # Add "softwareManager" role and give all the roles to it.
         $softwareManager = $this->auth->createRole($this->module->rbacItemPrefix . 'SoftwareManager');
-        $softwareManager->description = 'Software manager';
+        $softwareManager->description = '[ITAM] Software manager';
         $this->auth->add($softwareManager);
         $this->auth->addChild($softwareManager, $createSoftware);
         $this->auth->addChild($softwareManager, $updateSoftware);
@@ -168,22 +168,22 @@ class AuthorizationController extends Controller
 
         # Add "createLicense" permission
         $createLicense = $this->auth->createPermission($this->module->rbacItemPrefix . 'CreateLicense');
-        $createLicense->description = 'Create a software license';
+        $createLicense->description = '[ITAM] Create a software license';
         $this->auth->add($createLicense);
 
         # Add "updateLicense" permission
         $updateLicense = $this->auth->createPermission($this->module->rbacItemPrefix . 'UpdateLicense');
-        $updateLicense->description = 'Update a software license';
+        $updateLicense->description = '[ITAM] Update a software license';
         $this->auth->add($updateLicense);
 
         # Add "deleteLicense" permission
         $deleteLicense = $this->auth->createPermission($this->module->rbacItemPrefix . 'DeleteLicense');
-        $deleteLicense->description = 'Delete a software license';
+        $deleteLicense->description = '[ITAM] Delete a software license';
         $this->auth->add($deleteLicense);
 
         # Add "licenseManager" role and give all the roles to it.
         $licenseManager = $this->auth->createRole($this->module->rbacItemPrefix . 'LicenseManager');
-        $licenseManager->description = 'License manager';
+        $licenseManager->description = '[ITAM] License manager';
         $this->auth->add($licenseManager);
         $this->auth->addChild($licenseManager, $createLicense);
         $this->auth->addChild($licenseManager, $updateLicense);
@@ -203,7 +203,7 @@ class AuthorizationController extends Controller
     {
         # Add "ViewReports" permission
         $accessReports = $this->auth->createPermission($this->module->rbacItemPrefix . 'ViewReports');
-        $accessReports->description = 'View reports';
+        $accessReports->description = '[ITAM] View reports';
         $this->auth->add($accessReports);
 
         # add "ViewReports" role to the "admin" role.
@@ -217,7 +217,7 @@ class AuthorizationController extends Controller
     private function createAdminRole()
     {
         $admin = $this->auth->createRole($this->module->rbacItemPrefix . 'Admin');
-        $admin->description = 'System Administrator';
+        $admin->description = '[ITAM] System Administrator';
         $this->auth->add($admin);
 
         return $admin;
