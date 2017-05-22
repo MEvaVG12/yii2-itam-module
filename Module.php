@@ -2,7 +2,6 @@
 
 namespace marqu3s\itam;
 
-use consynki\yii\pushover\Pushover;
 use Yii;
 use yii\helpers\Html;
 use yii\base\Module as YiiBaseModule;
@@ -59,6 +58,9 @@ class Module extends YiiBaseModule
 
     /** @var string  */
     public $pushbulletAPIKey = '';
+
+    /** @var string  */
+    public $pushbulletChannelTag = '';
 
     /**
      * @var array The default configuration for the action column of the GridViews.
