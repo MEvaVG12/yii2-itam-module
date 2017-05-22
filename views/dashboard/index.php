@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><?= Module::t('app', 'Number of assets in database') ?>:</h1>
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center">
@@ -64,15 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports')): ?>
-<h1><?= Module::t('app', 'OS Licenses Usage') ?></h1>
-<table class="table table-hover">
-    <tr>
-        <th style="width: 30%"><?= Module::t('model', 'OS') ?></th>
-        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
-        <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
-        <th><?= Module::t('model', 'Usage') ?></th>
-    </tr>
-    <?php foreach ($osLicenses as $license): ?>
+    <h1><?= Module::t('app', 'OS Licenses Usage') ?></h1>
+    <?php foreach ($osLicenses as $i => $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
         $percentage = $license->purchased_licenses == 0 ? 101 : round(100 * $qtdInUse / $license->purchased_licenses, 1);
@@ -85,35 +79,38 @@ $this->params['breadcrumbs'][] = $this->title;
             $barCssClass = 'danger';
         }
         ?>
-        <tr>
-            <td>
-                <a href="/itam/reports/assets-by-os-license-analytic?idLicense=<?= $license->id ?>"><?= $license->os->name ?></a><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5 class="software-name"><a href="/itam/reports/assets-by-os-license-analytic?idLicense=<?= $license->id ?>"><?= $license->os->name ?></a></h5>
                 <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license->key ?>
-            </td>
-            <td class="text-center"><?= $license->purchased_licenses ?></td>
-            <td class="text-center"><?= $qtdInUse ?></td>
-            <th>
+            </div>
+            <div class="col-sm-6">
                 <div class="progress">
                     <div class="progress-bar progress-bar-<?= $barCssClass ?>" role="progressbar" aria-valuenow="<?= $percentage ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= round($percentage, 0) ?>%">
                         <span class="sr-only"><?= $percentage ?>%</span>
                         <?= $percentage ?>%
                     </div>
                 </div>
-            </th>
-        </tr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <?= Module::t('model', 'In use') ?>: <?= $qtdInUse ?>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <?= Module::t('model', 'Purchased licenses') ?>: <?= $license->purchased_licenses ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if ($i < count($osLicenses) - 1): ?>
+            <hr style="margin-top: 10px; margin-bottom: 10px">
+        <?php endif ?>
     <?php endforeach; ?>
-</table>
-<br>
+    <br><br>
 
-<h1><?= Module::t('app', 'Office Suite Licenses Usage') ?></h1>
-<table class="table table-hover">
-    <tr>
-        <th style="width: 30%"><?= Module::t('model', 'Office Suite') ?></th>
-        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
-        <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
-        <th><?= Module::t('model', 'Usage') ?></th>
-    </tr>
-    <?php foreach ($officeSuiteLicenses as $license): ?>
+
+
+    <h1><?= Module::t('app', 'Office Suite Licenses Usage') ?></h1>
+    <?php foreach ($officeSuiteLicenses as $i => $license): ?>
         <?php
         $qtdInUse = $license->getLicensesInUse();
         $percentage = $license->purchased_licenses == 0 ? 101 : round(100 * $qtdInUse / $license->purchased_licenses, 1);
@@ -126,38 +123,40 @@ $this->params['breadcrumbs'][] = $this->title;
             $barCssClass = 'danger';
         }
         ?>
-        <tr>
-            <td>
-                <a href="/itam/reports/assets-by-office-suite-license-analytic?idLicense=<?= $license->id ?>"><?= $license->officeSuite->name ?></a><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5 class="software-name"><a href="/itam/reports/assets-by-office-suite-license-analytic?idLicense=<?= $license->id ?>"><?= $license->officeSuite->name ?></a></h5>
                 <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license->key ?>
-            </td>
-            <td class="text-center"><?= $license->purchased_licenses ?></td>
-            <td class="text-center"><?= $qtdInUse ?></td>
-            <th>
+            </div>
+            <div class="col-sm-6">
                 <div class="progress">
                     <div class="progress-bar progress-bar-<?= $barCssClass ?>" role="progressbar" aria-valuenow="<?= $percentage ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= round($percentage, 0) ?>%">
                         <span class="sr-only"><?= $percentage ?>%</span>
                         <?= $percentage ?>%
                     </div>
                 </div>
-            </th>
-        </tr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <?= Module::t('model', 'In use') ?>: <?= $qtdInUse ?>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <?= Module::t('model', 'Purchased licenses') ?>: <?= $license->purchased_licenses ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if ($i < count($officeSuiteLicenses) - 1): ?>
+            <hr style="margin-top: 10px; margin-bottom: 10px">
+        <?php endif ?>
     <?php endforeach; ?>
-</table>
-<br>
+    <br><br>
 
-<h1><?= Module::t('app', 'Software Licenses Usage') ?></h1>
-<table class="table table-hover">
-    <tr>
-        <th style="width: 30%"><?= Module::t('model', 'Software') ?></th>
-        <th style="width: 15%" class="text-center"><?= Module::t('model', 'Purchased licenses') ?></th>
-        <th style="width: 10%" class="text-center"><?= Module::t('model', 'In use') ?></th>
-        <th><?= Module::t('model', 'Usage') ?></th>
-    </tr>
-    <?php foreach ($softwareLicenses as $license): ?>
+
+    <h1><?= Module::t('app', 'Software Licenses Usage') ?></h1>
+    <?php foreach ($softwareLicenses as $i => $license): ?>
         <?php
-        $qtdInUse = $license['inUse'];
-        $percentage = (int) $license['purchasedLicenses'] == 0 ? 101 : round(100 * $qtdInUse / $license['purchasedLicenses'], 1);
+        $qtdInUse = $license['in_use'];
+        $percentage = (int) $license['purchased_licenses'] == 0 ? 101 : round(100 * $qtdInUse / $license['purchased_licenses'], 1);
         if ($percentage < 100) {
             $barCssClass = 'success';
         } elseif ($percentage == 100) {
@@ -167,23 +166,31 @@ $this->params['breadcrumbs'][] = $this->title;
             $barCssClass = 'danger';
         }
         ?>
-        <tr>
-            <td>
-                <a href="/itam/reports/assets-by-software-license-analytic?idLicense=<?= $license['idSoftwareLicense']  ?>"><?= $license['software'] ?></a><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5 class="software-name"><a href="/itam/reports/ssets-by-software-license-analytic?idLicense=<?= $license['id_software_license']  ?>"><?= $license['name'] ?></a></h5>
                 <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license['key'] ?>
-            </td>
-            <td class="text-center"><?= $license['purchasedLicenses'] ?></td>
-            <td class="text-center"><?= $qtdInUse ?></td>
-            <th>
+            </div>
+            <div class="col-sm-6">
                 <div class="progress">
                     <div class="progress-bar progress-bar-<?= $barCssClass ?>" role="progressbar" aria-valuenow="<?= $percentage ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= round($percentage, 0) ?>%">
                         <span class="sr-only"><?= $percentage ?>%</span>
                         <?= $percentage ?>%
                     </div>
                 </div>
-            </th>
-        </tr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <?= Module::t('model', 'In use') ?>: <?= $qtdInUse ?>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <?= Module::t('model', 'Purchased licenses') ?>: <?= $license['purchased_licenses'] ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if ($i < count($softwareLicenses) - 1): ?>
+            <hr style="margin-top: 10px; margin-bottom: 10px">
+        <?php endif ?>
     <?php endforeach; ?>
-</table>
-<br>
+    <br><br>
 <?php endif ?>

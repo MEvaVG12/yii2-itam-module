@@ -70,29 +70,14 @@ class DashboardController extends Controller
             ->all();
 
         # Show data about Software licenses in use.
-        $idSoftwares = (new Query())
-            ->select(['id_software', 'id_software_license'])
-            ->distinct()
-            ->from('itam_software_asset')
-            ->innerJoin('itam_software', 'itam_software_asset.id_software = itam_software.id')
+        $softwareLicenses = (new Query())
+            ->select(['itam_software_license.id as id_software_license', 'itam_software.name', 'itam_software_license.key', 'count(itam_software_asset.id_asset) as in_use', 'itam_software_license.purchased_licenses'])
+            ->from('itam_software')
+            ->innerJoin('itam_software_license', 'itam_software.id = itam_software_license.id_software')
+            ->leftJoin('itam_software_asset', 'itam_software.id = itam_software_asset.id_software AND itam_software_asset.id_software_license = itam_software_license.id')
+            ->groupBy(['itam_software_asset.id_software', 'itam_software_license.id'])
             ->orderBy(['itam_software.name' => SORT_ASC])
             ->all();
-
-        $softwareLicenses = [];
-        foreach ($idSoftwares as $id) {
-            /** @var Software $software */
-            $software = Software::findOne($id['id_software']);
-            foreach ($software->licenses as $license) {
-                $softwareLicenses[] = [
-                    'idSoftwareLicense' => $license->id,
-                    'software' => $software->name,
-                    'key' => $license->key,
-                    'purchasedLicenses' => $license->purchased_licenses,
-                    'inUse' => $license->licensesInUse,
-                ];
-            }
-        }
-        //\yii\helpers\VarDumper::dump($softwareLicenses, 10, true); die;
 
         return $this->render('index', [
             'osLicenses' => $osLicenses,

@@ -19,7 +19,8 @@ include('_menuItems.php');
 <?php $this->beginContent(Yii::$app->viewPath . '/layouts/' . Yii::$app->layout . '.php') ?>
 <div class="itam-module">
 
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left hidden-md hidden-lg" id="cbp-spmenu-s1">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <h3>MENU</h3>
         <?php echo \yii\bootstrap\Nav::widget([
             'activateParents' => true,
             'items' => $items,
@@ -29,22 +30,11 @@ include('_menuItems.php');
     </nav>
 
     <div class="row">
-        <div class="col-md-2 hidden-xs hidden-sm">
-            <?php echo \yii\bootstrap\Nav::widget([
-                'activateParents' => true,
-                'items' => $items,
-                'options' => [
-                    'class' =>'nav-pills',
-                    'data' => [
-                        'spy' => 'affix',
-                        'offset-top' => 60
-                    ]
-                ], // set this to nav-tab to get tab-styled navigation
-            ]);
-            ?>
-        </div>
-        <div class="col-md-10">
-            <i id="showMenuLeft" class="fa fa-bars fa-2x hidden-md hidden-lg"></i>
+        <div class="col-xs-12">
+            <div id="showMenuLeft" class="text-center">
+                <i class="fa fa-bars fa-2x"></i><br>
+                <small>MENU</small>
+            </div>
             <?= $content ?>
         </div>
     </div>
