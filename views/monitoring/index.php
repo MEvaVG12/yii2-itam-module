@@ -11,6 +11,13 @@ use yii\widgets\Pjax;
 
 $this->title = Module::t('menu', 'Monitoring');
 $this->params['breadcrumbs'][] = $this->title;
+
+$js = <<<JS
+setTimeout(function(){
+   window.location.reload(1);
+}, 5000);
+JS;
+$this->registerJs($js);
 ?>
 <div class="monitoring-index">
 
