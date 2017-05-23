@@ -6,7 +6,7 @@
  * Time: 19:16
  */
 
-namespace marqu3s\itam\controllers;
+namespace marqu3s\itam\console\controllers;
 
 use consynki\yii\pushover\Pushover;
 use marqu3s\itam\models\Config;
@@ -16,9 +16,9 @@ use Yii;
 use yii\helpers\Console;
 
 /**
- * Class ConsoleController
+ * Provides asset survey methods.
  *
- * This is a child of a Console Controller.
+ * This is a child of a \yii\console\Controller Controller.
  * This means that it must be used from a console or terminal.
  * The main action query-assets query each monitored asset to find out
  * if it's online (UP) or offline (DOWN).
@@ -29,10 +29,63 @@ use yii\helpers\Console;
  * An asset will also be reported by the alert system if it came UP. In this case,
  * all the other assets that are still DOWN will also be included in the report.
  *
- * @package marqu3s\itam\controllers
+ * Installation: Add the following config to your main.php configuration of your
+ * console application and adjust parameters accordingly.
+ *
+ * ```php
+ * return [
+ *     'controllerMap' => [
+ *         'itam-monitoring' => [
+ *             'class' => 'marqu3s\itam\console\controllers\MonitoringController',
+ *             'nmapPath' => '/usr/bin/',
+ *             'pushbulletAPIKey' => '',
+ *             'pushbulletChannelTag' => '',
+ *             'pushoverUserKey' => '',
+ *             'pushoverAPIKey' => '',
+ *         ],
+ *     ],
+ * ];
+ * ```
+ *
+ * Reporting using Pushbullet requires the following attributes to be set:
+ * - pushbulletAPIKey - The access token to the pushbullet account
+ * - pushbulletChannelTag - The channel tag to where the notifications will be sent to
+ *
+ * Reporting using Pushover requires the following attributes to be set:
+ * - pushoverAPIKey - The access token to the pushbullet application
+ * - pushoverUserKey - The user/group key where the notifications will be sent to
+ *
+ * @package marqu3s\itam\console\controllers
  */
-class ConsoleController extends \yii\console\Controller
+class MonitoringController extends \yii\console\Controller
 {
+    /**
+     * The path to the nmap executable
+     * @var string
+     */
+    public $nmapPath = '/usr/bin/';
+
+    /** @var string  */
+    public $pushbulletAPIKey = '';
+
+    /** @var string  */
+    public $pushbulletChannelTag = '';
+
+    /** @var string  */
+    public $pushoverUserKey = '';
+
+    /** @var string  */
+    public $pushoverAPIKey = '';
+
+
+
+    ### ACTIONS ###
+    
+    /**
+     * Query assets to find out if they are UP or DOWN
+     *
+     * @return int
+     */
     public function actionQueryAssets()
     {
         /** @var Config $config */
@@ -157,12 +210,20 @@ class ConsoleController extends \yii\console\Controller
         return 0;
     }
 
+    /**
+     * Executes an nmap fast scan.
+     *
+     * @param $ip
+     */
     public function actionPortscan($ip)
     {
-        $result = exec("nmap {$ip}", $output, $return);
+        $result = exec($this->nmapPath . "nmap -F " . escapeshellarg($ip), $output, $return);
         \yii\helpers\VarDumper::dump($output, 10);
     }
 
+
+
+    ### AUXILIARY ###
 
     /**
      * Return a pushover component
@@ -171,10 +232,10 @@ class ConsoleController extends \yii\console\Controller
      */
     public function getPushover()
     {
-        if (!empty(Yii::$app->getModule('itam')->pushoverAPIKey) && !empty(Yii::$app->getModule('itam')->pushoverUserKey)) {
+        if (!empty($this->pushoverAPIKey) && !empty($this->pushoverUserKey)) {
             $pushover = new Pushover();
-            $pushover->api_key = Yii::$app->getModule('itam')->pushoverAPIKey;
-            $pushover->user_key = Yii::$app->getModule('itam')->pushoverUserKey;
+            $pushover->api_key = $this->pushoverAPIKey;
+            $pushover->user_key = $this->pushoverUserKey;
 
             return $pushover;
         }
@@ -189,8 +250,8 @@ class ConsoleController extends \yii\console\Controller
      */
     public function getPushbullet()
     {
-        if (!empty(Yii::$app->getModule('itam')->pushbulletAPIKey)) {
-            return new Pushbullet(Yii::$app->getModule('itam')->pushbulletAPIKey);
+        if (!empty($this->pushbulletAPIKey)) {
+            return new Pushbullet($this->pushbulletAPIKey);
         }
 
         return null;
@@ -220,7 +281,7 @@ class ConsoleController extends \yii\console\Controller
     {
         $pb = $this->getPushbullet();
         if (!empty($pb)) {
-            $channel = $pb->channel(Yii::$app->getModule('itam')->pushbulletChannelTag);
+            $channel = $pb->channel($this->pushbulletChannelTag);
             $channel->pushNote($title, $body);
         }
     }

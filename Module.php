@@ -3,11 +3,11 @@
 namespace marqu3s\itam;
 
 use Yii;
-use yii\helpers\Html;
 use yii\base\Module as YiiBaseModule;
+use yii\helpers\Html;
 
 /**
- * itam module definition class
+ * ITAM module definition class
  */
 class Module extends YiiBaseModule
 {
@@ -48,26 +48,12 @@ class Module extends YiiBaseModule
      * The path to the nmap executable
      * @var string
      */
-    public $nmapPath = '/usr/local/Cellar/nmap/7.40/bin/';
-
-    /** @var string  */
-    public $pushoverUserKey = '';
-
-    /** @var string  */
-    public $pushoverAPIKey = '';
-
-    /** @var string  */
-    public $pushbulletAPIKey = '';
-
-    /** @var string  */
-    public $pushbulletChannelTag = '';
+    public $nmapPath = '/usr/bin/';
 
     /**
      * @var array The default configuration for the action column of the GridViews.
      */
     public static $defaultGridActionColumn = [];
-
-
 
 
     /**
