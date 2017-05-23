@@ -63,6 +63,10 @@ class AssetSwitchSearch extends AssetSwitch
                 'asc' => ['itam_asset.hostname' => SORT_ASC],
                 'desc' => ['itam_asset.hostname' => SORT_DESC],
             ],
+            'ports' => [
+                'asc' => ['itam_asset_switch.ports' => SORT_ASC],
+                'desc' => ['itam_asset_switch.ports' => SORT_DESC],
+            ],
             'ipMacAddress' => [
                 'asc' => ['itam_asset.ip_address' => SORT_ASC, 'itam_asset.mac_address' => SORT_ASC],
                 'desc' => ['itam_asset.ip_address' => SORT_DESC, 'itam_asset.mac_address' => SORT_DESC],
@@ -93,6 +97,7 @@ class AssetSwitchSearch extends AssetSwitch
         $query->andFilterWhere([
             'id' => $this->id,
             'id_asset' => $this->id_asset,
+            'ports' => $this->ports,
             'itam_group_asset.id_group' => $this->group,
         ])
 

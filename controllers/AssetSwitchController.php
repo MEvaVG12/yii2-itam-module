@@ -24,6 +24,15 @@ class AssetSwitchController extends BaseCrudController
                 'value' => 'asset.hostname'
             ],
             [
+                'attribute' => 'ports',
+                'headerOptions' => [
+                    'style' => 'width: 150px'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],
+            [
                 'attribute' => 'ipMacAddress',
                 'format' => 'html',
                 'value' => function ($model) {

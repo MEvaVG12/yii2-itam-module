@@ -48,6 +48,9 @@ class AssetSwitch extends ActiveRecord
             [['firmware_version'], 'string', 'max' => 30],
             [['username', 'password'], 'string', 'max' => 20],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
+
+            # Custom attributes
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'group'], 'safe'],
         ];
     }
 
