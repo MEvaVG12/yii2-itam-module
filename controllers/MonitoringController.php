@@ -2,6 +2,7 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\Config;
 use Yii;
 use marqu3s\itam\Module;
 use marqu3s\itam\models\Monitoring;
@@ -57,9 +58,12 @@ class MonitoringController extends Controller
         $searchModel = new MonitoringSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $config = Config::findOne(1);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'config' => $config,
         ]);
     }
 

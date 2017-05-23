@@ -8,13 +8,15 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel marqu3s\itam\models\MonitoringSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $config \marqu3s\itam\models\Config */
 
 $this->title = Module::t('menu', 'Monitoring');
 $this->params['breadcrumbs'][] = $this->title;
 
 $js = <<<JS
-setTimeout(function(){
-   window.location.reload(1);
+setInterval(function(){
+   // window.location.reload(1);
+   $.pjax.reload(('#grid'));
 }, 5000);
 JS;
 $this->registerJs($js);
@@ -24,11 +26,16 @@ $this->registerJs($js);
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Module::t('app', 'New monitoring item'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php Pjax::begin(['options' => ['id' => 'grid']]); ?>
+        <?php
+        $color = (int) $config->asset_query_running == 1 ? 'success' : 'muted';
+        ?>
+        <p>
+            <?= Html::a(Module::t('app', 'New monitoring item'), ['create'], ['class' => 'btn btn-success']) ?>
+            <button id="btnResetQuery" class="btn btn-default"><?= Module::t('app', 'Query is running') ?>: <?= \rmrevin\yii\fontawesome\FA::i('circle', ['class' => 'text-' . $color]) ?></button>
+            &nbsp; <?= Module::t('app', 'Next query scan') ?>: <?= $config->next_asset_query_time ?>
+        </p>
 
-    <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
