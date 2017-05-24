@@ -23,7 +23,7 @@ $this->registerJs($js);
 
     <div class="row">
         <div class="col-sm-4">
-            <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map($availableAssets, 'id', 'hostname')) ?>
+            <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map($availableAssets, 'id', 'hostname'), ['prompt' => Module::t('app', 'Choose one')]) ?>
         </div>
         <div class="col-sm-4">
             <?= $form->field($model, 'description')->textInput(['maxlenght' => true]) ?>

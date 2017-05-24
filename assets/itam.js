@@ -94,6 +94,9 @@ $('document').ready(function () {
     $('#monitoring-check_type').change(function() {
         activateMonitoringSettings();
     });
+    $('#monitoring-id_asset').change(function () {
+        $('#monitoring-description').val($(this).find('option:selected').text());
+    });
     $('#btnScanPorts').click(function() {
         scanAssetPorts();
     });
