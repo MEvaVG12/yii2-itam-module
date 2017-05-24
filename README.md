@@ -76,9 +76,11 @@ Everybody are welcome to add other notification providers and enhance this modul
 
 ## Future Enhancements
 
+* Dashboard should show only asset types counts that contains at least one asset.
 * Better setup wizard (mainly the creation of tables in DB and some setup instructions)
 * New types of assets
     * Wi-Fi APs
     * IP Cameras
     * Projectors
+    * Printers
     * WAN Links
