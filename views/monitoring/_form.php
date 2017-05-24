@@ -9,6 +9,7 @@ use marqu3s\itam\models\Asset;
 /* @var $this yii\web\View */
 /* @var $model marqu3s\itam\models\Monitoring */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $availableAssets marqu3s\itam\models\Asset[] */
 
 $js = <<<JS
 activateMonitoringSettings();
@@ -22,7 +23,7 @@ $this->registerJs($js);
 
     <div class="row">
         <div class="col-sm-4">
-            <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map(Asset::find()->where("ip_address IS NOT NULL && ip_address != ''")->orderBy(['hostname' => SORT_ASC])->all(), 'id', 'hostname')) ?>
+            <?= $form->field($model, 'id_asset')->dropDownList(ArrayHelper::map($availableAssets, 'id', 'hostname')) ?>
         </div>
         <div class="col-sm-4">
             <?= $form->field($model, 'description')->textInput(['maxlenght' => true]) ?>

@@ -30,10 +30,18 @@ $this->registerJs($js);
         <?php
         $color = (int) $config->asset_query_running == 1 ? 'success' : 'muted';
         ?>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h6><?= Module::t('app', 'Query is running') ?>: <?= \rmrevin\yii\fontawesome\FA::i('circle', ['class' => 'text-' . $color]) ?></h6>
+            </div>
+            <div class="col-sm-6">
+                <h6><?= Module::t('app', 'Next query scan') ?>: <?= Yii::$app->formatter->asDatetime($config->next_asset_query_time) ?></h6>
+            </div>
+        </div><br>
+
         <p>
             <?= Html::a(Module::t('app', 'New monitoring item'), ['create'], ['class' => 'btn btn-success']) ?>
-            <button id="btnResetQuery" class="btn btn-default"><?= Module::t('app', 'Query is running') ?>: <?= \rmrevin\yii\fontawesome\FA::i('circle', ['class' => 'text-' . $color]) ?></button>
-            &nbsp; <?= Module::t('app', 'Next query scan') ?>: <?= $config->next_asset_query_time ?>
         </p>
 
         <?= GridView::widget([
@@ -52,12 +60,18 @@ $this->registerJs($js);
                 ],
                 [
                     'attribute' => 'check_type',
-                    'contentOptions' => [
-                        'class' => 'text-center'
+                    'headerOptions' => [
+                        'class' => 'hidden-xs',
                     ],
-                    'filter' => ['ping' => 'Ping', 'socket' => 'Socket']
+                    'contentOptions' => [
+                        'class' => 'hidden-xs text-center'
+                    ],
+                    'filter' => ['ping' => 'Ping', 'socket' => 'Socket'],
+                    'filterOptions' => [
+                        'class' => 'hidden-xs',
+                    ],
                 ],
-                [
+                /*[
                     'attribute' => 'socket_port',
                     'headerOptions' => [
                         'style' => 'width: 115px;'
@@ -92,7 +106,7 @@ $this->registerJs($js);
                     'contentOptions' => [
                         'class' => 'text-center'
                     ],
-                ],
+                ],*/
                 [
                     'attribute' => 'up',
                     'headerOptions' => [
@@ -103,7 +117,7 @@ $this->registerJs($js);
                     ],
                     'format' => 'html',
                     'value' => function(\marqu3s\itam\models\Monitoring $model) {
-                        $faIcon = ($model->up === 1) ? 'circle-o' : 'circle';
+                        $faIcon = ($model->up === 1) ? 'circle' : 'circle';
                         $cssClass = ($model->up === 1) ? 'success' : 'danger';
                         return \rmrevin\yii\fontawesome\FA::i($faIcon, ['class' => 'text-' . $cssClass]);
                     },
@@ -112,10 +126,14 @@ $this->registerJs($js);
                 [
                     'attribute' => 'fail_count',
                     'headerOptions' => [
-                        'style' => 'width: 100px;'
+                        'style' => 'width: 100px;',
+                        'class' => 'hidden-xs',
                     ],
                     'contentOptions' => [
-                        'class' => 'text-center'
+                        'class' => 'text-center hidden-xs'
+                    ],
+                    'filterOptions' => [
+                        'class' => 'text-center hidden-xs'
                     ],
                 ],
                 [
@@ -127,12 +145,16 @@ $this->registerJs($js);
                         return \rmrevin\yii\fontawesome\FA::i($icon, ['class' => 'text-' . $color]);
                     },
                     'headerOptions' => [
-                        'style' => 'width: 100px;'
+                        'style' => 'width: 100px;',
+                        'class' => 'hidden-xs'
                     ],
                     'contentOptions' => [
-                        'class' => 'text-center'
+                        'class' => 'text-center hidden-xs'
                     ],
-                    'filter' => ['0' => Module::t('app', 'No'), '1' => Module::t('app', 'Yes')]
+                    'filter' => ['0' => Module::t('app', 'No'), '1' => Module::t('app', 'Yes')],
+                    'filterOptions' => [
+                        'class' => 'text-center hidden-xs'
+                    ],
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
@@ -159,4 +181,16 @@ $this->registerJs($js);
             ],
         ]); ?>
     <?php Pjax::end(); ?>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <small>
+            <strong>Legend:</strong><br>
+            <?= \rmrevin\yii\fontawesome\FA::i('circle', ['class' => 'text-success']) ?> Asset is UP<br>
+            <?= \rmrevin\yii\fontawesome\FA::i('circle', ['class' => 'text-danger']) ?> Asset is DOWN<br>
+            <?= \rmrevin\yii\fontawesome\FA::i('check-circle', ['class' => 'text-success']) ?> Monitoring is enabled<br>
+            <?= \rmrevin\yii\fontawesome\FA::i('ban', ['class' => 'text-muted']) ?> Monitoring is disabled
+        </small>
+    </div>
 </div>

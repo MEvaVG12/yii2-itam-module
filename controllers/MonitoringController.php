@@ -5,9 +5,11 @@ namespace marqu3s\itam\controllers;
 use marqu3s\itam\models\Config;
 use Yii;
 use marqu3s\itam\Module;
+use marqu3s\itam\models\Asset;
 use marqu3s\itam\models\Monitoring;
 use marqu3s\itam\models\MonitoringSearch;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -83,6 +85,7 @@ class MonitoringController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'availableAssets' => $this->getAvailableAssets()
             ]);
         }
     }
@@ -105,6 +108,7 @@ class MonitoringController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'availableAssets' => $this->getAvailableAssets($model->asset->id)
             ]);
         }
     }
@@ -156,5 +160,33 @@ class MonitoringController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Returns a list of asset with fixed IPs that are not monitored.
+     *
+     * @param integer|array $keepAssetId Asset ID to keep in the list (used by the update action)
+     *
+     * @return array|Asset[]
+     */
+    private function getAvailableAssets($keepAssetId = 0)
+    {
+        # Assets already monitored
+        $monitoredAssets = Monitoring::find()->where(['not', ['id_asset' => $keepAssetId]])->all();
+        $idsMonitoredAssets = ArrayHelper::getColumn($monitoredAssets, 'id_asset');
+
+        # Available assets for monitoring
+        $availableAssets = Asset::find()
+            ->where(
+                ['and',
+                    ['not', ['ip_address' => null]],
+                    ['not', ['ip_address' => '']],
+                    ['not', ['id' => $idsMonitoredAssets]]
+                ]
+            )
+            ->orderBy(['hostname' => SORT_ASC])
+            ->all();
+
+        return $availableAssets;
     }
 }

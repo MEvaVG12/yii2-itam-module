@@ -17,7 +17,7 @@
     background-color: #0d77b6;
 }
 
-#showMenuLeft {
+#showMenuLeft, #showMenuRight {
     position: absolute;
     top: 4px;
     right: 15px;

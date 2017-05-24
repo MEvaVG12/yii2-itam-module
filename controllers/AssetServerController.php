@@ -27,13 +27,31 @@ class AssetServerController extends BaseCrudController
             ],
             [
                 'attribute' => 'id_os',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'value' => 'os.name',
-                'filter' => ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+                'filter' => ArrayHelper::map(Os::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'id_office_suite',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'value' => 'officeSuite.name',
-                'filter' => ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+                'filter' => ArrayHelper::map(OfficeSuite::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'ipMacAddress',
@@ -45,6 +63,12 @@ class AssetServerController extends BaseCrudController
             ],
             [
                 'attribute' => 'group',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function (AssetServer $model) {
                     if (empty($model->asset->groups)) return null;
@@ -54,7 +78,11 @@ class AssetServerController extends BaseCrudController
                     }
                     return $str;
                 },
-                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+
             ],
             /*[
                 'attribute' => 'brandAndModel',
@@ -68,13 +96,33 @@ class AssetServerController extends BaseCrudController
                 'attribute' => 'serviceTag',
                 'value' => 'asset.service_tag'
             ],*/
-            'cals',
+            [
+                'attribute' => 'cals',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center hidden-xs'
+                ],
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+            ],
             [
                 'attribute' => 'locationName',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
         ];
 

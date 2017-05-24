@@ -33,14 +33,29 @@ class AssetSmartphoneController extends BaseCrudController
             ],
             [
                 'attribute' => 'ipMacAddress',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     $ip = empty($model->asset->ip_address) ? Module::t('app', 'Dynamic IP') : $model->asset->ip_address;
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'group',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function (AssetSmartphone $model) {
                     if (empty($model->asset->groups)) return null;
@@ -50,23 +65,55 @@ class AssetSmartphoneController extends BaseCrudController
                     }
                     return $str;
                 },
-                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'brandAndModel',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     if (empty($model->asset->brand) && empty($model->asset->model)) return null;
                     return $model->asset->brand . '<br><small>' . $model->asset->model . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
-            'user',
+            [
+                'attribute' => 'user',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+            ],
             [
                 'attribute' => 'locationName',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
         ];
 

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model marqu3s\itam\models\Monitoring */
+/* @var $availableAssets marqu3s\itam\models\Asset[] */
 
 $this->title = Module::t('app', 'Update: ') . $model->asset->hostname;
 $this->params['breadcrumbs'][] = ['label' => Module::t('menu', 'Monitoring'), 'url' => ['index']];
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = Module::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'availableAssets' => $availableAssets,
     ]) ?>
 
 </div>

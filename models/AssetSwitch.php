@@ -68,6 +68,13 @@ class AssetSwitch extends ActiveRecord
             'firmware_install_date' => Module::t('model', 'Firmware install date'),
             'username' => Module::t('model', 'Username'),
             'password' => Module::t('model', 'Password'),
+
+            # Custom attributes used in the GridView
+            'locationName' => Module::t('model', 'Location'),
+            'hostname' => Module::t('model', 'Hostname'),
+            'ipMacAddress' => Module::t('model', 'IP/MAC address'),
+            'brandAndModel' => Module::t('model', 'Brand and model'),
+            'group' => Module::t('model', 'Group'),
         ];
     }
 

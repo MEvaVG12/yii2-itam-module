@@ -26,11 +26,15 @@ class AssetSwitchController extends BaseCrudController
             [
                 'attribute' => 'ports',
                 'headerOptions' => [
-                    'style' => 'width: 150px'
+                    'style' => 'width: 150px',
+                    'class' => 'hidden-xs'
                 ],
                 'contentOptions' => [
-                    'class' => 'text-center'
-                ]
+                    'class' => 'text-center hidden-xs'
+                ],
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'ipMacAddress',
@@ -42,6 +46,12 @@ class AssetSwitchController extends BaseCrudController
             ],
             [
                 'attribute' => 'group',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function (AssetSwitch $model) {
                     if (empty($model->asset->groups)) return null;
@@ -51,22 +61,43 @@ class AssetSwitchController extends BaseCrudController
                     }
                     return $str;
                 },
-                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name')
+                'filter' => ArrayHelper::map(Group::find()->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'),
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'brandAndModel',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     if (empty($model->asset->brand) && empty($model->asset->model)) return null;
                     return $model->asset->brand . '<br><small>' . $model->asset->model . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
             [
                 'attribute' => 'locationName',
+                'headerOptions' => [
+                    'class' => 'hidden-xs'
+                ],
+                'contentOptions' => [
+                    'class' => 'hidden-xs'
+                ],
                 'format' => 'html',
                 'value' => function ($model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
-                }
+                },
+                'filterOptions' => [
+                    'class' => 'hidden-xs'
+                ],
             ],
         ];
 

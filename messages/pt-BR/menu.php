@@ -17,13 +17,14 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Monitoring' => '',
     'Smartphones' => '',
+    'Switches' => '',
     'Asset Groups' => 'Grupos de ativos',
     'Authorization' => 'Autorização',
     'Create authorization rules' => 'Criar regras de autorização',
     'Dashboard' => 'Painel de indicadores',
     'Locations' => 'Locais',
+    'Monitoring' => 'Monitoramento',
     'OS Licenses' => 'Licenças de SO',
     'OSes' => 'SO',
     'Office Suite Licenses' => 'Licenças de Office',
