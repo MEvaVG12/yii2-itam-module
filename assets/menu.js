@@ -9,7 +9,10 @@ var
     menuRight = document.getElementById('cbp-spmenu-s2'),
     showRight = document.getElementById('showMenuRight'),
 
+    itamModule = document.getElementById('itamModule'),
     body = document.body;
+
+console.log(itamModule);
 
 body.classList.add('cbp-spmenu-push');
 
@@ -23,8 +26,11 @@ showRight.onclick = function (e) {
     menuRight.classList.toggle('cbp-spmenu-open');
 };
 
-body.onclick = function () {
-    body.classList.remove('cbp-spmenu-push-toleft');
-    menuRight.classList.remove('cbp-spmenu-open');
+itamModule.onclick = function (e) {
+    if (body.classList.contains('cbp-spmenu-push-toleft')) {
+        e.stopPropagation();
+        body.classList.remove('cbp-spmenu-push-toleft');
+        menuRight.classList.remove('cbp-spmenu-open');
+    }
 };
 

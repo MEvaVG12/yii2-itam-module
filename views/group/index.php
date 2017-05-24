@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 $this->title = Module::t('menu', 'Asset Groups');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="location-index">
+<div class="group-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,7 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 'name',
-                'description',
+                [
+                    'attribute' => 'description',
+                    'headerOptions' => [
+                        'class' => 'hidden-xs'
+                    ],
+                    'contentOptions' => [
+                        'class' => 'hidden-xs'
+                    ],
+                    'filterOptions' => [
+                        'class' => 'hidden-xs'
+                    ]
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{view} &nbsp; {update} &nbsp; {delete}',
