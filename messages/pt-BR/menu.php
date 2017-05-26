@@ -17,9 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Access Points' => 'Pontos de acesso',
+    'Printers' => 'Impressoras',
     'Smartphones' => '',
     'Switches' => '',
+    'Access Points' => 'Pontos de acesso',
     'Asset Groups' => 'Grupos de ativos',
     'Authorization' => 'Autorização',
     'Create authorization rules' => 'Criar regras de autorização',

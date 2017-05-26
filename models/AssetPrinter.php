@@ -2,7 +2,9 @@
 
 namespace marqu3s\itam\models;
 
+use marqu3s\itam\Module;
 use yii\db\ActiveRecord;
+use marqu3s\itam\traits\TraitAsset;
 
 /**
  * This is the model class for table "itam_asset_printer".
@@ -14,6 +16,13 @@ use yii\db\ActiveRecord;
  */
 class AssetPrinter extends ActiveRecord
 {
+    /**
+     * TraitAsset adds properties used to filter the GridView and methods
+     * to work with the related Asset model.
+     */
+    use TraitAsset;
+
+
     /**
      * @inheritdoc
      */
@@ -30,6 +39,9 @@ class AssetPrinter extends ActiveRecord
         return [
             [['id_asset'], 'integer'],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
+
+            # Custom attributes
+            [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'group'], 'safe'],
         ];
     }
 
@@ -42,14 +54,6 @@ class AssetPrinter extends ActiveRecord
             'id' => 'ID',
             'id_asset' => 'Id Asset',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdAsset()
-    {
-        return $this->hasOne(Asset::className(), ['id' => 'id_asset']);
     }
 
     /**

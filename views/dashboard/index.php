@@ -27,9 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-3">
-        <div class="well text-center text-muted">
+        <div class="well text-center">
             <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Access Points'), ['asset-access-point/index']) ?></h4>
             <h4><?= \marqu3s\itam\models\AssetAccessPoint::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="well text-center">
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Printers'), ['asset-printer/index']) ?></h4>
+            <h4><?= \marqu3s\itam\models\AssetPrinter::find()->count(); ?></h4>
         </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-3">
@@ -56,12 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
-        <div class="well text-center text-muted">
-            <h4 class="numbersHeader"><?= Module::t('app', 'Printers') ?></h4>
-            <h4>TBD</h4>
-        </div>
-    </div>
+
 </div>
 
 <?php if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'ViewReports')): ?>

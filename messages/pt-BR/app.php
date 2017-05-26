@@ -17,13 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Access Points' => 'Pontos de acesso',
-    'Create Access Point' => 'Novo ponto de acesso',
+    'Create Printer' => 'Nova impressora',
     'Monitor' => '',
     'Offline' => '',
     'Online' => '',
     'Smartphones' => '',
     'Switches' => '',
+    'Access Points' => 'Pontos de acesso',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
     'Add software' => 'Novo programa',
@@ -47,6 +47,7 @@ return [
     'Choose an office suite' => 'Escolha um Office',
     'Choose one' => 'Escolha um',
     'Create' => 'Criar',
+    'Create Access Point' => 'Novo ponto de acesso',
     'Create Group' => 'Criar grupo',
     'Create Location' => 'Novo local',
     'Create OS License' => 'Nova licença de SO',
