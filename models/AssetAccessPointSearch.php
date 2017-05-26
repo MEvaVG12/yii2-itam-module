@@ -40,10 +40,6 @@ class AssetAccessPointSearch extends AssetAccessPoint
     {
         $query = AssetAccessPoint::find();
 
-        # Add conditions that should always apply here
-        # Join with asset and asset.location
-        $query->joinWith(['asset', 'asset.location', 'asset.groups']);
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -72,8 +68,8 @@ class AssetAccessPointSearch extends AssetAccessPoint
                 'desc' => ['itam_asset.brand' => SORT_DESC, 'itam_asset.model' => SORT_DESC],
             ],
             'group' => [
-                'asc' => ['itam_asset_group.name' => SORT_ASC],
-                'desc' => ['itam_asset_group.name' => SORT_DESC],
+                'asc' => ['itam_group.name' => SORT_ASC],
+                'desc' => ['itam_group.name' => SORT_DESC],
             ],
         ];
         $dataProvider->sort->defaultOrder = [
@@ -89,15 +85,24 @@ class AssetAccessPointSearch extends AssetAccessPoint
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        # Add conditions that should always apply here
+        # Join with asset, asset.location and asset.groups
+        $query->joinWith(['asset', 'asset.location'], false);
+        $query->joinWith(['asset.groups'], false);
+        //\yii\helpers\VarDumper::dump($query, 10, true);die;
+
+        # grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'id_asset' => $this->id_asset,
-            'itam_group_asset.id_group' => $this->group,
-        ])
+            //'itam_group_asset.id_group' => $this->group,
+        ]);
 
         # Here we search the attributes of our relations using our previously configured ones in "AssetServerSearch"
-        ->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname]);
+        $query->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname]);
+        if (!empty($this->group)) {
+            $query/*>joinWith(['asset.groups'])*/->andWhere(['itam_group_asset.id_group' => $this->group]);
+        }
         if (!empty($this->locationName)) {
             $query->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')");
         }
@@ -107,6 +112,7 @@ class AssetAccessPointSearch extends AssetAccessPoint
         if (!empty($this->brandAndModel)) {
             $query->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')");
         }
+
 
         return $dataProvider;
     }

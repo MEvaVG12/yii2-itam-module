@@ -205,14 +205,25 @@ class Asset extends ActiveRecord
             ->orderBy(['itam_software.name' => SORT_ASC]);
     }
 
+
+    public function getGroupAssets()
+    {
+        return $this->hasMany(GroupAsset::className(), ['id_asset' => 'id'])
+            ->joinWith(['group'])
+            ->orderBy(['itam_group.name' => SORT_ASC]);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getGroups()
     {
-        return $this->hasMany(GroupAsset::className(), ['id_asset' => 'id'])
-            ->joinWith(['group'])
+        return $this->hasMany(Group::className(), ['id' => 'id_group'])
+            ->via('groupAssets')
             ->orderBy(['itam_group.name' => SORT_ASC]);
+        /*return $this->hasMany(GroupAsset::className(), ['id_asset' => 'id'])
+            ->joinWith(['group'])
+            ->orderBy(['itam_group.name' => SORT_ASC]);*/
     }
 
     /**
@@ -231,7 +242,7 @@ class Asset extends ActiveRecord
     {
         # Store each group this asset belongs to in the groupId attribute.
         foreach ($this->groups as $group) {
-            $this->groupId[] = $group->id_group;
+            $this->groupId[] = $group->id;
         }
     }
 
