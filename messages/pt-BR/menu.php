@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Access Points' => 'Pontos de acesso',
     'Smartphones' => '',
     'Switches' => '',
     'Asset Groups' => 'Grupos de ativos',

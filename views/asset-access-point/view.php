@@ -5,13 +5,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model marqu3s\itam\models\AssetSwitch */
+/* @var $model marqu3s\itam\models\AssetAccessPoint */
 
 $this->title = $model->asset->hostname;
-$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Switches'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('app', 'Access Points'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="switch-view">
+<div class="access-point-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -23,12 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'ports',
             'firmware_version',
             'firmware_release_date',
             'firmware_install_date',
-            'username',
-            'password'
         ],
     ]) ?>
 

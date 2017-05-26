@@ -21,6 +21,12 @@ if (!$this->context->module->rbacAuthorization || Yii::$app->user->can($this->co
         '<li class="divider"></li>',
         [
             //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'AssetManager'),
+            'label' => Module::t('menu', 'Access Points'),
+            'url' => ['asset-access-point/index'],
+            //'linkOptions' => ['class' => 'list-group-item'],
+        ],
+        [
+            //'visible' => !$this->context->module->rbacAuthorization || Yii::$app->user->can($this->context->module->rbacItemPrefix . 'AssetManager'),
             'label' => Module::t('menu', 'Servers'),
             'url' => ['asset-server/index'],
             //'linkOptions' => ['class' => 'list-group-item'],

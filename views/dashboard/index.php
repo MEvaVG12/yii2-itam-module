@@ -27,6 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="well text-center text-muted">
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Access Points'), ['asset-access-point/index']) ?></h4>
+            <h4><?= \marqu3s\itam\models\AssetAccessPoint::find()->count(); ?></h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center">
             <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Servers'), ['asset-server/index']) ?></h4>
             <h4><?= \marqu3s\itam\models\AssetServer::find()->count(); ?></h4>
@@ -53,12 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="well text-center text-muted">
             <h4 class="numbersHeader"><?= Module::t('app', 'Printers') ?></h4>
-            <h4>TBD</h4>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
-        <div class="well text-center text-muted">
-            <h4 class="numbersHeader"><?= Module::t('app', 'Wi-Fi APs') ?></h4>
             <h4>TBD</h4>
         </div>
     </div>

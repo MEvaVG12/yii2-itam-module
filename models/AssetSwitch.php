@@ -49,6 +49,9 @@ class AssetSwitch extends ActiveRecord
             [['username', 'password'], 'string', 'max' => 20],
             [['id_asset'], 'exist', 'skipOnError' => true, 'targetClass' => Asset::className(), 'targetAttribute' => ['id_asset' => 'id']],
 
+            # Use NULL instead of '' (empty string)
+            [['firmware_release_date', 'firmware_install_date', 'firmware_version', 'username', 'password'], 'default', 'value' => null],
+
             # Custom attributes
             [['locationName', 'hostname', 'ipMacAddress', 'brandAndModel', 'group'], 'safe'],
         ];

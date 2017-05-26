@@ -17,7 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Choose one' => 'Escolha um',
+    'Access Points' => 'Pontos de acesso',
+    'Create Access Point' => 'Novo ponto de acesso',
     'Monitor' => '',
     'Offline' => '',
     'Online' => '',
@@ -44,6 +45,7 @@ return [
     'Choose an OS license:' => 'Escolha uma licença de SO',
     'Choose an Office Suite license:' => 'Escolha uma licença de Office:',
     'Choose an office suite' => 'Escolha um Office',
+    'Choose one' => 'Escolha um',
     'Create' => 'Criar',
     'Create Group' => 'Criar grupo',
     'Create Location' => 'Novo local',
@@ -126,7 +128,6 @@ return [
     'Users' => 'Usuários',
     'Users Permissions' => 'Permissões do usuário',
     'View' => 'Ver',
-    'Wi-Fi APs' => 'APs Wi-Fi',
     'Workstations' => 'Estações',
     'Yes' => 'Sim',
     'available' => 'disponível',
