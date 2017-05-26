@@ -10,6 +10,7 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use Yii;
+use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "itam_asset".
@@ -40,7 +41,7 @@ use Yii;
 class Asset extends ActiveRecord
 {
     const ASSET_TYPES = [
-        'server', 'smartphone', 'switch', 'workstation'
+        'accessPoint', 'printer', 'server', 'smartphone', 'switch', 'workstation'
     ];
 
     public $groupId = [];
@@ -99,7 +100,7 @@ class Asset extends ActiveRecord
             [['hostname', 'brand', 'model', 'created_by', 'updated_by'], 'string', 'max' => 100],
             [['serial_number'], 'string', 'max' => 30],
             [['ip_address'], 'string', 'max' => 15],
-            [['mac_address'], 'string', 'max' => 14],
+            [['mac_address'], 'string', 'max' => 17],
             [['annotations'], 'string'],
             [['id_location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['id_location' => 'id']],
 
@@ -271,7 +272,7 @@ class Asset extends ActiveRecord
         foreach (self::ASSET_TYPES as $type) {
             $classname = 'marqu3s\itam\models\Asset' . ucfirst($type);
             if (($model = $classname::find()->where(['id_asset' => $this->id])->one()) !== null) {
-                $url = ['asset-' . $type . '/' . $action];
+                $url = ['asset-' . Inflector::camel2id($type) . '/' . $action];
                 if (in_array($action, ['view', 'update'])) {
                     $url['id'] = $model->id;
                 }
