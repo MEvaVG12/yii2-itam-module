@@ -48,6 +48,11 @@ a.desc:after {
     content: "\e156";
 }
 
+a[target="_blank"]:after {
+    font-family: 'FontAwesome';
+    content: "\f08e";
+}
+
 /** Label column width of the DetailView */
 .table.detail-view tr th:first-child {
     width: 230px;

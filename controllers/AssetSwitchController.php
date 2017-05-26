@@ -2,10 +2,12 @@
 
 namespace marqu3s\itam\controllers;
 
+use marqu3s\itam\models\Asset;
 use marqu3s\itam\models\AssetSwitch;
 use marqu3s\itam\models\Group;
 use marqu3s\itam\Module;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * AssetSwitchController implements the CRUD actions for AssetSwitch model.
@@ -21,7 +23,10 @@ class AssetSwitchController extends BaseCrudController
         $this->gridDataColumns = [
             [
                 'attribute' => 'hostname',
-                'value' => 'asset.hostname'
+                'format' => 'raw',
+                'value' => function (AssetSwitch $model) {
+                    return Html::a($model->asset->hostname, 'http://' . $model->asset->ip_address, ['target' => '_blank', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => Module::t('app', 'Go to Web UI')]);
+                }
             ],
             [
                 'attribute' => 'ports',

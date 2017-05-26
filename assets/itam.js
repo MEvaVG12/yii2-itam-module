@@ -100,4 +100,7 @@ $('document').ready(function () {
     $('#btnScanPorts').click(function() {
         scanAssetPorts();
     });
+
+    // Bootstrap tooltip
+    $('[data-toggle="tooltip"]').tooltip();
 });

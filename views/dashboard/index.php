@@ -62,6 +62,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h4><?= \marqu3s\itam\models\AssetWorkstation::find()->count(); ?></h4>
         </div>
     </div>
+    <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="well text-center">
+            <h4 class="numbersHeader"><?= Html::a(Module::t('app', 'Assets Monitored'), ['monitoring/index']) ?></h4>
+            <h4>
+                <span title="<?= Module::t('app', 'Total') ?>" data-toggle="tooltip" data-placement="bottom"><?= \marqu3s\itam\models\Monitoring::find()->where(['enabled' => 1])->count(); ?></span> /
+                <span title="<?= Module::t('app', 'Online') ?>" class="text-success" data-toggle="tooltip" data-placement="bottom"><?= \marqu3s\itam\models\Monitoring::find()->where(['enabled' => 1, 'up' => 1])->count(); ?></span> /
+                <span title="<?= Module::t('app', 'Offline') ?>" class="text-danger" data-toggle="tooltip" data-placement="bottom"><?= \marqu3s\itam\models\Monitoring::find()->where(['enabled' => 1, 'up' => 0])->count(); ?></span>
+            </h4>
+        </div>
+    </div>
 
 </div>
 

@@ -17,12 +17,14 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Create Printer' => 'Nova impressora',
+    'Assets Monitored' => 'Monitoramento',
+    'Go to Web UI' => 'Abrir interface web',
     'Monitor' => '',
     'Offline' => '',
     'Online' => '',
     'Smartphones' => '',
     'Switches' => '',
+    'Total' => '',
     'Access Points' => 'Pontos de acesso',
     'Actions' => 'Ações',
     'Active' => 'Ativo',
@@ -54,6 +56,7 @@ return [
     'Create Office Suite' => 'Novo pacote office',
     'Create Office Suite License' => 'Nova licença de Office',
     'Create Os' => 'Novo SO',
+    'Create Printer' => 'Nova impressora',
     'Create Rules' => 'Criar regras',
     'Create Server' => 'Novo Servidor',
     'Create Smartphone' => 'Novo Smartphone',

@@ -60,7 +60,7 @@ return [
     'Password' => 'Senha',
     'Ping count' => 'Quantidade de pings',
     'Ping timeout' => 'Tempo limite do ping',
-    'Ports' => 'portas',
+    'Ports' => 'Portas',
     'Purchased licenses' => 'Licenças adquiridas',
     'Room' => 'Sala',
     'Serial number' => 'Número de série',
