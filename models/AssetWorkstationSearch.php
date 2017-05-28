@@ -45,6 +45,10 @@ class AssetWorkstationSearch extends AssetWorkstation
         # Join with asset and asset.location
         $query->joinWith(['asset', 'asset.location', 'asset.groups', 'os', 'officeSuite']);
 
+        # Group by asset hostname because assets can belong to more than one group
+        # and this can return a total number of items that is wrong.
+        $query->groupBy(['itam_asset.hostname']);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [

@@ -56,7 +56,7 @@ class AssetServerController extends BaseCrudController
             [
                 'attribute' => 'ipMacAddress',
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetServer $model) {
                     $ip = empty($model->asset->ip_address) ? Module::t('app', 'Dynamic IP') : $model->asset->ip_address;
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 }
@@ -73,8 +73,8 @@ class AssetServerController extends BaseCrudController
                 'value' => function (AssetServer $model) {
                     if (empty($model->asset->groups)) return null;
                     $str = '';
-                    foreach ($model->asset->groups as $item) {
-                        $str .= $item->group->name . '<br>';
+                    foreach ($model->asset->groups as $group) {
+                        $str .= $group->name . '<br>';
                     }
                     return $str;
                 },
@@ -117,7 +117,7 @@ class AssetServerController extends BaseCrudController
                     'class' => 'hidden-xs'
                 ],
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetServer $model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
                 },
                 'filterOptions' => [

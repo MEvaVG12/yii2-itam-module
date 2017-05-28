@@ -205,7 +205,9 @@ class Asset extends ActiveRecord
             ->orderBy(['itam_software.name' => SORT_ASC]);
     }
 
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getGroupAssets()
     {
         return $this->hasMany(GroupAsset::className(), ['id_asset' => 'id'])
@@ -221,9 +223,6 @@ class Asset extends ActiveRecord
         return $this->hasMany(Group::className(), ['id' => 'id_group'])
             ->via('groupAssets')
             ->orderBy(['itam_group.name' => SORT_ASC]);
-        /*return $this->hasMany(GroupAsset::className(), ['id_asset' => 'id'])
-            ->joinWith(['group'])
-            ->orderBy(['itam_group.name' => SORT_ASC]);*/
     }
 
     /**

@@ -7,7 +7,6 @@ use marqu3s\itam\models\Group;
 use marqu3s\itam\models\OfficeSuite;
 use marqu3s\itam\models\Os;
 use marqu3s\itam\Module;
-use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -63,7 +62,7 @@ class AssetWorkstationController extends BaseCrudController
                     'class' => 'hidden-xs'
                 ],
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetWorkstation $model) {
                     $ip = empty($model->asset->ip_address) ? Module::t('app', 'Dynamic IP') : $model->asset->ip_address;
                     return $ip . '<br><small>' . $model->asset->mac_address . '</small>';
                 },
@@ -83,8 +82,8 @@ class AssetWorkstationController extends BaseCrudController
                 'value' => function (AssetWorkstation $model) {
                     if (empty($model->asset->groups)) return null;
                     $str = '';
-                    foreach ($model->asset->groups as $item) {
-                        $str .= $item->group->name . '<br>';
+                    foreach ($model->asset->groups as $group) {
+                        $str .= $group->name . '<br>';
                     }
                     return $str;
                 },
@@ -114,7 +113,7 @@ class AssetWorkstationController extends BaseCrudController
                     'class' => 'hidden-xs'
                 ],
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetWorkstation $model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
                 },
                 'filterOptions' => [

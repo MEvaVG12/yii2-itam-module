@@ -40,6 +40,14 @@ class AssetAccessPointSearch extends AssetAccessPoint
     {
         $query = AssetAccessPoint::find();
 
+        # Add conditions that should always apply here
+        # Join with asset, asset.location and asset.groups
+        $query->joinWith(['asset', 'asset.location', 'asset.groups']);
+
+        # Group by asset hostname because assets can belong to more than one group
+        # and this can return a total number of items that is wrong.
+        $query->groupBy(['itam_asset.hostname']);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -85,24 +93,15 @@ class AssetAccessPointSearch extends AssetAccessPoint
             return $dataProvider;
         }
 
-        # Add conditions that should always apply here
-        # Join with asset, asset.location and asset.groups
-        $query->joinWith(['asset', 'asset.location'], false);
-        $query->joinWith(['asset.groups'], false);
-        //\yii\helpers\VarDumper::dump($query, 10, true);die;
-
         # grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'id_asset' => $this->id_asset,
-            //'itam_group_asset.id_group' => $this->group,
+            'itam_group_asset.id_group' => $this->group,
         ]);
 
         # Here we search the attributes of our relations using our previously configured ones in "AssetServerSearch"
         $query->andFilterWhere(['like', 'itam_asset.hostname', $this->hostname]);
-        if (!empty($this->group)) {
-            $query/*>joinWith(['asset.groups'])*/->andWhere(['itam_group_asset.id_group' => $this->group]);
-        }
         if (!empty($this->locationName)) {
             $query->andWhere("(itam_location.name like '%$this->locationName%' OR itam_asset.room like '%$this->locationName%')");
         }
@@ -112,7 +111,6 @@ class AssetAccessPointSearch extends AssetAccessPoint
         if (!empty($this->brandAndModel)) {
             $query->andWhere("(itam_asset.brand like '%$this->brandAndModel%' OR itam_asset.model like '%$this->brandAndModel%')");
         }
-
 
         return $dataProvider;
     }

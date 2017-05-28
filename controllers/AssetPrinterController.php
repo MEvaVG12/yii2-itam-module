@@ -43,8 +43,8 @@ class AssetPrinterController extends BaseCrudController
                 'value' => function (AssetPrinter $model) {
                     if (empty($model->asset->groups)) return null;
                     $str = '';
-                    foreach ($model->asset->groups as $item) {
-                        $str .= $item->group->name . '<br>';
+                    foreach ($model->asset->groups as $group) {
+                        $str .= $group->name . '<br>';
                     }
                     return $str;
                 },
@@ -62,7 +62,7 @@ class AssetPrinterController extends BaseCrudController
                     'class' => 'hidden-xs'
                 ],
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetPrinter $model) {
                     if (empty($model->asset->brand) && empty($model->asset->model)) return null;
                     return $model->asset->brand . '<br><small>' . $model->asset->model . '</small>';
                 },
@@ -79,7 +79,7 @@ class AssetPrinterController extends BaseCrudController
                     'class' => 'hidden-xs'
                 ],
                 'format' => 'html',
-                'value' => function ($model) {
+                'value' => function (AssetPrinter $model) {
                     return $model->asset->location->name . '<br><small>' . $model->asset->room . '</small>';
                 },
                 'filterOptions' => [
