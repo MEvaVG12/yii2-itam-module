@@ -9,6 +9,8 @@
 namespace marqu3s\itam\console\controllers;
 
 use consynki\yii\pushover\Pushover;
+use Longman\TelegramBot\Request;
+use Longman\TelegramBot\Telegram;
 use marqu3s\itam\models\Config;
 use marqu3s\itam\models\Monitoring;
 use Pushbullet\Pushbullet;
@@ -70,6 +72,15 @@ class MonitoringController extends \yii\console\Controller
 
     /** @var string  */
     public $pushbulletChannelTag = '';
+
+    /** @var string  */
+    public $telegramAPIKey = '';
+
+    /** @var string  */
+    public $telegramBotName = '';
+
+    /** @var string  */
+    public $telegramChannel = '';
 
     /** @var string  */
     public $pushoverUserKey = '';
@@ -186,6 +197,9 @@ class MonitoringController extends \yii\console\Controller
                 # Pushbullet alerts
                 $this->sendPushbulletAlert($subject, $body);
 
+                # Telegram alert
+                $this->sendTelegramAlert($subject, $body);
+
                 # Pushover alerts
                 //$this->sendPushoverAlert($subject, $body);
             }
@@ -258,6 +272,20 @@ class MonitoringController extends \yii\console\Controller
     }
 
     /**
+     * Configures a Telegram module to use the Telegram API
+     */
+    public function getTelegram()
+    {
+        if (!empty($this->telegramAPIKey)) {
+            $telegram = new Telegram($this->telegramAPIKey, $this->telegramBotName);
+
+            return $telegram;
+        }
+
+        return null;
+    }
+
+    /**
      * Sends an alert using Pushover service.
      *
      * @param string $title
@@ -283,6 +311,20 @@ class MonitoringController extends \yii\console\Controller
         if (!empty($pb)) {
             $channel = $pb->channel($this->pushbulletChannelTag);
             $channel->pushNote($title, $body);
+        }
+    }
+
+    /**
+     * Sends an alert using the Telegram API.
+     *
+     * @param string $title
+     * @param string $body
+     */
+    public function sendTelegramAlert($title, $body)
+    {
+        $telegram = $this->getTelegram();
+        if ($telegram !== null) {
+            $result = Request::sendMessage(['chat_id' => $this->telegramChannel, 'text' => $title . "\n" . $body]);
         }
     }
 }
