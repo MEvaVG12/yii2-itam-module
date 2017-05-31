@@ -123,7 +123,7 @@ class MonitoringController extends \yii\console\Controller
             foreach ($itemsToMonitor as $i => $item) {
                 if ($item->check_type == 'ping') {
                     $pingResult = exec("ping -c {$item->ping_count} -t {$item->ping_timeout} {$item->asset->ip_address}", $output, $return); // t = timeout, c = count
-                    if (strstr($pingResult, '100.0% packet loss') !== false) {
+                    if (strstr($pingResult, '100.0% packet loss') !== false || strstr($pingResult, '100% packet loss') !== false) {
                         $results[$item->description] = 0;
                     } else {
                         $results[$item->description] = 1;
