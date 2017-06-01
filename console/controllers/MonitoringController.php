@@ -123,7 +123,7 @@ class MonitoringController extends \yii\console\Controller
             foreach ($itemsToMonitor as $i => $item) {
                 if ($item->check_type == 'ping') {
                     $pingResult = exec("ping -c {$item->ping_count} -t {$item->ping_timeout} {$item->asset->ip_address}", $output, $return); // t = timeout, c = count
-                    if (strstr($pingResult, '100.0% packet loss') !== false || strstr($pingResult, '100% packet loss') !== false) {
+                    if ((int) $return !== 0) {
                         $results[$item->description] = 0;
                     } else {
                         $results[$item->description] = 1;
@@ -154,6 +154,7 @@ class MonitoringController extends \yii\console\Controller
                     # Assets still down
                     if ($results[$item->description] === 0) {
                         $assetsStillDown[] = $item;
+                        $item->fail_count++;
                     }
                 }
 
@@ -228,11 +229,34 @@ class MonitoringController extends \yii\console\Controller
      * Executes an nmap fast scan.
      *
      * @param $ip
+     *
+     * @return int
      */
     public function actionPortscan($ip)
     {
         $result = exec($this->nmapPath . "nmap -F " . escapeshellarg($ip), $output, $return);
         \yii\helpers\VarDumper::dump($output, 10);
+
+        return 0;
+    }
+
+    /**
+     * Executes a ping to an IP.
+     *
+     * @param string $ip
+     * @param int $count
+     * @param int $timeout
+     *
+     * @return int
+     */
+    public function actionPing($ip, $count = 1, $timeout = 2)
+    {
+        $pingResult = exec("ping -c {$count} -t {$timeout} {$ip}", $output, $return); // t = timeout, c = count
+        \yii\helpers\VarDumper::dump($pingResult, 10);
+        \yii\helpers\VarDumper::dump($output, 10);
+        \yii\helpers\VarDumper::dump($return, 10);
+
+        return 0;
     }
 
 
