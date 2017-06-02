@@ -142,10 +142,14 @@ class MonitoringController extends \yii\console\Controller
                 if ((int)$item->up !== $results[$item->description]) {
                     # If previous state was down, then the asset came up
                     if ($item->up === 0) {
+                        # Send the alert only if fail count is greater than or igual to alert_after_x_consecutive_fails
+                        if ($item->fail_count >= $item->alert_after_x_consecutive_fails) {
+                            $assetsWentUp[] = $item;
+                        }
                         $item->fail_count = 0;
-                        $assetsWentUp[] = $item;
                     } else { // asset went down
                         $item->fail_count++;
+                        # Send the alert only if fail count is greater than or igual to alert_after_x_consecutive_fails
                         if ($item->fail_count >= $item->alert_after_x_consecutive_fails) {
                             $assetsWentDown[] = $item;
                         }
