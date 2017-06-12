@@ -54,8 +54,8 @@ use yii\widgets\DetailView;
                     return null;
                 } else {
                     $str = '';
-                    foreach ($model->asset->groups as $item) {
-                        $str .= $item->group->name . '<br>';
+                    foreach ($model->asset->groups as $group) {
+                        $str .= $group->name . '<br>';
                     }
                     return $str;
                 }

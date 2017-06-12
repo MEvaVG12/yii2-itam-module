@@ -3,7 +3,6 @@
 namespace marqu3s\itam\models;
 
 use marqu3s\itam\Module;
-use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;

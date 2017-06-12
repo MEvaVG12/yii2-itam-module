@@ -179,7 +179,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <div class="row">
             <div class="col-sm-6">
-                <h5 class="software-name"><a href="/itam/reports/ssets-by-software-license-analytic?idLicense=<?= $license['id_software_license']  ?>"><?= $license['name'] ?></a></h5>
+                <h5 class="software-name"><a href="/itam/reports/assets-by-software-license-analytic?idLicense=<?= $license['id_software_license']  ?>"><?= $license['name'] ?></a></h5>
                 <span class="label label-default"><?= ucfirst(Module::t('model', 'key')) ?>:</span> <?= $license['key'] ?>
             </div>
             <div class="col-sm-6">
