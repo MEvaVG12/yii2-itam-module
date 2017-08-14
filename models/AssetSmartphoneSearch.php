@@ -47,7 +47,12 @@ class AssetSmartphoneSearch extends AssetSmartphone
 
         # Group by asset hostname because assets can belong to more than one group
         # and this can return a total number of items that is wrong.
-        $query->groupBy(['itam_asset.hostname']);
+        # Add all the model attributes to the group by clause because of ONLY_FULL_GROUP_BY sql mode.
+        $groupBy[] = 'itam_asset.hostname';
+        foreach ($this->attributes() as $attr) {
+            $groupBy[] = self::tableName() . '.' . $attr;
+        }
+        $query->groupBy($groupBy);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
