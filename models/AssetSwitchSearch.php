@@ -48,6 +48,7 @@ class AssetSwitchSearch extends AssetSwitch
         # and this can return a total number of items that is wrong.
         # Add all the model attributes to the group by clause because of ONLY_FULL_GROUP_BY sql mode.
         $groupBy[] = 'itam_asset.hostname';
+        $groupBy[] = 'itam_group.name';
         foreach ($this->attributes() as $attr) {
             $groupBy[] = self::tableName() . '.' . $attr;
         }

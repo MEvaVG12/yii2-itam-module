@@ -70,12 +70,14 @@ class DashboardController extends Controller
             ->all();
 
         # Show data about Software licenses in use.
+        $columnsSelect = ['itam_software_asset.id_software', 'itam_software_license.id', 'itam_software_license.id as id_software_license', 'itam_software.name', 'itam_software_license.key', 'count(itam_software_asset.id_asset) as in_use', 'itam_software_license.purchased_licenses'];
+        $columnsGroupBy = ['itam_software_asset.id_software', 'itam_software_license.id', 'itam_software_license.id', 'itam_software.name', 'itam_software_license.key', 'itam_software_license.purchased_licenses'];
         $softwareLicenses = (new Query())
-            ->select(['itam_software_license.id as id_software_license', 'itam_software.name', 'itam_software_license.key', 'count(itam_software_asset.id_asset) as in_use', 'itam_software_license.purchased_licenses'])
+            ->select($columnsSelect)
             ->from('itam_software')
             ->innerJoin('itam_software_license', 'itam_software.id = itam_software_license.id_software')
             ->leftJoin('itam_software_asset', 'itam_software.id = itam_software_asset.id_software AND itam_software_asset.id_software_license = itam_software_license.id')
-            ->groupBy(['itam_software_asset.id_software', 'itam_software_license.id'])
+            ->groupBy($columnsGroupBy)
             ->orderBy(['itam_software.name' => SORT_ASC])
             ->all();
 
